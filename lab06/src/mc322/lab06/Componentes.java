@@ -6,13 +6,18 @@ public class Componentes {
     protected int linha;
     protected int coluna;
     protected char simbolo;
+    protected Caverna caverna;
 
     /* Métodos */
 
-    protected  Componentes(int linha, int coluna, char simbolo) {
+    public Componentes(int linha, int coluna, char simbolo, Caverna caverna) {
         this.linha = linha;
         this.coluna = coluna;
         this.simbolo = simbolo;
+        this.caverna = caverna;
     }
 
+    boolean solicitarInclusao() {
+        return caverna.colocarNaSala(linha, coluna);
+    }
 }

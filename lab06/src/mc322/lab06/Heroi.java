@@ -1,14 +1,12 @@
 package mc322.lab06;
 
-public class Heroi extends Sala 
-{
-    int flecha;
-    boolean equipada;
-    //Caverna caverna;
-    Heroi()
-    {
-    	flecha = 1;
-    	celula = 'P';
+public class Heroi extends Componentes {
+    private int flecha;
+    private boolean equipada;
+
+    public Heroi(int linha, int coluna, char simbolo, Caverna caverna) {
+        super(linha, coluna, simbolo, caverna);
+    	this.flecha = 1;
     	equipada = false;
     }
 }
