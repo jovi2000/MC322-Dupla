@@ -3,6 +3,7 @@ package mc322.lab06;
 public class Montador {
 	/* Atributos */
 	public Caverna caverna_principal;
+	public Componentes heroi;
 	private int contador_wumpus; // Número de Wumpus que a caverna possui
 	private int contador_buraco; // Número de Buracos que a caverna possui
 	private int contador_heroi; // Número de Herois que a caverna possui
@@ -30,6 +31,7 @@ public class Montador {
 				/* Instanciando o novo componente */
 				if (posicao_atual[4] == 'P') {
 					novo_componente = new Heroi(linha_componente, coluna_componente, 'P', this.caverna_principal);
+					heroi = novo_componente;
 					if (linha_componente != 0 || coluna_componente != 0) {
 						return false;
 					}
