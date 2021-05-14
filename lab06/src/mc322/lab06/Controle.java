@@ -31,11 +31,19 @@ public class Controle {
     		score += n;
     		if (n == 0) System.out.print("COMANDO INVALIDO");
     		if (n <= -1000) 
-    		{System.out.print("Voce presdeu =(");
-    		game_over = true:}
+    		{
+			caverna.mostra();
+			System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
+			System.out.print("Voce presdeu =(");
+    			game_over = true:
+		}
     		if (n == 1000) 
-    		{System.out.print("Voce ganhou =D");
-    		game_over = true:}
+    		{
+			caverna.mostra();
+			System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
+			System.out.print("Voce ganhou =D");
+    			game_over = true:
+		}
     		*/
     	}
     	System.out.print("Deseja jogar Novamente?\nDigite 'sim' ou 'nao'");
