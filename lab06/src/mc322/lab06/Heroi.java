@@ -3,7 +3,7 @@ package mc322.lab06;
 public class Heroi extends Componentes {
     /* Atributos */
     private int flecha;
-    private boolean equipada;
+    private boolean equipada; // Indica se a flecha está equipada ou não
 
     public Heroi(int linha, int coluna, char simbolo, Caverna caverna) {
         super(linha, coluna, simbolo, caverna);
@@ -11,7 +11,7 @@ public class Heroi extends Componentes {
     	this.equipada = false;
     }
     
-    int controle_heroi(String comando)
+    int controleHeroi(String comando)
     {
     	int pontos = 0;
     	switch(comando)

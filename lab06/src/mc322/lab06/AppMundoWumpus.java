@@ -5,7 +5,7 @@ public class AppMundoWumpus
 	public static void main(String[] args) 
 	{
 		int loop = 0;
-		while(loop ==0)
+		while (loop == 0)
 		{
 			Montador teste = new Montador();
 			/*String[] vetor_teste = {"1:1,P","1:2,_","1:3,_","1:4,B","2:1,_","2:2,_", "2:3,_","2:4,_","3:1,_","3:2,B","3:3,_",

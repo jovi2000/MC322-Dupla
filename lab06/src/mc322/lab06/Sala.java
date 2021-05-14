@@ -13,7 +13,6 @@ public class Sala {
 		this.visivel = false;
 	}
 
-	//PERGUNTAR SE ESSA FUNÇÃO É REALEMNTE NECESSÁRIA
 	public boolean disponibilidadeSala(Componentes componente) {
 		/* Caso os componentes não sejam nem fedor nem brisa, é necessário verificar os componentes da lista */
 		if (componente.simbolo != 'f' && componente.simbolo != 'b') {

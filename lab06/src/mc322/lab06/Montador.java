@@ -3,10 +3,10 @@ package mc322.lab06;
 public class Montador {
 	/* Atributos */
 	public Caverna caverna_principal;
-	private int contador_wumpus;
-	private int contador_buraco;
-	private int contador_heroi;
-	private int contador_ouro;
+	private int contador_wumpus; // Número de Wumpus que a caverna possui
+	private int contador_buraco; // Número de Buracos que a caverna possui
+	private int contador_heroi; // Número de Herois que a caverna possui
+	private int contador_ouro; // Número de Ouros que a caverna possui
 
     /* Métodos */
 	Montador() {

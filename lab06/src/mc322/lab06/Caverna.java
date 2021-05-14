@@ -1,5 +1,7 @@
 package mc322.lab06;
 
+import java.util.LinkedList;
+
 public class Caverna {
     /* Atributos */
     public Sala[][] matriz_caverna;
@@ -21,20 +23,50 @@ public class Caverna {
     public boolean verificarSala(int linha, int coluna, Componentes componente) {
         return matriz_caverna[linha][coluna].adicionaComponente(componente);
 	}
-    public void mostra()/// não programado
-    {
+
+    public void exibirCaverna() {
     	for (int i = 0; i < 4; i++) {
 			System.out.println();
+			/* Printando todos os número no começo das linhas que indicam a posição de cada linha */
+			System.out.print((i + 1) + " ");
 			for (int j = 0; j < 4; j++) {
+				/* Caso a lista ligada da sala esteja vazia, a sala não tem nenhum componente */
 				if (matriz_caverna[i][j].lista_sala.size() == 0) {
-					System.out.print("-");
+					System.out.print("- ");
 				}
 				else {
-					System.out.print(matriz_caverna[i][j].lista_sala.get(0).simbolo);
+					System.out.print(verificarPrioridade(matriz_caverna[i][j].lista_sala) + " ");
 				}
 			}
 		}
+		/* Printando todos os números que mostram a posição de cada coluna */
+		System.out.println(); System.out.print("  ");
+		for (int n = 0; n < 4; n++) {
+			System.out.print((n + 1) + " ");
+		}
     }
+
+    /* Função que verifica qual o componente de maior prioridade dentro de uma lista ligada */
+    private char verificarPrioridade(LinkedList<Componentes> lista) {
+    	char prioridade = ' ';
+    	for (int i = 0; i < lista.size(); i++) {
+    		/* Caso o componente da lista seja um Wumps, um ouro ou um buraco, ele já é prioridade */
+    		if (lista.get(i).simbolo == 'W' || lista.get(i).simbolo == 'B' || lista.get(i).simbolo == 'O') {
+    			prioridade = lista.get(i).simbolo;
+    			return prioridade;
+			}
+    		else if (lista.get(i).simbolo == 'P') {
+				prioridade = 'H';
+			}
+			else if (lista.get(i).simbolo == 'f') {
+				prioridade = 'f';
+			}
+			else {
+				prioridade = 'b';
+			}
+		}
+		return prioridade;
+	}
     
 
 }

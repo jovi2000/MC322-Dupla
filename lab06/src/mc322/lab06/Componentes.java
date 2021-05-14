@@ -21,8 +21,8 @@ public class Componentes {
         return caverna.verificarSala(linha, coluna, this);
     }
 
-    /* Função que verifica se a posição do fedor está dentro ou fora da matriz. Caso esteja dentro retorna "true" e caso
-	esteja fora retorna "false" */
+    /* Função que verifica se a posição do fedor ou da brisa está dentro ou fora da matriz. Caso esteja dentro retorna
+    "true" e caso esteja fora retorna "false" */
     private boolean dentroDaMatriz(int linha, int coluna) {
         return (linha <= 3 && linha >= 0) && (coluna <= 3 && coluna >= 0);
     }
