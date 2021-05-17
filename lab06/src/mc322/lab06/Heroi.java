@@ -15,8 +15,8 @@ public class Heroi extends Componentes {
     	this.flecha = 1;
     	this.equipada = false;
     	ouro_capturado = false;
-    	x=1;
-    	y=1;
+    	x=0;
+    	y=0;
     }
     
     int controleHeroi(String comando)
@@ -46,7 +46,7 @@ public class Heroi extends Componentes {
     			}
     			if (captura == false) System.out.print("Kade o ouro?!! :(");
     		case "w":// p/ cima
-    			if (y == 1) System.out.print("comando invalido");
+    			if (y == 0) System.out.print("comando invalido");
     			else
     			{
     				caverna.matriz_caverna[x][y].lista_sala.remove('P');
@@ -71,7 +71,7 @@ public class Heroi extends Componentes {
     				}
     			}
     		case "d":// p/ baixo
-    			if (y == 4) System.out.print("comando invalido");
+    			if (y == 3) System.out.print("comando invalido");
     			else
     			{
     				caverna.matriz_caverna[x][y].lista_sala.remove('P');
@@ -96,7 +96,7 @@ public class Heroi extends Componentes {
     				}
     			}
     		case "a":// p/ esquerda
-    			if (x == 1) System.out.print("comando invalido");
+    			if (x == 0) System.out.print("comando invalido");
     			else
     			{
     				caverna.matriz_caverna[x][y].lista_sala.remove('P');
@@ -121,7 +121,7 @@ public class Heroi extends Componentes {
     				}
     			}
     		case "s":// p/ direita 
-    			if (x == 4) System.out.print("comando invalido");
+    			if (x == 3) System.out.print("comando invalido");
     			else
     			{
     				caverna.matriz_caverna[x][y].lista_sala.remove('P');
