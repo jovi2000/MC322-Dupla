@@ -7,7 +7,7 @@ public class Heroi extends Componentes {
     private boolean equipada; // Indica se a flecha está equipada ou não
     private int x,y;
     private boolean ouro_capturado;
-    Random random = new Random();
+    Random random;
     
 
     public Heroi(int linha, int coluna, char simbolo, Caverna caverna) {
@@ -15,11 +15,12 @@ public class Heroi extends Componentes {
     	this.flecha = 1;
     	this.equipada = false;
     	ouro_capturado = false;
+    	random = new Random();
     	x=0;
     	y=0;
     }
     
-    int controleHeroi(String comando)
+    public int controleHeroi(String comando)
     {
     	int pontos = 0;
     	switch(comando)
@@ -44,7 +45,7 @@ public class Heroi extends Componentes {
     					ouro_capturado = true;
     				}
     			}
-    			if (captura == false) System.out.print("Kade o ouro?!! :(");
+    			if (!captura) System.out.print("Cade o ouro?!! :(");
     		case "w":// p/ cima
     			if (y == 0) System.out.print("comando invalido");
     			else
@@ -60,7 +61,7 @@ public class Heroi extends Componentes {
     					}
     					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'W')
     					{
-    						if(equipada == true)
+    						if(equipada)
     						{
     							int vive = random.nextInt(1);
     							if (vive != 1) pontos -= 1000;
@@ -85,7 +86,7 @@ public class Heroi extends Componentes {
     					}
     					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'W')
     					{
-    						if(equipada == true)
+    						if(equipada)
     						{
     							int vive = random.nextInt(1);
     							if (vive != 1) pontos -= 1000;
@@ -110,7 +111,7 @@ public class Heroi extends Componentes {
     					}
     					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'W')
     					{
-    						if(equipada == true)
+    						if(equipada)
     						{
     							int vive = random.nextInt(1);
     							if (vive != 1) pontos -= 1000;
@@ -135,7 +136,7 @@ public class Heroi extends Componentes {
     					}
     					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'W')
     					{
-    						if(equipada == true)
+    						if(equipada)
     						{
     							int vive = random.nextInt(1);
     							if (vive != 1) pontos -= 1000;
@@ -146,11 +147,11 @@ public class Heroi extends Componentes {
     				}
     			}
     		case "q":// sai caverna 
-    			if (ouro_capturado == true && x ==1 && y==1) pontos += 789;
+    			if (ouro_capturado && x ==1 && y==1) pontos += 789;
     			
     		
     	}
-    	if (equipada == true)
+    	if (equipada)
     	{
     		if (flecha != 0) flecha--;
     		else equipada = false;

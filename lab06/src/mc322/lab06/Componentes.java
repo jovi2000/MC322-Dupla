@@ -1,7 +1,8 @@
 package mc322.lab06;
 
+import java.util.LinkedList;
+
 public class Componentes {
-    // Fazer um polimorfismo para o contrutor de cada componente
     /* Atributos */
     protected int linha;
     protected int coluna;
@@ -29,54 +30,53 @@ public class Componentes {
 
     /* Função usada pelas Classes primarias Wumpus e Buraco para adicionar os componentes secundários Fedor e Brisa */
     public void inserirSecundarios() {
-        int[] vetor_posicoes = new int[8]; /* Os indices pares do vetor são as linhas e o número seguinte de cada linha
-		 é sua respectiva coluna */
-        int posicao_vetor = 0;
+        LinkedList<Integer> lista_posicoes = new LinkedList<Integer>(); /* Os indices pares da lista são as linhas e o
+        número seguinte de cada linha é sua respectiva coluna */
 
         /* Calculando todas as posicoes dos objetos da classe secundária */
         /* Posicao acima */
         int linha_secundaria = linha - 1, coluna_secundaria = coluna;
         if (dentroDaMatriz(linha_secundaria, coluna_secundaria)) {
-            vetor_posicoes[posicao_vetor] = linha_secundaria;
-            vetor_posicoes[posicao_vetor + 1] = coluna_secundaria;
-            posicao_vetor += 2;
+            lista_posicoes.add(linha_secundaria);
+            lista_posicoes.add(coluna_secundaria);
         }
         /* Posicao abaixo */
         linha_secundaria = linha + 1;
         coluna_secundaria = coluna;
         if (dentroDaMatriz(linha_secundaria, coluna_secundaria)) {
-            vetor_posicoes[posicao_vetor] = linha_secundaria;
-            vetor_posicoes[posicao_vetor + 1] = coluna_secundaria;
-            posicao_vetor += 2;
+            lista_posicoes.add(linha_secundaria);
+            lista_posicoes.add(coluna_secundaria);
         }
         /* Posicao a direita */
         linha_secundaria = linha;
         coluna_secundaria = coluna + 1;
         if (dentroDaMatriz(linha_secundaria, coluna_secundaria)) {
-            vetor_posicoes[posicao_vetor] = linha_secundaria;
-            vetor_posicoes[posicao_vetor + 1] = coluna_secundaria;
-            posicao_vetor += 2;
+            lista_posicoes.add(linha_secundaria);
+            lista_posicoes.add(coluna_secundaria);
         }
         /* Posicao a esquerda */
         linha_secundaria = linha;
         coluna_secundaria = coluna - 1;
         if (dentroDaMatriz(linha_secundaria, coluna_secundaria)) {
-            vetor_posicoes[posicao_vetor] = linha_secundaria;
-            vetor_posicoes[posicao_vetor + 1] = coluna_secundaria;
-            posicao_vetor += 2;
+            lista_posicoes.add(linha_secundaria);
+            lista_posicoes.add(coluna_secundaria);
         }
 
         /* Adicionando cada fedor ou brisa na sala da caverna */
         if (simbolo == 'W') {
-            for (int i = 0; i < vetor_posicoes.length; i += 2) {
-                Componentes novo_fedor = new Fedor(vetor_posicoes[i], vetor_posicoes[i + 1], 'f', caverna);
-                caverna.verificarSala(vetor_posicoes[i], vetor_posicoes[i + 1], novo_fedor);
+            for (int i = 0; i < lista_posicoes.size(); i += 2) {
+                Componentes novo_fedor = new Fedor(lista_posicoes.get(i), lista_posicoes.get(i+1), 'f', caverna);
+                caverna.verificarSala(lista_posicoes.get(i), lista_posicoes.get(i+1), novo_fedor);
             }
         } else /* simbolo = 'B' */ {
-            for (int i = 0; i < vetor_posicoes.length; i += 2) {
-                Componentes nova_brisa = new Brisa(vetor_posicoes[i], vetor_posicoes[i + 1], 'b', caverna);
-                caverna.verificarSala(vetor_posicoes[i], vetor_posicoes[i + 1], nova_brisa);
+            for (int i = 0; i < lista_posicoes.size(); i += 2) {
+                Componentes nova_brisa = new Brisa(lista_posicoes.get(i), lista_posicoes.get(i+1), 'b', caverna);
+                caverna.verificarSala(lista_posicoes.get(i), lista_posicoes.get(i+1), nova_brisa);
             }
         }
+    }
+
+    public int controleHeroi(String comando) {
+        return 0;
     }
 }

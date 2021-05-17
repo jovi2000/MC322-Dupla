@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class Sala {
     /* Atributos */
 	public LinkedList<Componentes> lista_sala; // Lista ligada de Componentes
-	public boolean visivel; // Se o heroi já passou pela sala visivel = true, caso contrário visivel = false
+	public boolean visivel; // Se o heroi já passou pela sala, visivel = true, caso contrário, visivel = false
 
 	/* Métodos */
 	Sala() {
@@ -34,6 +34,10 @@ public class Sala {
 		/* Se a sala está disponível para receber o componente, ele é adicionado */
 		if (disponibilidadeSala(componente)) {
 			lista_sala.add(componente);
+			/* O heroi já começa visível */
+			if (componente.simbolo == 'P') {
+				visivel = true;
+			}
 			return true;
 		}
 		else {

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Controle {
     /* Atributo */
-    Heroi heroi;
+    Componentes heroi;
     String player;
     boolean game_over;
     Scanner keyboard;
@@ -12,7 +12,7 @@ public class Controle {
     +500 matar o Wumpus */
 
 	/* Métodos */
-    Controle(Heroi heroi)
+    Controle(Componentes heroi)
     {
     	this.heroi = heroi;
     	game_over = false;
@@ -23,13 +23,14 @@ public class Controle {
     boolean jogo()
     {
     	/* Adquirindo o nome do jogador */
-    	System.out.print("Nome do novo Jogador");
+    	System.out.print("Nome do novo Jogador: ");
 		player = keyboard.nextLine();
 
     	while (!game_over)
     	{
     		heroi.caverna.exibirCaverna();
     		System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
+			System.out.print("\nDigite sua ação: ");
     		String  comando = keyboard.nextLine();
     		int n = heroi.controleHeroi(comando); 
     		score += n;

@@ -30,12 +30,17 @@ public class Caverna {
 			/* Printando todos os número no começo das linhas que indicam a posição de cada linha */
 			System.out.print((i + 1) + " ");
 			for (int j = 0; j < 4; j++) {
-				/* Caso a lista ligada da sala esteja vazia, a sala não tem nenhum componente */
-				if (matriz_caverna[i][j].lista_sala.size() == 0) {
-					System.out.print("- ");
+				/* Caso a sala não esteja visível */
+				if (!matriz_caverna[i][j].visivel) {
+					System.out.print("# ");
 				}
 				else {
-					System.out.print(verificarPrioridade(matriz_caverna[i][j].lista_sala) + " ");
+					/* Caso a lista ligada da sala esteja vazia e visivel, a sala não tem nenhum componente */
+					if (matriz_caverna[i][j].lista_sala.size() == 0) {
+						System.out.print("- ");
+					} else {
+						System.out.print(verificarPrioridade(matriz_caverna[i][j].lista_sala) + " ");
+					}
 				}
 			}
 		}
@@ -56,7 +61,7 @@ public class Caverna {
     			return prioridade;
 			}
     		else if (lista.get(i).simbolo == 'P') {
-				prioridade = 'H';
+				prioridade = 'P';
 			}
 			else if (lista.get(i).simbolo == 'f') {
 				prioridade = 'f';
