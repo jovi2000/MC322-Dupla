@@ -20,22 +20,25 @@ public class Heroi extends Componentes {
     private int move(int x, int y)
     {
     	int pontos = 0;
-    	if (linha == 0 && x ==-1) System.out.print("comando invalido");
-    	else if (linha == 3 && x ==1) System.out.print("comando invalido");
-    	else if (coluna == 0 && y ==-1) System.out.print("comando invalido");
-    	else if (coluna == 3 && y ==1) System.out.print("comando invalido");
+    	if (linha == 0 && x == -1) System.out.print("Comando invalido");
+    	else if (linha == 3 && x == 1) System.out.print("Comando invalido");
+    	else if (coluna == 0 && y == -1) System.out.print("Comando invalido");
+    	else if (coluna == 3 && y == 1) System.out.print("Comando invalido");
 		else
 		{
+			/* É necessário remover o heroi da sala que ele está */
 			for (int i = 0; i < caverna.matriz_caverna[linha][coluna].lista_sala.size(); i++)
 			{
 				if(caverna.matriz_caverna[linha][coluna].lista_sala.get(i).simbolo == 'P') 
 				{
 					caverna.matriz_caverna[linha][coluna].lista_sala.remove(i);
+					break;
 				}
 			}
 			pontos = -15;
 			linha += x;
 			coluna += y;
+			/* É necessário verificar qual são os componentes da sala que o heroi está chegando */
 			for (int i = 0; i < caverna.matriz_caverna[linha][coluna].lista_sala.size(); i++)
 			{
 				if(caverna.matriz_caverna[linha][coluna].lista_sala.get(i).simbolo == 'B') 
@@ -47,17 +50,21 @@ public class Heroi extends Componentes {
 					if(equipada)
 					{
 						int vive = random.nextInt(2);
+						/* Caso o número sorteado seja 1 o heroi vive e caso seja 0 o heroi morre */
 						if (vive != 1) pontos -= 1000;
 						else 
 						{
 							pontos += 500;
+							/* Remove o monstro da sala, já que ele foi morto */
 							caverna.matriz_caverna[linha][coluna].lista_sala.remove(i);
 						}
 					}
 					else pontos -= 1000;
 				}
 			}
-			///if (pontos >= -50) caverna.matriz_caverna[linha][coluna].lista_sala.add(Heroi);//n sei como adivi
+			if (pontos >= -50) {
+				caverna.matriz_caverna[linha][coluna].lista_sala.add(this);
+			}
 			caverna.matriz_caverna[linha][coluna].visivel = true;
 		}
     	return pontos;
@@ -68,7 +75,7 @@ public class Heroi extends Componentes {
     	int pontos = 0;
     	switch(comando)
     	{
-    		case "k"://equipa flecha
+    		case "k": //equipa a flecha
     			if (flecha != 0)
     			{
     				equipada = true;
@@ -77,7 +84,7 @@ public class Heroi extends Componentes {
     			}
     			else System.out.print("Acabaram as flechas!!! :(");
     			break;
-    		case "c":// captura ouro
+    		case "c":// captura o ouro
     			boolean captura = false;
     			for (int i = 0; i < caverna.matriz_caverna[linha][coluna].lista_sala.size(); i++)
     			{
@@ -91,20 +98,20 @@ public class Heroi extends Componentes {
     			}
     			if (!captura) System.out.print("Cade o ouro?!! :( ");
     			break;
-    		case "w":// p/ cima
+    		case "w": // para cima
     			pontos = move(-1,0);
     			break;
-    		case "s":// p/ baixo
+    		case "s": // para baixo
     			pontos = move(1,0);
     			break;
-    		case "a":// p/ esquerda
+    		case "a": // para esquerda
     			pontos =move(0,-1);
     			break;
-    		case "d":// p/ direita 
+    		case "d": // para direita
     			pontos = move(0,1);
     			break;
-    		case "q":// sai caverna 
-    			if (ouro_capturado && linha ==0 && coluna ==0) pontos += 789;
+    		case "q": // sai da caverna
+    			if (ouro_capturado && linha == 0 && coluna == 0) pontos += 789;
     			
     		
     	}

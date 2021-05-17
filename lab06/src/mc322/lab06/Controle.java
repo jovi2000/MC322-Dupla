@@ -52,7 +52,7 @@ public class Controle {
     		}
     		
     	}
-    	System.out.print("\nDeseja jogar Novamente?\nDigite 'sim' ou 'nao'");
+    	System.out.println("\n\nDeseja jogar Novamente?\nDigite 'sim' ou 'nao'");
 		String  novamente = keyboard.nextLine();
 		String sim = "sim";
     	if (novamente.equals(sim))	
@@ -61,7 +61,7 @@ public class Controle {
     	}
     	else
     	{
-    		System.out.print("\nVolte Sempre!!");
+    		System.out.println("\nVolte Sempre!!");
     		return false;
     	}    	
     }	
