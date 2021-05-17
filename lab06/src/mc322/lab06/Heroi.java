@@ -5,7 +5,6 @@ public class Heroi extends Componentes {
     /* Atributos */
     private int flecha;
     private boolean equipada; // Indica se a flecha está equipada ou não
-    private int x,y;
     private boolean ouro_capturado;
     Random random;
     
@@ -16,8 +15,52 @@ public class Heroi extends Componentes {
     	this.equipada = false;
     	ouro_capturado = false;
     	random = new Random();
-    	x=0;
-    	y=0;
+    }
+    
+    private int move(int x, int y)
+    {
+    	int pontos = 0;
+    	if (linha == 0 && x ==-1) System.out.print("comando invalido");
+    	else if (linha == 3 && x ==1) System.out.print("comando invalido");
+    	else if (coluna == 0 && y ==-1) System.out.print("comando invalido");
+    	else if (coluna == 3 && y ==1) System.out.print("comando invalido");
+		else
+		{
+			for (int i = 0; i < caverna.matriz_caverna[linha][coluna].lista_sala.size(); i++)
+			{
+				if(caverna.matriz_caverna[linha][coluna].lista_sala.get(i).simbolo == 'P') 
+				{
+					caverna.matriz_caverna[linha][coluna].lista_sala.remove(i);
+				}
+			}
+			pontos = -15;
+			linha += x;
+			coluna += y;
+			for (int i = 0; i < caverna.matriz_caverna[linha][coluna].lista_sala.size(); i++)
+			{
+				if(caverna.matriz_caverna[linha][coluna].lista_sala.get(i).simbolo == 'B') 
+				{
+					pontos -= 1000;
+				}
+				if(caverna.matriz_caverna[linha][coluna].lista_sala.get(i).simbolo == 'W')
+				{
+					if(equipada)
+					{
+						int vive = random.nextInt(2);
+						if (vive != 1) pontos -= 1000;
+						else 
+						{
+							pontos += 500;
+							caverna.matriz_caverna[linha][coluna].lista_sala.remove(i);
+						}
+					}
+					else pontos -= 1000;
+				}
+			}
+			///if (pontos >= -50) caverna.matriz_caverna[linha][coluna].lista_sala.add(Heroi);//n sei como adivi
+			caverna.matriz_caverna[linha][coluna].visivel = true;
+		}
+    	return pontos;
     }
     
     public int controleHeroi(String comando)
@@ -30,124 +73,38 @@ public class Heroi extends Componentes {
     			{
     				equipada = true;
     				pontos -= 100;
+    				System.out.print("Flecha EQUIPADA ;)");
     			}
     			else System.out.print("Acabaram as flechas!!! :(");
+    			break;
     		case "c":// captura ouro
-    			//caverna.matriz_caverna[x][y].lista_sala
     			boolean captura = false;
-    			for (int i = 0; i < caverna.matriz_caverna[x][y].lista_sala.size(); i++)
+    			for (int i = 0; i < caverna.matriz_caverna[linha][coluna].lista_sala.size(); i++)
     			{
-    				if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'O') 
+    				if(caverna.matriz_caverna[linha][coluna].lista_sala.get(i).simbolo == 'O') 
     				{
     					captura = true;
-    					caverna.matriz_caverna[x][y].lista_sala.remove('O');
+    					caverna.matriz_caverna[linha][coluna].lista_sala.remove(i);
     					pontos = 1000;
     					ouro_capturado = true;
     				}
     			}
-    			if (!captura) System.out.print("Cade o ouro?!! :(");
+    			if (!captura) System.out.print("Cade o ouro?!! :( ");
+    			break;
     		case "w":// p/ cima
-    			if (y == 0) System.out.print("comando invalido");
-    			else
-    			{
-    				caverna.matriz_caverna[x][y].lista_sala.remove('P');
-        			pontos = -15;
-    				y--;
-    				for (int i = 0; i < caverna.matriz_caverna[x][y].lista_sala.size(); i++)
-    				{
-    					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'B') 
-    					{
-    						pontos -= 1000;
-    					}
-    					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'W')
-    					{
-    						if(equipada)
-    						{
-    							int vive = random.nextInt(1);
-    							if (vive != 1) pontos -= 1000;
-    							else pontos += 500;
-    						}
-    						else pontos -= 1000;
-    					}
-    				}
-    			}
-    		case "d":// p/ baixo
-    			if (y == 3) System.out.print("comando invalido");
-    			else
-    			{
-    				caverna.matriz_caverna[x][y].lista_sala.remove('P');
-        			pontos = -15;
-    				y++;
-    				for (int i = 0; i < caverna.matriz_caverna[x][y].lista_sala.size(); i++)
-    				{
-    					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'B') 
-    					{
-    						pontos -= 1000;
-    					}
-    					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'W')
-    					{
-    						if(equipada)
-    						{
-    							int vive = random.nextInt(1);
-    							if (vive != 1) pontos -= 1000;
-    							else pontos += 500;
-    						}
-    						else pontos -= 1000;
-    					}
-    				}
-    			}
+    			pontos = move(-1,0);
+    			break;
+    		case "s":// p/ baixo
+    			pontos = move(1,0);
+    			break;
     		case "a":// p/ esquerda
-    			if (x == 0) System.out.print("comando invalido");
-    			else
-    			{
-    				caverna.matriz_caverna[x][y].lista_sala.remove('P');
-        			pontos = -15;
-    				x--;
-    				for (int i = 0; i < caverna.matriz_caverna[x][y].lista_sala.size(); i++)
-    				{
-    					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'B') 
-    					{
-    						pontos -= 1000;
-    					}
-    					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'W')
-    					{
-    						if(equipada)
-    						{
-    							int vive = random.nextInt(1);
-    							if (vive != 1) pontos -= 1000;
-    							else pontos += 500;
-    						}
-    						else pontos -= 1000;
-    					}
-    				}
-    			}
-    		case "s":// p/ direita 
-    			if (x == 3) System.out.print("comando invalido");
-    			else
-    			{
-    				caverna.matriz_caverna[x][y].lista_sala.remove('P');
-        			pontos = -15;
-    				x++;
-    				for (int i = 0; i < caverna.matriz_caverna[x][y].lista_sala.size(); i++)
-    				{
-    					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'B') 
-    					{
-    						pontos -= 1000;
-    					}
-    					if(caverna.matriz_caverna[x][y].lista_sala.get(i).simbolo == 'W')
-    					{
-    						if(equipada)
-    						{
-    							int vive = random.nextInt(1);
-    							if (vive != 1) pontos -= 1000;
-    							else pontos += 500;
-    						}
-    						else pontos -= 1000;
-    					}
-    				}
-    			}
+    			pontos =move(0,-1);
+    			break;
+    		case "d":// p/ direita 
+    			pontos = move(0,1);
+    			break;
     		case "q":// sai caverna 
-    			if (ouro_capturado && x ==1 && y==1) pontos += 789;
+    			if (ouro_capturado && linha ==0 && coluna ==0) pontos += 789;
     			
     		
     	}

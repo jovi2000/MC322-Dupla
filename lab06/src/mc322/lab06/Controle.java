@@ -29,8 +29,8 @@ public class Controle {
     	while (!game_over)
     	{
     		heroi.caverna.exibirCaverna();
-    		System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
-			System.out.print("\nDigite sua ação: ");
+    		System.out.print("\nPlayer: " + player + "\nScore: " + score + "\n");
+			System.out.print("Digite sua ação: ");
     		String  comando = keyboard.nextLine();
     		int n = heroi.controleHeroi(comando); 
     		score += n;
@@ -38,7 +38,7 @@ public class Controle {
     		if (n <= -1000) 
     		{
     			heroi.caverna.exibirCaverna();
-				System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
+				System.out.print("\nPlayer: " + player + "\nScore: " + score + "\n");
 				System.out.print("Voce perdeu =(");
     			game_over = true;
     		}
@@ -46,18 +46,22 @@ public class Controle {
     		{
     			heroi.caverna.exibirCaverna();
     			score -= n;
-    			System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
+    			System.out.print("\nPlayer: " + player + "\nScore: " + score + "\n");
     			System.out.print("Voce ganhou =D");
     			game_over = true;
     		}
     		
     	}
-    	System.out.print("Deseja jogar Novamente?\nDigite 'sim' ou 'nao'");
+    	System.out.print("\nDeseja jogar Novamente?\nDigite 'sim' ou 'nao'");
 		String  novamente = keyboard.nextLine();
-    	if (novamente == "sim")	return true;
+		String sim = "sim";
+    	if (novamente.equals(sim))	
+    	{
+    		return true;
+    	}
     	else
     	{
-    		System.out.print("Volte Sempre!!");
+    		System.out.print("\nVolte Sempre!!");
     		return false;
     	}    	
     }	
