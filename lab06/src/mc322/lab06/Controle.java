@@ -31,24 +31,25 @@ public class Controle {
     		heroi.caverna.exibirCaverna();
     		System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
     		String  comando = keyboard.nextLine();
-    		/*int n = heroi.controleHeroi(comando); //Não sei como chama o heroi****************
+    		int n = heroi.controleHeroi(comando); 
     		score += n;
     		if (n == 0) System.out.print("COMANDO INVALIDO");
     		if (n <= -1000) 
     		{
-			caverna.exibirCaverna();
-			System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
-			System.out.print("Voce perdeu =(");
-    			game_over = true:
-		}
-    		if (n == 1000) 
+    			heroi.caverna.exibirCaverna();
+				System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
+				System.out.print("Voce perdeu =(");
+    			game_over = true;
+    		}
+    		if (n == 789) 
     		{
-			caverna.exibirCaverna();
-			System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
-			System.out.print("Voce ganhou =D");
-    			game_over = true:
-		}
-    		*/
+    			heroi.caverna.exibirCaverna();
+    			score -= n;
+    			System.out.print("\n\nPlayer: " + player + "\n\nScore: " + score + "\n");
+    			System.out.print("Voce ganhou =D");
+    			game_over = true;
+    		}
+    		
     	}
     	System.out.print("Deseja jogar Novamente?\nDigite 'sim' ou 'nao'");
 		String  novamente = keyboard.nextLine();

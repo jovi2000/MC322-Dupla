@@ -67,6 +67,5 @@ public class Caverna {
 		}
 		return prioridade;
 	}
-    
 
 }
