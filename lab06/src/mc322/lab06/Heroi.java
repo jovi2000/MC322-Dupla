@@ -92,7 +92,6 @@ public class Heroi extends Componentes {
     				{
     					captura = true;
     					caverna.matriz_caverna[linha][coluna].lista_sala.remove(i);
-    					pontos = 1000;
     					ouro_capturado = true;
     				}
     			}
@@ -111,8 +110,10 @@ public class Heroi extends Componentes {
     			pontos = move(0,1);
     			break;
     		case "q": // sai da caverna
-    			if (ouro_capturado && linha == 0 && coluna == 0) pontos += 789;
-    			
+    			if (ouro_capturado && linha == 0 && coluna == 0) pontos += 1000;
+    			else System.out.print("A saida não é aqui");
+    		default:
+    			System.out.print("Comando invalido");
     		
     	}
     	if (equipada)

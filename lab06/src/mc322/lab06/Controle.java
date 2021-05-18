@@ -34,7 +34,6 @@ public class Controle {
     		String  comando = keyboard.nextLine();
     		int n = heroi.controleHeroi(comando); 
     		score += n;
-    		if (n == 0) System.out.print("COMANDO INVALIDO");
     		if (n <= -1000) 
     		{
     			heroi.caverna.exibirCaverna();
@@ -42,10 +41,9 @@ public class Controle {
 				System.out.print("Voce perdeu =(");
     			game_over = true;
     		}
-    		if (n == 789) 
+    		if (n == 1000) 
     		{
     			heroi.caverna.exibirCaverna();
-    			score -= n;
     			System.out.print("\nPlayer: " + player + "\nScore: " + score + "\n");
     			System.out.print("Voce ganhou =D");
     			game_over = true;
