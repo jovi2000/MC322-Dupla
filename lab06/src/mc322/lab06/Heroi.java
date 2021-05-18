@@ -20,10 +20,10 @@ public class Heroi extends Componentes {
     private int move(int x, int y)
     {
     	int pontos = 0;
-    	if (linha == 0 && x == -1) System.out.print("Comando invalido");
-    	else if (linha == 3 && x == 1) System.out.print("Comando invalido");
-    	else if (coluna == 0 && y == -1) System.out.print("Comando invalido");
-    	else if (coluna == 3 && y == 1) System.out.print("Comando invalido");
+    	if (linha == 0 && x == -1) System.out.print("Comando invalido");//n=789;
+    	else if (linha == 3 && x == 1) System.out.print("Comando invalido");//n=789;
+    	else if (coluna == 0 && y == -1) System.out.print("Comando invalido");//n=789;
+    	else if (coluna == 3 && y == 1) System.out.print("Comando invalido");//n=789;
 		else
 		{
 			/* É necessário remover o heroi da sala que ele está */
@@ -82,7 +82,7 @@ public class Heroi extends Componentes {
     				pontos -= 100;
     				System.out.print("Flecha EQUIPADA ;)");
     			}
-    			else System.out.print("Acabaram as flechas!!! :(");
+    			else System.out.print("Acabaram as flechas!!! :(");//n=789;
     			break;
     		case "c":// captura o ouro
     			boolean captura = false;
@@ -95,7 +95,7 @@ public class Heroi extends Componentes {
     					ouro_capturado = true;
     				}
     			}
-    			if (!captura) System.out.print("Cade o ouro?!! :( ");
+    			if (!captura) System.out.print("Cade o ouro?!! :( ");//n=789;
     			break;
     		case "w": // para cima
     			pontos = move(-1,0);
@@ -112,8 +112,9 @@ public class Heroi extends Componentes {
     		case "q": // sai da caverna
     			if (ouro_capturado && linha == 0 && coluna == 0) pontos += 1000;
     			else System.out.print("A saida não é aqui");
+    			break;
     		default:
-    			System.out.print("Comando invalido");
+    			System.out.print("Comando invalido"); //n=789;
     		
     	}
     	if (equipada)
