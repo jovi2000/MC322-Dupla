@@ -15,7 +15,7 @@ public class Sala {
 
 	public boolean disponibilidadeSala(Componentes componente) {
 		/* Caso os componentes não sejam nem fedor nem brisa, é necessário verificar os componentes da lista */
-		if (componente.simbolo != 'f' && componente.simbolo != 'b') {
+		if (componente.simbolo != 'f' && componente.simbolo != 'b' && componente.simbolo != 'P') {
 			for (int i = 0; i < lista_sala.size(); i++) {
 				/* Se um dos componentes não for nem fedor nem brisa, a inserção é inválida */
 				if (lista_sala.get(i).simbolo != 'f' && lista_sala.get(i).simbolo != 'b') {
@@ -24,7 +24,7 @@ public class Sala {
 			}
 			return true;
 		}
-		/* A inserção de fedor e de brisa é sempre válida */
+		/* A inserção de fedor, brisa e heroi é sempre válida */
 		else {
 			return true;
 		}
@@ -34,7 +34,7 @@ public class Sala {
 		/* Se a sala está disponível para receber o componente, ele é adicionado */
 		if (disponibilidadeSala(componente)) {
 			lista_sala.add(componente);
-			/* O heroi já começa visível */
+			/* As salas que o heroi passa ficam visíveis */
 			if (componente.simbolo == 'P') {
 				visivel = true;
 			}
@@ -43,5 +43,23 @@ public class Sala {
 		else {
 			return false;
 		}
+	}
+	
+	public void removeComponente(char simbolo_solicitado) {
+		for (int i = 0; i < lista_sala.size(); i++) {
+			if(lista_sala.get(i).simbolo == simbolo_solicitado) {
+				lista_sala.remove(i);
+				break;
+			}
+		}
+	}
+	
+	public int verificaComponentes(char simbolo_solicitado) {
+		for (int i = 0; i < lista_sala.size(); i++) {
+			if (lista_sala.get(i).simbolo == simbolo_solicitado) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }

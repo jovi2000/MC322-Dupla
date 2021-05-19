@@ -19,12 +19,12 @@ public class Componentes {
     }
 
     public boolean solicitarInclusao() {
-        return caverna.verificarSala(linha, coluna, this);
+        return caverna.solicitaAdicao(linha, coluna, this);
     }
 
     /* Função que verifica se a posição do fedor ou da brisa está dentro ou fora da matriz. Caso esteja dentro retorna
     "true" e caso esteja fora retorna "false" */
-    private boolean dentroDaMatriz(int linha, int coluna) {
+    public boolean dentroDaMatriz(int linha, int coluna) {
         return (linha <= 3 && linha >= 0) && (coluna <= 3 && coluna >= 0);
     }
 
@@ -66,17 +66,21 @@ public class Componentes {
         if (simbolo == 'W') {
             for (int i = 0; i < lista_posicoes.size(); i += 2) {
                 Componentes novo_fedor = new Fedor(lista_posicoes.get(i), lista_posicoes.get(i+1), 'f', caverna);
-                caverna.verificarSala(lista_posicoes.get(i), lista_posicoes.get(i+1), novo_fedor);
+                caverna.solicitaAdicao(lista_posicoes.get(i), lista_posicoes.get(i+1), novo_fedor);
             }
         } else /* simbolo = 'B' */ {
             for (int i = 0; i < lista_posicoes.size(); i += 2) {
                 Componentes nova_brisa = new Brisa(lista_posicoes.get(i), lista_posicoes.get(i+1), 'b', caverna);
-                caverna.verificarSala(lista_posicoes.get(i), lista_posicoes.get(i+1), nova_brisa);
+                caverna.solicitaAdicao(lista_posicoes.get(i), lista_posicoes.get(i+1), nova_brisa);
             }
         }
     }
 
+    /* Classe especifica do componente Heroi */
     public int controleHeroi(String comando) {
         return 0;
+    }
+
+    public void removerFedores() {
     }
 }

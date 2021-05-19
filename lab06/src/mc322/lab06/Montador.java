@@ -14,7 +14,7 @@ public class Montador {
 		this.caverna_principal = new Caverna();
 	}
 
-    public boolean montarCaverna(String[] vetor_celulas) {
+    public boolean montarCaverna(String[][] matriz_celulas) {
 		boolean validar = true;
 
 		if (contador_wumpus > 1 || contador_heroi > 1 || contador_ouro > 1 || contador_buraco > 3) {
@@ -22,14 +22,14 @@ public class Montador {
 		}
 		else {
 			/* Percorrendo o vetor com as posições da caverna */
-			for (int i = 0; i < vetor_celulas.length; i++) {
-				char[] posicao_atual = vetor_celulas[i].toCharArray();
+			for (int i = 0; i < matriz_celulas.length; i++) {
+				char[] posicao_atual = matriz_celulas[i][0].toCharArray();
 				Componentes novo_componente; /* Componente que será adicionado na Caverna */
 
 				/* Encontrando a linha e a coluna da caverna, onde o componente se encontra */
 				int linha_componente = posicao_atual[0] - '1', coluna_componente = posicao_atual[2] - '1';
 				/* Instanciando o novo componente */
-				if (posicao_atual[4] == 'P') {
+				if (matriz_celulas[i][1].equals("P")) {
 					novo_componente = new Heroi(linha_componente, coluna_componente, 'P', this.caverna_principal);
 					heroi = novo_componente;
 					if (linha_componente != 0 || coluna_componente != 0) {
@@ -37,15 +37,15 @@ public class Montador {
 					}
 					contador_heroi++;
 				}
-				else if (posicao_atual[4] == 'O') {
+				else if (matriz_celulas[i][1].equals("O")) {
 					novo_componente = new Ouro(linha_componente, coluna_componente, 'O', this.caverna_principal);
 					contador_ouro++;
 				}
-				else if (posicao_atual[4] == 'B') {
+				else if (matriz_celulas[i][1].equals("B")) {
 					novo_componente = new Buraco(linha_componente, coluna_componente, 'B', this.caverna_principal);
 					contador_buraco++;
 				}
-				else if (posicao_atual[4] == 'W') {
+				else if (matriz_celulas[i][1].equals("W")) {
 					novo_componente = new Wumpus(linha_componente, coluna_componente, 'W', this.caverna_principal);
 					contador_wumpus++;
 				}

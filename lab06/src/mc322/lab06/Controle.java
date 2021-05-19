@@ -34,8 +34,6 @@ public class Controle {
     		String  comando = keyboard.nextLine();
     		int n = heroi.controleHeroi(comando); 
     		score += n;
-    		/*if (n != 789)score += n;
-    		else System.out.print("Comando invalido"); */
     		if (n <= -1000) 
     		{
     			heroi.caverna.exibirCaverna();

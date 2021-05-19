@@ -30,25 +30,25 @@ public class CSVHandling {
 			readCSV();
 	}
 
-   public String getDataExport() {
-      return dataExport;
-   }
+	public String getDataExport() {
+		return dataExport;
+	}
 
-   public void setDataExport(String dataExport) {
-      if(dataExport!= null)
-         this.dataExport = dataExport;
-   }
+	public void setDataExport(String dataExport) {
+		if(dataExport!= null)
+			this.dataExport = dataExport;
+	}
 
 	public String[][] requestCommands() {
 		return commands;
 	}
 
-   public void exportState(String[] state) {
-      this.state = state;
-      writeCSV();
-   }
+	public void exportState(String[] state) {
+		this.state = state;
+		writeCSV();
+	}
 
-   private void readCSV() {
+	private void readCSV() {
 		try {
 			BufferedReader file = new BufferedReader(new FileReader(dataSource));
 
@@ -65,13 +65,13 @@ public class CSVHandling {
 			erro.printStackTrace();
 		}
 	}
-	
+
 	private void writeCSV(){
 		try {
 			PrintWriter fileExport = new PrintWriter(new FileWriter(dataExport, true));
 			if (state != null)
-			   for (int s = 0; s < state.length; s++)
-			      fileExport.println(state[s]);
+				for (int s = 0; s < state.length; s++)
+					fileExport.println(state[s]);
 			fileExport.close();
 		}catch(IOException erro){
 			erro.printStackTrace();

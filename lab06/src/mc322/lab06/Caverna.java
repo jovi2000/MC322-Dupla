@@ -1,5 +1,6 @@
 package mc322.lab06;
 
+import javax.naming.CompositeName;
 import java.util.LinkedList;
 
 public class Caverna {
@@ -20,8 +21,17 @@ public class Caverna {
         }
     }
 
-    public boolean verificarSala(int linha, int coluna, Componentes componente) {
-        return matriz_caverna[linha][coluna].adicionaComponente(componente);
+    /* Retorna o index do componente na lista ligada da sala */
+    public int verificarSala(int linha, int coluna, char simbolo) {
+        return matriz_caverna[linha][coluna].verificaComponentes(simbolo);
+	}
+
+	public boolean solicitaAdicao(int linha, int coluna, Componentes componente) {
+		return matriz_caverna[linha][coluna].adicionaComponente(componente);
+	}
+
+	public void solicitarRemocao(int linha, int coluna, char simbolo) {
+    	matriz_caverna[linha][coluna].removeComponente(simbolo);
 	}
 
     public void exibirCaverna() {
