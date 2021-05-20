@@ -12,6 +12,7 @@ public class Wumpus extends Componentes {
 		posicoes_fedores =  new LinkedList<Integer>();
 	}
 
+	/* O método em Wumpus tem uma diferença do método em Componentes, que é a atribuição do atributo poisicoes_fedores */
 	public void inserirSecundarios() {
 
 		/* Calculando todas as posicoes dos objetos da classe secundária */

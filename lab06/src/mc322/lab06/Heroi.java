@@ -87,7 +87,7 @@ public class Heroi extends Componentes {
     				equipada = true;
     				System.out.print("\nFlecha EQUIPADA ;)");
     			}
-    			else System.out.print("\nAcabaram as flechas!!! :(");//n=789;
+    			else System.out.print("\nAcabaram as flechas!!! :(");
     			break;
     		case "c": // captura o ouro
     			boolean captura = false;
@@ -98,7 +98,7 @@ public class Heroi extends Componentes {
     					ouro_capturado = true;
 						System.out.print("\nOuro adquirido!! ");
     				}
-    			if (!captura) System.out.print("\nCade o ouro?!! :( ");//n=789;
+    			if (!captura) System.out.print("\nCade o ouro?!! :( ");
     			break;
     		case "w": // para cima
     			pontos = move(-1,0);
@@ -117,8 +117,7 @@ public class Heroi extends Componentes {
     			else System.out.print("\nA saida não é aqui");
     			break;
     		default:
-    			System.out.print("\nComando invalido"); //n=789;
-    		
+    			System.out.print("\nComando invalido");
     	}
     	return pontos;
     }
