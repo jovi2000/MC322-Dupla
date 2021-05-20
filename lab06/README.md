@@ -19,7 +19,7 @@ public void solicitarRemocao(int linha, int coluna, char simbolo) {
 > Nesse trecho são mostrados métodos da classe Caverna. Esses métodos são chamados por Componentes para avisar a Caverna que o Componente deseja verificar, retirar ou adicionar um outro Componente da lista ligada da classe Sala. Os mesmos métodos chamam outros métodos da classe Sala para solicitar que a ação pedida pelo Componente seja realizada, ou seja o Componente solicita uma ação para a Caverna e a Caverna avisa para a Sala a ação que deve ser realizda. A Sala por sua vez irá verificar a ação e realiza-la caso seja válida. Esse trecho, então, mostra a divisão de tarefas e o encapsulamento que o código possui, uma vez que cada classe exerce sua própria função.
 ### Heroi Senciente
 * Neste trecho do código podemos ver que além do próprio herói saber quantas flechas ele passou ele também sabe quais movimentos ele não pode executar além de saber identificar que não há tesouros na sala.
-'''
+~~~java
 ...
 switch(comando)
     	{
@@ -54,4 +54,4 @@ private int move(int x, int y)
     	else if (coluna == 0 && y == -1) System.out.print("\nComando inválido");
     	else if (coluna == 3 && y == 1) System.out.print("\nComando inválido");
 		else
-'''
+~~~
