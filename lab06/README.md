@@ -37,26 +37,16 @@ public boolean adicionaComponente(Componentes componente) {
 ~~~java
 ...
 switch(comando){
-    		case "k": //equipa a flecha
-    			if (flecha != 0)
-    			{
+    		case "k": //equipa a flecha(...)
     				equipada = true;
-    				System.out.print("\nFlecha EQUIPADA ;)");
-    			}
+    				System.out.print("\nFlecha EQUIPADA ;)");}
     			else System.out.print("\nAcabaram as flechas!!! :(");(...)
     		case "c": // captura o ouro
     			boolean captura = false;
-    				if (caverna.verificarSala(linha, coluna, 'O') != -1)
-    				{
-    					captura = true;
-    					caverna.solicitarRemocao(linha, coluna, 'O');
+    				if (caverna.verificarSala(linha, coluna, 'O') != -1){
+    					captura = true;(...)
     					ouro_capturado = true;
 						System.out.print("\nOuro adquirido!! ");(...)
-    				}
-    			if (!captura) System.out.print("\nCade o ouro?!! :( ");
-    		case "w": // para cima(...)
-    			pontos = move(-1,0);
-...
 private int move(int x, int y){
     	int pontos = 0;
     	if (linha == 0 && x == -1) System.out.print("\nComando inválido");...
