@@ -1,6 +1,8 @@
 # Lab06 - O Mundo de Wumpus
 ## Arquivos Java do Jogo
 * Instruções:
+
+
 	O jogo consiste em explorar as cegas a caverna com movimentos paralelo aos eixos evitando os Buracos e tomando cuidado com o monstro que na caverna habita, tudo isso para achar o ouro e conseguir sair da caverna vivo e rico, para isso o jogador conta com com um poderoso nariz que sente a brisa vinda do buraco que ficará amostra na interface do jogo (representada com a letra “b”) ou sentirá o fedor (representada pela a letra “f”) da criatura nas salas adjacentes ao local onde a criatura está caso o joga queira se aventurar mais e enfrentar o terrível monstro ele terá com sigo uma flecha que ele ira usar na próxima sala que entrar porém acertar a criatura não é garantia de nada, entrar na sala do buraco ou tentar enfrentar o monstro sem ter equipado a flecha é morte na certa ahahahha
 		![image](https://user-images.githubusercontent.com/80778627/118917410-33ce4d80-b907-11eb-822b-9468b309d36e.png)
 
