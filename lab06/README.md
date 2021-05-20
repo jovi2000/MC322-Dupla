@@ -5,18 +5,34 @@
 ## Destaques de Arquitetura
 ### Distribuição de Tarefas e Encapsulamento (Critérios 2 e 4)
 ~~~java
-/* Métodos da classe Caverna */
-public int verificarSala(int linha, int coluna, char simbolo) {
-    return matriz_caverna[linha][coluna].verificaComponentes(simbolo);
-}
-public boolean solicitaAdicao(int linha, int coluna, Componentes componente) {
-    return matriz_caverna[linha][coluna].adicionaComponente(componente);
-}
-public void solicitarRemocao(int linha, int coluna, char simbolo) {
-    matriz_caverna[linha][coluna].removeComponente(simbolo);
+public class Componentes {
+    ...
+    public boolean solicitarInclusao() {
+        return caverna.solicitaAdicao(linha, coluna, this);
+    }
 }
 ~~~
-> Nesse trecho são mostrados métodos da classe Caverna. Esses métodos são chamados por Componentes para avisar a Caverna que o Componente deseja verificar, retirar ou adicionar um outro Componente da lista ligada da classe Sala. Os mesmos métodos chamam outros métodos da classe Sala para solicitar que a ação pedida pelo Componente seja realizada, ou seja o Componente solicita uma ação para a Caverna e a Caverna avisa para a Sala a ação que deve ser realizda. A Sala por sua vez irá verificar a ação e realiza-la caso seja válida. Esse trecho, então, mostra a divisão de tarefas e o encapsulamento que o código possui, uma vez que cada classe exerce sua própria função.
+~~~java
+public class Caverna {
+    ...
+    public boolean solicitaAdicao(int linha, int coluna, Componentes componente) {
+        return matriz_caverna[linha][coluna].adicionaComponente(componente);
+    }
+}
+~~~
+~~~java
+/* Método da classe Sala (esse comentário não faz parte do código original) */
+public boolean adicionaComponente(Componentes componente) {
+    /* Se a sala está disponível para receber o componente, ele é adicionado */
+    if (disponibilidadeSala(componente)) {
+	lista_sala.add(componente);
+	...
+	return true;
+    }
+    else { return false; }
+}
+~~~
+> Nesse primeiro trecho, é mostrado um método da classe Componente. Esse método chama um outro método da classe Caverna (trecho 2) com função de avisar a Caverna que o esse Componente deseja ser adicionado na Sala da Caverna. A Caverna, então, chama um outro método da classe Sala (trecho 3) para solicitar que a adição requerida pelo Componente seja realizada, ou seja o Componente solicita uma ação para a Caverna e a Caverna avisa para a Sala a ação que deve ser realizada. A Sala por sua vez irá verificar se a adição e valida, e se for irá adicionar o Componente. Com isso, esses trechos mostram a divisão de tarefas e o encapsulamento que o código possui, uma vez que cada classe exerce sua própria função.
 ### Heroi Senciente
 * Neste trecho do código podemos ver que o próprio herói sabe: identifica se ele ainda tem flechas, quais movimentos ele não pode executar e identificar se há ou não tesouros na sala.
 ~~~java
