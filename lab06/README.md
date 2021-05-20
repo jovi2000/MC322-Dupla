@@ -32,9 +32,8 @@ public boolean adicionaComponente(Componentes componente) {
     else { return false; }
 }
 ~~~
-> Nesse primeiro trecho, é mostrado um método da classe Componente. Esse método chama um outro método da classe Caverna (trecho 2) com função de avisar a Caverna que o esse Componente deseja ser adicionado na Sala da Caverna. A Caverna, então, chama um outro método da classe Sala (trecho 3) para solicitar que a adição requerida pelo Componente seja realizada, ou seja o Componente solicita uma ação para a Caverna e a Caverna avisa para a Sala a ação que deve ser realizada. A Sala por sua vez irá verificar se a adição e valida, e se for irá adicionar o Componente. Com isso, esses trechos mostram a divisão de tarefas e o encapsulamento que o código possui, uma vez que cada classe exerce sua própria função.
+> Nesse primeiro trecho, é mostrado um método da classe Componente. Esse método chama um outro método da classe Caverna (trecho 2) com a função de avisar à Caverna que o Componente deseja ser adicionado na Sala. A Caverna, então, chama um outro método da classe Sala (trecho 3) para solicitar que a adição requerida pelo Componente seja realizada, ou seja, o Componente solicita uma ação para a Caverna que avisa para a Sala a ação que deve ser realizada. A Sala por sua vez irá verificar se a adição é valida e, se for, irá adicionar o Componente. Com isso, esses trechos mostram a divisão de tarefas e o encapsulamento que o código possui, uma vez que cada classe exerce sua própria função.
 ### Heroi Senciente
-* Neste trecho do código podemos ver que o próprio herói sabe: identifica se ele ainda tem flechas, quais movimentos ele não pode executar e identificar se há ou não tesouros na sala.
 ~~~java
 ...
 switch(comando)
@@ -71,3 +70,4 @@ private int move(int x, int y)
     	else if (coluna == 3 && y == 1) System.out.print("\nComando inválido");
 		else
 ~~~
+> Neste trecho do código podemos ver que o próprio herói sabe: identifica se ele ainda tem flechas, quais movimentos ele não pode executar e identificar se há ou não tesouros na sala.
