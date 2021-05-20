@@ -32,7 +32,7 @@ public boolean adicionaComponente(Componentes componente) {
     else { return false; }
 }
 ~~~
-> Nesse primeiro trecho, é mostrado um método da classe Componentes. Esse método chama um outro método da classe Caverna (trecho 2) com a função de avisar à Caverna que o Componente deseja ser adicionado na Sala. A Caverna, então, chama um outro método da classe Sala (trecho 3) para solicitar que a adição requerida pelo Componente seja realizada, ou seja, o Componente solicita uma ação para a Caverna que avisa para a Sala a ação que deve ser realizada. A Sala por sua vez irá verificar se a adição é valida e, se for, irá adicionar o Componente. Com isso, esses trechos mostram a divisão de tarefas e o encapsulamento que o código possui, uma vez que cada classe exerce sua própria função.
+> Nesse primeiro trecho é mostrado um método da classe Componentes. Esse método chama um outro método da classe Caverna (trecho 2) com a função de avisar à Caverna que o Componente deseja ser adicionado em uma certa Sala. A Caverna, então, chama um outro método da classe Sala (trecho 3) para solicitar que a adição requerida pelo Componente seja realizada, ou seja, o Componente solicita uma ação para a Caverna que avisa para a Sala a ação que deve ser realizada. A Sala por sua vez irá verificar se a adição é valida e, se for, irá adicionar o Componente. Com isso, esses trechos mostram a divisão de tarefas e o encapsulamento que o código possui, uma vez que cada classe exerce sua própria função.
 ### Heroi Senciente
 ~~~java
 ...
