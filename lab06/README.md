@@ -35,20 +35,16 @@ public boolean adicionaComponente(Componentes componente) {
 > Nesse primeiro trecho é mostrado um método da classe Componentes. Esse método chama um outro método da classe Caverna (trecho 2) com a função de avisar à Caverna que o Componente deseja ser adicionado em uma certa Sala. A Caverna, então, chama um outro método da classe Sala (trecho 3) para solicitar que a adição requerida pelo Componente seja realizada, ou seja, o Componente solicita uma ação para a Caverna que avisa para a Sala a ação que deve ser realizada. A Sala por sua vez irá verificar se a adição é valida e, se for, irá adicionar o Componente. Com isso, esses trechos mostram a divisão de tarefas e o encapsulamento que o código possui, uma vez que cada classe exerce sua própria função.
 ### Heroi Senciente
 ~~~java
-...
-switch(comando){
+(...)
     		case "k": //equipa a flecha(...)
     				equipada = true;
     				System.out.print("\nFlecha EQUIPADA ;)");}
     			else System.out.print("\nAcabaram as flechas!!! :(");(...)
-    		case "c": // captura o ouro
-    			boolean captura = false;
-    				if (caverna.verificarSala(linha, coluna, 'O') != -1){
-    					captura = true;(...)
+    		case "c": // captura o ouro(...)
+    				if (caverna.verificarSala(linha, coluna, 'O') != -1)(...)
     					ouro_capturado = true;
 						System.out.print("\nOuro adquirido!! ");(...)
-private int move(int x, int y){
-    	int pontos = 0;
+private int move(int x, int y)(...)
     	if (linha == 0 && x == -1) System.out.print("\nComando inválido");...
 ~~~
 > Neste trecho do código podemos ver que o próprio herói sabe: identifica se ele ainda tem flechas, quais movimentos ele não pode executar e identificar se há ou não tesouros na sala.
