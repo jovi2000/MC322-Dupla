@@ -1,3 +1,7 @@
+package model;
+
+import model.Entidades;
+
 public class MapaModel {
     /* Atributos */
     Entidades[][] mapa;

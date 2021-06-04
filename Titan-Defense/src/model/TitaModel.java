@@ -1,8 +1,12 @@
+package model;
+
+import gameplay.TitaGameplay;
+import model.Entidades;
+
 public class TitaModel extends Entidades {
     /* Atributos */
     private int dano;
     private int vida;
-    private TitaController controle;
 
     public int getDano() {
         return dano;
@@ -20,11 +24,4 @@ public class TitaModel extends Entidades {
         this.vida = vida;
     }
 
-    public TitaController getControle() {
-        return controle;
-    }
-
-    public void setControle(TitaController controle) {
-        this.controle = controle;
-    }
 }

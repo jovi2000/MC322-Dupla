@@ -1,7 +1,11 @@
+package model;
+
+import gameplay.TorreGameplay;
+
 public class TorreModel extends Entidades {
     /* Atributos */
     private int dano;
-    private TorreController controle;
+    private TorreGameplay controle;
 
     public int getDano() {
         return dano;
@@ -11,11 +15,11 @@ public class TorreModel extends Entidades {
         this.dano = dano;
     }
 
-    public TorreController getControle() {
+    public TorreGameplay getControle() {
         return controle;
     }
 
-    public void setControle(TorreController controle) {
+    public void setControle(TorreGameplay controle) {
         this.controle = controle;
     }
 }
