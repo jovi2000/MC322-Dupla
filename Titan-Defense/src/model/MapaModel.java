@@ -4,7 +4,9 @@ import model.Entidades;
 
 public class MapaModel {
     /* Atributos */
-    Entidades[][] mapa;
+    private Entidades[][] mapa;
+    private int vida; // Vida da cidade/player
+    private int dinheiro;
 
     public Entidades[][] getMapa() {
         return mapa;

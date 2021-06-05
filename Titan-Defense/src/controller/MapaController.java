@@ -3,6 +3,8 @@ package controller;
 import gameplay.TitaGameplay;
 import gameplay.TorreGameplay;
 import model.MapaModel;
+import model.TitaModel;
+import model.TorreModel;
 
 import java.util.Timer;
 
@@ -11,7 +13,8 @@ public class MapaController {
     private TitaGameplay titaGameplay;
     private TorreGameplay torreGameplay;
     private MapaModel mapa;
-    /* Ter vetor de titas e de torres */
+    private TitaModel[] vetorTitas;
+    private TorreModel[] vetorTorres;
 
     void ataqueDasTorres(vetordetorres){
 
