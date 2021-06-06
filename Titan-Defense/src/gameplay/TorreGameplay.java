@@ -1,11 +1,16 @@
 package gameplay;
 
+import model.TitaModel;
 import model.TorreModel;
 
 public class TorreGameplay {
-    /* Recebe uma torre e um titã */
+    /* Torre ataca o titã */
+    void atacar(TorreModel torre, TitaModel tita) {
+        int vidaFinal = tita.getVida() - torre.getDano();
+        tita.setVida(vidaFinal);
+    }
 
-    void atacar(TorreModel torre) {
-
+    void evoluir(TorreModel torre) {
+        // Dependendo do nível, algumas caracteristicas são melhoradas
     }
 }

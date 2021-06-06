@@ -5,18 +5,10 @@ import model.Entidades;
 
 public class TitaModel extends Entidades {
     /* Atributos */
-    private int dano;
     private int vida;
     private int movimento; // Quantos blocos o titã anda por tempo
 
     /* Getters e Setters */
-    public int getDano() {
-        return dano;
-    }
-
-    public void setDano(int dano) {
-        this.dano = dano;
-    }
 
     public int getVida() {
         return vida;
@@ -36,7 +28,4 @@ public class TitaModel extends Entidades {
 
     /* Métodos */
 
-    public void movimentar() {
-
-    }
 }

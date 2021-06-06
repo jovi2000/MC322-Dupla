@@ -15,4 +15,20 @@ public class MapaModel {
     public void setMapa(Entidades[][] mapa) {
         this.mapa = mapa;
     }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public int getDinheiro() {
+        return dinheiro;
+    }
+
+    public void setDinheiro(int dinheiro) {
+        this.dinheiro = dinheiro;
+    }
 }
