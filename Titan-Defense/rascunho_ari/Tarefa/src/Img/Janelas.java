@@ -13,7 +13,6 @@ public class Janelas
 	static JFrame janela = new JFrame("Meu primeiro frame em Java");
 	public static void main(String[] args) 
 	{
-		 
 		 janela.setSize(1300,1000);
 		 janela.setLayout(new GridLayout(7, 12));
 		 janela.setVisible(true);
@@ -22,7 +21,6 @@ public class Janelas
 		 ImageIcon predio2 = new ImageIcon("/home/arima/Área de Trabalho/mc322/Tarefa/data/predio2.jpg");
 		 ImageIcon piso = new ImageIcon("/home/arima/Área de Trabalho/mc322/Tarefa/data/piso.jpg");
 
-		 
 		 
 		 for (int i = 0; i < 12; i++)
 		 {
