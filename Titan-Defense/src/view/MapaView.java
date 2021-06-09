@@ -1,5 +1,7 @@
 package view;
 
-public class MapaView {
+import controller.MapaController;
 
+public class MapaView {
+    MapaController controle;
 }

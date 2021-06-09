@@ -1,6 +1,5 @@
 package gameplay;
 
 public interface IGameplay {
-    void atacar();
-
+    public void atacar();
 }
