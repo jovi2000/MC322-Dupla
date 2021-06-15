@@ -2,7 +2,7 @@
 
 # Descrição Resumida do Projeto/Jogo
 
-> <Descreva resumidamente o jogo e seu propósito.>
+> oi
 
 # Equipe
 * `<João Vitor Viégas Barreira>` - `<175116>`
