@@ -2,6 +2,6 @@ package view;
 
 import controller.MapaController;
 
-public class MapaView {
+public class GameView {
     MapaController controle;
 }

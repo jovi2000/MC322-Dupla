@@ -1,22 +1,11 @@
 package model;
 
-import gameplay.TitaGameplay;
-import model.Entidades;
-
-public class TitaModel extends Entidades {
+public class TitaModel extends Entidade {
     /* Atributos */
-    private int vida;
     private int movimento; // Quantos blocos o titã anda por tempo
+    private int dano;
 
     /* Getters e Setters */
-
-    public int getVida() {
-        return vida;
-    }
-
-    public void setVida(int vida) {
-        this.vida = vida;
-    }
 
     public int getMovimento() {
         return movimento;
@@ -26,6 +15,11 @@ public class TitaModel extends Entidades {
         this.movimento = movimento;
     }
 
-    /* Métodos */
+    public int getDano() {
+        return dano;
+    }
 
+    public void setDano(int dano) {
+        this.dano = dano;
+    }
 }

@@ -1,17 +1,18 @@
 package model;
 
-public class Entidades {
+public class Entidade {
     /* Atributos */
-    private int dano;
+    private int vida;
     private int linha;
     private int coluna;
+    private char tipo;
 
-    public int getDano() {
-        return dano;
+    public int getVida() {
+        return vida;
     }
 
-    public void setDano(int dano) {
-        this.dano = dano;
+    public void setVida(int vida) {
+        this.vida = vida;
     }
 
     public int getLinha() {
@@ -28,5 +29,13 @@ public class Entidades {
 
     public void setColuna(int coluna) {
         this.coluna = coluna;
+    }
+
+    public char getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(char tipo) {
+        this.tipo = tipo;
     }
 }

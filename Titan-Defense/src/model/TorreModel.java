@@ -1,11 +1,10 @@
 package model;
 
-import gameplay.TorreGameplay;
-
-public class TorreModel extends Entidades {
+public class TorreModel extends Entidade {
     /* Atributos */
     private int nivel;
     private boolean danoEmArea;
+    private int dano;
 
     public int getNivel() {
         return nivel;
@@ -21,5 +20,13 @@ public class TorreModel extends Entidades {
 
     public void setDanoEmArea(boolean danoEmArea) {
         this.danoEmArea = danoEmArea;
+    }
+
+    public int getDano() {
+        return dano;
+    }
+
+    public void setDano(int dano) {
+        this.dano = dano;
     }
 }

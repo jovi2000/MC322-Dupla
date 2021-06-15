@@ -5,13 +5,13 @@ import gameplay.TorreGameplay;
 import model.*;
 
 import java.util.LinkedList;
-import java.util.Timer;
 
 public class MapaController {
     /* Atributos */
     private TitaGameplay titaGameplay;
     private TorreGameplay torreGameplay;
-    private MapaModel mapa;
+    private Entidade[][] mapa;
+    private CidadeModel cidade;
     private LinkedList<TitaModel> listaTitas;
     private LinkedList<TorreModel> listaTorres;
 
@@ -21,7 +21,7 @@ public class MapaController {
     public void movimentoDosTitas() {
         for (int i = 0; i < listaTitas.size(); i++) {
             if (titaGameplay.verificarMovimento(listaTitas.get(i), mapa)) {
-                titaGameplay.movimentarTita(listaTitas.get(i), mapa);
+                titaGameplay.movimentarTita(listaTitas.get(i));
                 movimentarTita(listaTitas.get(i));
             }
         }
@@ -29,16 +29,8 @@ public class MapaController {
 
     /* Muda a posição do titã no mapa */
     public void movimentarTita(TitaModel tita) {
-        Entidades[][] mapaAtual = mapa.getMapaMatriz();
-        mapaAtual[tita.getLinha()][tita.getColuna()] = null;
-        mapaAtual[tita.getLinha()][tita.getColuna() + tita.getMovimento()] = tita;
-        mapa.setMapaMatriz(mapaAtual);
-    }
-
-    /* Percorre o vetor de torres para ver qual as torres que podem atacar */
-    void ataqueDasTorres() {
-        for (int i = 0; i < listaTorres.size(); i++) {
-        }
+        mapa[tita.getLinha()][tita.getColuna()] = null;
+        mapa[tita.getLinha()][tita.getColuna() + tita.getMovimento()] = tita;
     }
 
     /* Funcao que percorre vetor de titas para ver se algum morreu ou chegou na cidade */
@@ -48,40 +40,48 @@ public class MapaController {
                 retirarTitaDoMapa(listaTitas.get(i));
             }
             else {
-                if (titaGameplay.verificarAtaque(listaTitas.get(i), mapa.getColunaDaCidade())) {
-                    titaGameplay.atacar(listaTitas.get(i), mapa);
+                if (titaGameplay.verificarAtaque(listaTitas.get(i), cidade.getColuna())) {
+                    titaGameplay.atacar(listaTitas.get(i), cidade);
                     retirarTitaDoMapa(listaTitas.get(i));
                 }
             }
         }
     }
 
-    public void contruirTorre(int linha, int coluna, char tipo) {
-        Entidades[][] mapaAtual = mapa.getMapaMatriz();
-        if (tipo == 'f') {
-            mapaAtual[linha][coluna] = new TorreDeFlechas();
-        }
-        else {
-            mapaAtual[linha][coluna] = new TorreCanhao();
-        }
-        mapa.setMapaMatriz(mapaAtual);
-    }
-
-    public void evoluirTorre(int linha, int coluna) {
-        Entidades[][] mapaAtual = mapa.getMapaMatriz();
-        torreGameplay.evoluir(mapaAtual[linha][coluna]);
-        mapa.setMapaMatriz(mapaAtual);
+    public void retirarTitaDoMapa(TitaModel tita) {
+        /* Tirando o titã do mapa */
+        mapa[tita.getLinha()][tita.getColuna()] = null;
     }
 
     public void gerarTitas() {
-
+        //Dependendo da fase terá um vetor com um certo número de titãs que irão spawnar
     }
 
-    public void retirarTitaDoMapa(TitaModel tita) {
-        /* Tirando o titã do mapa */
-        Entidades[][] mapaAtual = mapa.getMapaMatriz();
-        mapaAtual[tita.getLinha()][tita.getColuna()] = null;
-        mapa.setMapaMatriz(mapaAtual);
+    /* Percorre o vetor de torres para ver qual as torres que podem atacar */
+    public void ataqueDasTorres() {
+        LinkedList<Entidade> listaDeAlvos;
+        for (int i = 0; i < listaTorres.size(); i++) {
+            listaDeAlvos = torreGameplay.procurarUmAlvo(listaTorres.get(i), mapa);
+            atacarAlvos(listaTorres.get(i), listaDeAlvos);
+        }
     }
 
+    public void atacarAlvos(TorreModel torre, LinkedList<Entidade> alvos) {
+        for (int i = 0; i < alvos.size(); i++) {
+            torreGameplay.atacar(torre, alvos.get(i));
+        }
+    }
+
+    public void contruirTorre(int linha, int coluna, char tipo) {
+        if (tipo == 'f') {
+            mapa[linha][coluna] = new TorreDeFlechas();
+        }
+        else {
+            mapa[linha][coluna] = new TorreCanhao();
+        }
+    }
+
+    public void evoluirTorre(int linha, int coluna) {
+        torreGameplay.evoluir(mapa[linha][coluna]);
+    }
 }
