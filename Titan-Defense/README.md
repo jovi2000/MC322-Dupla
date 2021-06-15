@@ -129,11 +129,9 @@ Método | Objetivo
 
 ## Diagrama da hierarquia de exceções
 
-![Desenho sem título](https://user-images.githubusercontent.com/62356359/121977964-8e6b9580-cd5d-11eb-8d67-35854e72627b.png)
+![HierarquiaExceções (1)](https://user-images.githubusercontent.com/62356359/121978251-308b7d80-cd5e-11eb-8459-4e05b7fa63fa.png)
 
 ## Descrição das classes de exceção
-
-`<Monte uma tabela descritiva seguindo o exemplo>:`
 
 Classe | Descrição
 ----- | -----
