@@ -17,7 +17,7 @@
 
 ## Slides da Prévia
 
-> <https://classroom.google.com/c/MjY0Nzk0NDE4ODI2/a/MzQxMjkwNjY4OTc3/details>
+> <https://drive.google.com/file/d/1OOp8SSEmv9yHHQGiwm8wtko_4qYf-cZQ/view>
 
 # Documentação dos Componentes
 
