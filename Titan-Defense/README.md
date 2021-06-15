@@ -16,7 +16,8 @@
 # Slides do Projeto
 
 ## Slides da Prévia
-`<https://classroom.google.com/c/MjY0Nzk0NDE4ODI2/a/MzQxMjkwNjY4OTc3/details>`
+
+> <https://classroom.google.com/c/MjY0Nzk0NDE4ODI2/a/MzQxMjkwNjY4OTc3/details>
 
 # Documentação dos Componentes
 
