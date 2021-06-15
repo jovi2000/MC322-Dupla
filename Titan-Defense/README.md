@@ -42,7 +42,10 @@
 
 ![Arquitetura melhorada](https://user-images.githubusercontent.com/62356359/121977754-18ffc500-cd5d-11eb-8395-30bab8494918.png)
 
-> <Faça uma breve descrição do diagrama.>
+> * GameView: componente que possui a main, a interface gráfica e que recebe o que é feito pelo jogador. Sempre que o jogador realiza uma nova ação o GameView avisa ao controller.
+> * MapaController: componente que possui a maior parte das funções do jogo e que realiza ou manda outro componente realizar as ações. O controller possui um ponteiro para o Gameplay e possui como atributo a matriz que representa o mapa do jogo, ou seja, possui o ponteiro de todos os Models que estão no mapa
+> * Gameplay: componente que possui duas classes e cada uma delas tem as ações (métodos) de cada Entidade (torre e titã). Sempre que o controller deseja realizar uma mudança em um Model ele avisa ao Gameplay, que realiza a mudança e devolve o valor atualizado.
+> * Model: componente que possui o modelo de cada Entidade. Os Models não possuem métodos mas guardam todas as informações do Model (em atributos) e sempre que eles precisam ser atualizados, o Gameplay realiza isso.
 
 ## Diagrama Geral de Componentes
 
