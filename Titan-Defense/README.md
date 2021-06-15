@@ -135,6 +135,6 @@ Método | Objetivo
 
 Classe | Descrição
 ----- | -----
-DivisaoInvalida | Engloba todas as exceções de divisões não aceitas.
-DivisaoInutil | Indica que a divisão por 1 é inútil.
-DivisaoNaoInteira | Indica uma divisão não inteira.
+CompraInvalida | Engloba todas as exceções de compras não aceitas
+SaldoNegativo | Indica que o saldo final da compra foi negativo
+PosicaoInvalida | Indica que a posição que o player selecionou é inválida
