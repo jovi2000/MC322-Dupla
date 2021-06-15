@@ -25,7 +25,7 @@
 
 ## Diagrama Geral do Projeto
 
-> <Apresente um diagrama geral de organização da organização do seu sistema. O formato é livre. A escolha de um ou mais estilos arquiteturais será considerado um diferencial.>
+![Arquitetura melhorada](https://user-images.githubusercontent.com/62356359/121977754-18ffc500-cd5d-11eb-8395-30bab8494918.png)
 
 > <Faça uma breve descrição do diagrama.>
 
