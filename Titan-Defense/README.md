@@ -40,7 +40,7 @@
 
 ## Diagrama Geral do Projeto
 
-![Arquitetura melhorada](https://user-images.githubusercontent.com/62356359/121977754-18ffc500-cd5d-11eb-8395-30bab8494918.png)
+![Arquitetura melhorada (1)](https://user-images.githubusercontent.com/62356359/122250441-0b9f2380-cea0-11eb-92b0-8577cf436099.png)
 
 > * GameView: componente que possui a main, a interface gráfica e que recebe o que é feito pelo jogador. Sempre que o jogador realiza uma nova ação o GameView avisa ao controller.
 > * MapaController: componente que possui a maior parte das funções do jogo e que realiza ou manda outro componente realizar as ações. O controller possui um ponteiro para o Gameplay e possui como atributo a matriz que representa o mapa do jogo, ou seja, possui o ponteiro de todos os Models que estão no mapa
