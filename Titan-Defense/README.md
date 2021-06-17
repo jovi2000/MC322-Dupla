@@ -49,38 +49,59 @@
 
 ## Diagrama Geral de Componentes
 
-### Exemplo 1
+![Componentes - Arquitetura](https://user-images.githubusercontent.com/62356359/122320629-e7bbfc00-cef8-11eb-9731-fe7b140197c4.png)
 
-Este é o diagrama compondo componentes para análise:
+## Componente `<GameView>`
 
-![Diagrama Analise](diagrama-componentes-analise.png)
+> O GameView tem toda interface gráfica programada nele e recebe todas as ações que o jogador realiza. Após receber as ações realizadas pelo jogador, esse componente envia ações e informações para controller, que com isso pode realizar as modificações necessárias no mapa e no jogo.
 
-### Exemplo 2
-
-Este é um diagrama inicial do projeto de jogos:
-
-![Diagrama Jogos](diagrama-componentes-jogos.png)
-
-### Exemplo 3
-
-Este é outro diagrama de um projeto de vendas:
-
-![Diagrama Vendas](diagrama-componentes-vendas.png)
-
-Para cada componente será apresentado um documento conforme o modelo a seguir:
-
-## Componente `<Nome do Componente>`
-
-> <Resumo do papel do componente e serviços que ele oferece.>
-
-![Componente](diagrama-componente.png)
+![GameView](https://user-images.githubusercontent.com/62356359/122320739-205bd580-cef9-11eb-9ec6-f18d36437156.png)
 
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
 Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
-Autores | `<nome dos membros que criaram o componente>`
-Interfaces | `<listagem das interfaces do componente>`
+Autores | `<João Barreira e Arimã Batista>`
+Interfaces | `<IDadosView>`
+
+`<MapaController>`
+
+> O MapaController tem a função de controlar o jogo e as mudanças que ocorrem dentro do mapa. Esse componente recebe as informações do GameView sobre o que o jogador fez e realiza, ou ordena que outro componente realize, as mudanças necessárias no mapa. É importante ressaltar que esse componente possui como atributo a matriz que representa o mapa do jogo.
+
+![MapaController](https://user-images.githubusercontent.com/62356359/122319841-93fce300-cef7-11eb-8cb5-2435100177b3.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Autores | `<João Barreira e Arimã Batista>`
+Interfaces | `<IDadosView, IDadosModel e IController>`
+
+`<Model>`
+
+> O Model possui todas as informações, armazenadas em atributos, das Entidades (Torre, Titã e Cidade) e sempre que algum componente precisa de alguma informação do Model, ele é solicitado.
+
+![Model](https://user-images.githubusercontent.com/62356359/122322108-4edab000-cefb-11eb-9410-6c4b09147c6b.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Autores | `<João Barreira e Arimã Batista>`
+Interfaces | `<IDadosModel, ITita, ITorre, IAtaque>`
+
+`<Gameplay>`
+
+> O Gameplay possui todos os métodos que representam ações de Torre e de Tita e é dividido em duas classes: TitaGameplay e TorreGameplay. Toda vez que o MapaController deseja realizar alguma alteração em um Model, ele chama o componente Gameplay para efetuar essa mudança e depois devolver o Model atualizado.
+
+![Gameplay](https://user-images.githubusercontent.com/62356359/122322736-551d5c00-cefc-11eb-8ada-e77ab77ef953.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Autores | `<João Barreira e Arimã Batista>`
+Interfaces | `< ITita, ITorre, IAtaque>`
 
 ### Interfaces
 
