@@ -64,7 +64,7 @@ Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08compone
 Autores | `<João Barreira e Arimã Batista>`
 Interfaces | `<IDadosView>`
 
-`<MapaController>`
+##`<MapaController>`
 
 > O MapaController tem a função de controlar o jogo e as mudanças que ocorrem dentro do mapa. Esse componente recebe as informações do GameView sobre o que o jogador fez e realiza, ou ordena que outro componente realize, as mudanças necessárias no mapa. É importante ressaltar que esse componente possui como atributo a matriz que representa o mapa do jogo.
 
@@ -77,7 +77,7 @@ Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08compone
 Autores | `<João Barreira e Arimã Batista>`
 Interfaces | `<IDadosView, IDadosModel e IController>`
 
-`<Model>`
+##`<Model>`
 
 > O Model possui todas as informações, armazenadas em atributos, das Entidades (Torre, Titã e Cidade) e sempre que algum componente precisa de alguma informação do Model, ele é solicitado.
 
@@ -90,7 +90,7 @@ Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08compone
 Autores | `<João Barreira e Arimã Batista>`
 Interfaces | `<IDadosModel, ITita, ITorre, IAtaque>`
 
-`<Gameplay>`
+##`<Gameplay>`
 
 > O Gameplay possui todos os métodos que representam ações de Torre e de Tita e é dividido em duas classes: TitaGameplay e TorreGameplay. Toda vez que o MapaController deseja realizar alguma alteração em um Model, ele chama o componente Gameplay para efetuar essa mudança e depois devolver o Model atualizado.
 
