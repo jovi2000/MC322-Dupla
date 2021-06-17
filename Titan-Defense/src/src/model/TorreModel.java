@@ -3,8 +3,8 @@ package model;
 public class TorreModel extends Entidade {
     /* Atributos */
     private int nivel;
-    private boolean danoEmArea;
     private int dano;
+    private char tipo;
 
     public int getNivel() {
         return nivel;
@@ -14,19 +14,19 @@ public class TorreModel extends Entidade {
         this.nivel = nivel;
     }
 
-    public boolean isDanoEmArea() {
-        return danoEmArea;
-    }
-
-    public void setDanoEmArea(boolean danoEmArea) {
-        this.danoEmArea = danoEmArea;
-    }
-
     public int getDano() {
         return dano;
     }
 
     public void setDano(int dano) {
         this.dano = dano;
+    }
+
+    public char getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(char tipo) {
+        this.tipo = tipo;
     }
 }

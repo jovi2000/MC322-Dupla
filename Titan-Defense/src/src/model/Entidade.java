@@ -5,7 +5,6 @@ public class Entidade {
     private int vida;
     private int linha;
     private int coluna;
-    private char tipo;
 
     public int getVida() {
         return vida;
@@ -31,11 +30,4 @@ public class Entidade {
         this.coluna = coluna;
     }
 
-    public char getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(char tipo) {
-        this.tipo = tipo;
-    }
 }

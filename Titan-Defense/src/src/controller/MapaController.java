@@ -6,7 +6,7 @@ import model.*;
 
 import java.util.LinkedList;
 
-public class MapaController {
+public class MapaController implements IDadosView, IDadosModel , IController {
     /* Atributos */
     private TitaGameplay titaGameplay;
     private TorreGameplay torreGameplay;
@@ -21,8 +21,8 @@ public class MapaController {
     public void movimentoDosTitas() {
         for (int i = 0; i < listaTitas.size(); i++) {
             if (titaGameplay.verificarMovimento(listaTitas.get(i), mapa)) {
-                titaGameplay.movimentarTita(listaTitas.get(i));
-                movimentarTita(listaTitas.get(i));
+                titaGameplay.movimentar(listaTitas.get(i)); // Muda o atributo coluna do Titã
+                movimentarTita(listaTitas.get(i)); // Muda a posição do titã no mapa
             }
         }
     }
@@ -33,16 +33,16 @@ public class MapaController {
         mapa[tita.getLinha()][tita.getColuna() + tita.getMovimento()] = tita;
     }
 
-    /* Funcao que percorre vetor de titas para ver se algum morreu ou chegou na cidade */
+    /* Funcao que percorre vetor de titas para verificar se algum morreu ou chegou na cidade */
     public void verificarTitas() {
         for (int i = 0; i < listaTitas.size(); i++) {
             if (titaGameplay.verificarMorte(listaTitas.get(i))) {
-                retirarTitaDoMapa(listaTitas.get(i));
+                retirarTitaDoMapa(listaTitas.get(i)); // Se morreu, o Titã é retirado do mapa
             }
             else {
                 if (titaGameplay.verificarAtaque(listaTitas.get(i), cidade.getColuna())) {
                     titaGameplay.atacar(listaTitas.get(i), cidade);
-                    retirarTitaDoMapa(listaTitas.get(i));
+                    retirarTitaDoMapa(listaTitas.get(i)); // Depois de atacar a cidade, o titã desaparece do mapa
                 }
             }
         }
@@ -55,13 +55,14 @@ public class MapaController {
 
     public void gerarTitas() {
         //Dependendo da fase terá um vetor com um certo número de titãs que irão spawnar
+        // Colocar cada titã que nasce no vetor
     }
 
     /* Percorre o vetor de torres para ver qual as torres que podem atacar */
     public void ataqueDasTorres() {
         LinkedList<Entidade> listaDeAlvos;
         for (int i = 0; i < listaTorres.size(); i++) {
-            listaDeAlvos = torreGameplay.procurarUmAlvo(listaTorres.get(i), mapa);
+            listaDeAlvos = torreGameplay.procurarAlvos(listaTorres.get(i), mapa);
             atacarAlvos(listaTorres.get(i), listaDeAlvos);
         }
     }
@@ -79,9 +80,10 @@ public class MapaController {
         else {
             mapa[linha][coluna] = new TorreCanhao();
         }
+        listaTorres.add((TorreModel)mapa[linha][coluna]);
     }
 
     public void evoluirTorre(int linha, int coluna) {
-        torreGameplay.evoluir(mapa[linha][coluna]);
+        torreGameplay.evoluir((TorreModel)mapa[linha][coluna]);
     }
 }
