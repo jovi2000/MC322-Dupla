@@ -102,24 +102,11 @@ item | detalhamento
 Classe | `package gameplay (Esse componente é composto por duas classes que ficam no pacote gameplay)`
 Interfaces | `ITita, ITorre, IAtaque`
 
-### Interfaces
-
-Interfaces associadas a esse componente:
-
-![Diagrama Interfaces](diagrama-interfaces.png)
-
-Interface agregadora do componente em Java:
-
-~~~java
-public interface IDataSet extends ITableProducer, IDataSetProperties {
-}
-~~~
-
 ## Detalhamento das Interfaces
 
 ### Interface `IDadosView`
 
-`Interface provida pelo componente GameView para fornecer dados desse componente para métodos do MapaController que os usam
+Interface provida pelo componente GameView para fornecer dados desse componente para métodos do MapaController que os usam
 
 ~~~java
 public interface IDadosModel {
@@ -131,12 +118,12 @@ public interface IDadosModel {
 
 Método | Objetivo
 -------| --------
-`<ContruirTorre>` | `<Cria uma nova torre no mapa dependendo do tipo dela. Tanto a posição da torre no mapa (linha e coluna) quanto o tipo fazem parte do parametro e são fornecidos pelo GameView>`
-`<evoluirTorre>` | `<Evolui o nível de uma torre ja presente no mapa. A posição da torre no mapa faz parte do parametro e é fornecida pelo GameView>`
+`ContruirTorre` | `Cria uma nova torre no mapa dependendo do tipo dela. Tanto a posição da torre no mapa (linha e coluna) quanto o tipo fazem parte do parametro e são fornecidos pelo GameView`
+`evoluirTorre` | `Evolui o nível de uma torre ja presente no mapa. A posição da torre no mapa faz parte do parametro e é fornecida pelo GameView`
 
 ## `IDadosModel`
 
-`Interface provida pelo componente Model para fornecer dados desse componente para métodos do MapaController que os usam
+Interface provida pelo componente Model para fornecer dados desse componente para métodos do MapaController que os usam
 
 ~~~java
 public interface IDadosModel {
@@ -151,39 +138,58 @@ Método | Objetivo
 `movimentarTita` | `Muda a posição do titã dentro da matriz que representa o mapa. O parametro é um TitaModel que faz parte do componente Model`
 `retirarTitaDoMapa` | `Apaga o titã que esta dentro da matriz que representa o mapa. O parametro é um TitaModel que faz parte do componente Model`
 `atacarAlvos` | `Chama a função do componente Gameplay que ordena a torre, que está no parametro, atacar os alvos presentes na lista ligada(parametro)`
-## Exemplo:
 
-### Interface `ITableProducer`
+## `ITita`
 
-Interface provida por qualquer fonte de dados que os forneça na forma de uma tabela.
+Interface provida pelo componente Model para fornecer dados do TitaModel para métodos do Gameplay que os usam
 
 ~~~java
-public interface ITableProducer {
-  String[] requestAttributes();
-  String[][] requestInstances();
+public interface ITita {
+    public boolean verificarMovimento(TitaModel tita, Entidade[][] mapa);
+    public void movimentar(TitaModel tita);
+    public boolean verificarMorte(TitaModel tita);
 }
 ~~~
 
 Método | Objetivo
 -------| --------
-`requestAttributes` | Retorna um vetor com o nome de todos os atributos (colunas) da tabela.
-`requestInstances` | Retorna uma matriz em que cada linha representa uma instância e cada coluna o valor do respectivo atributo (a ordem dos atributos é a mesma daquela fornecida por `requestAttributes`.
+`verificarMovimento` | `Verfica se o movimento que o titã irá realizar é valido. O parametro é um TitaModel que faz parte do componente Model e o outro um mapa, fornecido pelo controller`
+`movimentar` | `Muda o atributo coluna do Titã, após o movimento ser realizado. O parametro é um TitaModel que faz parte do componente Model.`
+`verificarMorte` | `Verifica o atributo vida do Titã para ver se ele está morto`
 
-### Interface `IDataSetProperties`
+## `ITorre`
 
-Define o recurso (usualmente o caminho para um arquivo em disco) que é a fonte de dados.
+Interface provida pelo componente Model para fornecer dados do TorreModel para métodos do Gameplay que os usam
 
 ~~~java
-public interface IDataSetProperties {
-  public String getDataSource();
-  public void setDataSource(String dataSource);
+public interface ITorre {
+    public void evoluir(TorreModel torre);
+    public LinkedList<Entidade> procurarAlvos(TorreModel torre, Entidade[][] mapa);
+    public LinkedList<Entidade> procurarAlvosFlecha(TorreModel torre, Entidade[][] mapa);
+    public LinkedList<Entidade> procurarAlvosCanhao(TorreModel torre, Entidade[][] mapa);
 }
 ~~~
 
 Método | Objetivo
 -------| --------
-`getDataSource` | Retorna o caminho da fonte de dados.
-`setDataSource` | Define o caminho da fonte de dados, informado através do parâmetro `dataSource`.
+`evoluir` | `Melhora os atributos da TorreModel passsada como parametro`
+`procurarAlvos` | `Verifica pelo mapa (parametro) qual os alvos que a torre (parametro) pode atacar e retorna esse(s) alvo(s) em uma de lista ligada`
+`procurarAlvosFlecha` | `Verifica pelo mapa (parametro) qual o alvo que a TorreDeFlechas (parametro) pode atacar e retorna esse alvo em uma de lista ligada`
+`procurarAlvosCanhao` | `Verifica pelo mapa (parametro) quais os alvos que a TorreCanhao (parametro) pode atacar e retorna esses alvos em uma de lista ligada`
+
+## `IAtaque`
+
+Interface provida pelo componente Model para fornecer dados das Entidades para métodos com função de ataque do Gameplay que os usam
+
+~~~java
+public interface IAtaque {
+    public void atacar(Entidade atacante, Entidade vitima);
+}
+~~~
+
+Método | Objetivo
+-------| --------
+`atacar` | `A vida da vitima (parametro) é subtraida pelo dano do atacante (parametro)`
 
 # Plano de Exceções
 
