@@ -60,7 +60,7 @@
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Classe | `<view.GameView)>`
 Autores | `<João Barreira e Arimã Batista>`
 Interfaces | `<IDadosView>`
 
@@ -73,7 +73,7 @@ Interfaces | `<IDadosView>`
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Classe | `<controller.MapaController>`
 Autores | `<João Barreira e Arimã Batista>`
 Interfaces | `<IDadosView, IDadosModel e IController>`
 
@@ -86,7 +86,7 @@ Interfaces | `<IDadosView, IDadosModel e IController>`
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
+Classe | `<model.Entidade (O componente chama Model mas a super classe que possui todos os models chama Entidade)>`
 Autores | `<João Barreira e Arimã Batista>`
 Interfaces | `<IDadosModel, ITita, ITorre, IAtaque>`
 
@@ -99,8 +99,7 @@ Interfaces | `<IDadosModel, ITita, ITorre, IAtaque>`
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
-Autores | `<João Barreira e Arimã Batista>`
+Classe | `<package gameplay (Esse componente é composto por duas classes que ficam no pacote gameplay)>`
 Interfaces | `< ITita, ITorre, IAtaque>`
 
 ### Interfaces
@@ -118,18 +117,38 @@ public interface IDataSet extends ITableProducer, IDataSetProperties {
 
 ## Detalhamento das Interfaces
 
-### Interface `<nome da interface>`
+### Interface `<IDadosView>`
 
-`<Resumo do papel da interface.>`
+`Interface provida pelo componente GameView para fornecer dados desse componente para métodos do MapaController que os usam
 
 ~~~
-<Interface em Java.>
+    public void contruirTorre(int linha, int coluna, char tipo);
+
+    public void evoluirTorre(int linha, int coluna);
 ~~~
 
 Método | Objetivo
 -------| --------
-`<id do método em Java>` | `<objetivo do método e descrição dos parâmetros>`
+`<ContruirTorre>` | `<Cria uma nova torre no mapa dependendo do tipo dela. Tanto a posição da torre no mapa (linha e coluna) quanto o tipo fazem parte do parametro e são fornecidos pelo GameView>`
+`<evoluirTorre>` | `<Evolui o nível de uma torre ja presente no mapa. A posição da torre no mapa faz parte do parametro e é fornecida pelo GameView>`
 
+`<IDadosModel>`
+
+`Interface provida pelo componente Model para fornecer dados desse componente para métodos do MapaController que os usam
+
+~~~
+    public void movimentarTita(TitaModel tita);
+
+    public void retirarTitaDoMapa(TitaModel tita);
+
+    public void atacarAlvos(TorreModel torre, LinkedList<Entidade> alvos);
+~~~
+
+Método | Objetivo
+-------| --------
+`<movimentarTita>` | `<Muda a posição do titã dentro da matriz que representa o mapa. O parametro é um TitaModel que faz parte do componente Model>`
+`<retirarTitaDoMapa>` | `<Apaga o titã que esta dentro da matriz que representa o mapa. O parametro é um TitaModel que faz parte do componente Model>`
+`<atacarAlvos>` | `<Chama a função do componente Gameplay que ordena a torre, que está no parametro, atacar os alvos presentes na lista ligada(parametro)>`
 ## Exemplo:
 
 ### Interface `ITableProducer`
