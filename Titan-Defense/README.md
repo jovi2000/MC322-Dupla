@@ -121,7 +121,7 @@ Método | Objetivo
 `ContruirTorre` | `Cria uma nova torre no mapa dependendo do tipo dela. Tanto a posição da torre no mapa (linha e coluna) quanto o tipo fazem parte do parametro e são fornecidos pelo GameView`
 `evoluirTorre` | `Evolui o nível de uma torre ja presente no mapa. A posição da torre no mapa faz parte do parametro e é fornecida pelo GameView`
 
-## `IDadosModel`
+### `IDadosModel`
 
 Interface provida pelo componente Model para fornecer dados desse componente para métodos do MapaController que os usam
 
@@ -139,7 +139,7 @@ Método | Objetivo
 `retirarTitaDoMapa` | `Apaga o titã que esta dentro da matriz que representa o mapa. O parametro é um TitaModel que faz parte do componente Model`
 `atacarAlvos` | `Chama a função do componente Gameplay que ordena a torre, que está no parametro, atacar os alvos presentes na lista ligada(parametro)`
 
-## `ITita`
+### `ITita`
 
 Interface provida pelo componente Model para fornecer dados do TitaModel para métodos do Gameplay que os usam
 
@@ -157,7 +157,7 @@ Método | Objetivo
 `movimentar` | `Muda o atributo coluna do Titã, após o movimento ser realizado. O parametro é um TitaModel que faz parte do componente Model.`
 `verificarMorte` | `Verifica o atributo vida do Titã para ver se ele está morto`
 
-## `ITorre`
+### `ITorre`
 
 Interface provida pelo componente Model para fornecer dados do TorreModel para métodos do Gameplay que os usam
 
@@ -177,7 +177,7 @@ Método | Objetivo
 `procurarAlvosFlecha` | `Verifica pelo mapa (parametro) qual o alvo que a TorreDeFlechas (parametro) pode atacar e retorna esse alvo em uma de lista ligada`
 `procurarAlvosCanhao` | `Verifica pelo mapa (parametro) quais os alvos que a TorreCanhao (parametro) pode atacar e retorna esses alvos em uma de lista ligada`
 
-## `IAtaque`
+### `IAtaque`
 
 Interface provida pelo componente Model para fornecer dados das Entidades para métodos com função de ataque do Gameplay que os usam
 
