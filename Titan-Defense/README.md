@@ -51,7 +51,7 @@
 
 ![Componentes - Arquitetura](https://user-images.githubusercontent.com/62356359/122320629-e7bbfc00-cef8-11eb-9731-fe7b140197c4.png)
 
-## Componente `<GameView>`
+## Componente `GameView`
 
 > O GameView tem toda interface gráfica programada nele e recebe todas as ações que o jogador realiza. Após receber as ações realizadas pelo jogador, esse componente envia ações e informações para controller, que com isso pode realizar as modificações necessárias no mapa e no jogo.
 
@@ -60,11 +60,11 @@
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | `<view.GameView)>`
-Autores | `<João Barreira e Arimã Batista>`
-Interfaces | `<IDadosView>`
+Classe | `view.GameView`
+Autores | `João Barreira e Arimã Batista`
+Interfaces | `IDadosView`
 
-## `<MapaController>`
+## `MapaController`
 
 > O MapaController tem a função de controlar o jogo e as mudanças que ocorrem dentro do mapa. Esse componente recebe as informações do GameView sobre o que o jogador fez e realiza, ou ordena que outro componente realize, as mudanças necessárias no mapa. É importante ressaltar que esse componente possui como atributo a matriz que representa o mapa do jogo.
 
@@ -73,11 +73,11 @@ Interfaces | `<IDadosView>`
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | `<controller.MapaController>`
-Autores | `<João Barreira e Arimã Batista>`
-Interfaces | `<IDadosView, IDadosModel e IController>`
+Classe | `controller.MapaController`
+Autores | `João Barreira e Arimã Batista`
+Interfaces | `IDadosView, IDadosModel e IController`
 
-## `<Model>`
+## `Model`
 
 > O Model possui todas as informações, armazenadas em atributos, das Entidades (Torre, Titã e Cidade) e sempre que algum componente precisa de alguma informação do Model, ele é solicitado.
 
@@ -86,11 +86,11 @@ Interfaces | `<IDadosView, IDadosModel e IController>`
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | `<model.Entidade (O componente chama Model mas a super classe que possui todos os models chama Entidade)>`
-Autores | `<João Barreira e Arimã Batista>`
-Interfaces | `<IDadosModel, ITita, ITorre, IAtaque>`
+Classe | `model.Entidade (O componente chama Model mas a super classe que possui todos os models chama Entidade)`
+Autores | `João Barreira e Arimã Batista`
+Interfaces | `IDadosModel, ITita, ITorre, IAtaque`
 
-## `<Gameplay>`
+## `Gameplay`
 
 > O Gameplay possui todos os métodos que representam ações de Torre e de Tita e é dividido em duas classes: TitaGameplay e TorreGameplay. Toda vez que o MapaController deseja realizar alguma alteração em um Model, ele chama o componente Gameplay para efetuar essa mudança e depois devolver o Model atualizado.
 
@@ -99,8 +99,8 @@ Interfaces | `<IDadosModel, ITita, ITorre, IAtaque>`
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | `<package gameplay (Esse componente é composto por duas classes que ficam no pacote gameplay)>`
-Interfaces | `< ITita, ITorre, IAtaque>`
+Classe | `package gameplay (Esse componente é composto por duas classes que ficam no pacote gameplay)`
+Interfaces | `ITita, ITorre, IAtaque`
 
 ### Interfaces
 
@@ -117,14 +117,16 @@ public interface IDataSet extends ITableProducer, IDataSetProperties {
 
 ## Detalhamento das Interfaces
 
-### Interface `<IDadosView>`
+### Interface `IDadosView`
 
 `Interface provida pelo componente GameView para fornecer dados desse componente para métodos do MapaController que os usam
 
-~~~
-    public void contruirTorre(int linha, int coluna, char tipo);
-
-    public void evoluirTorre(int linha, int coluna);
+~~~java
+public interface IDadosModel {
+    public void movimentarTita(TitaModel tita);
+    public void retirarTitaDoMapa(TitaModel tita);
+    public void atacarAlvos(TorreModel torre, LinkedList<Entidade> alvos);
+}
 ~~~
 
 Método | Objetivo
@@ -132,23 +134,23 @@ Método | Objetivo
 `<ContruirTorre>` | `<Cria uma nova torre no mapa dependendo do tipo dela. Tanto a posição da torre no mapa (linha e coluna) quanto o tipo fazem parte do parametro e são fornecidos pelo GameView>`
 `<evoluirTorre>` | `<Evolui o nível de uma torre ja presente no mapa. A posição da torre no mapa faz parte do parametro e é fornecida pelo GameView>`
 
-`<IDadosModel>`
+## `IDadosModel`
 
 `Interface provida pelo componente Model para fornecer dados desse componente para métodos do MapaController que os usam
 
-~~~
+~~~java
+public interface IDadosModel {
     public void movimentarTita(TitaModel tita);
-
     public void retirarTitaDoMapa(TitaModel tita);
-
     public void atacarAlvos(TorreModel torre, LinkedList<Entidade> alvos);
+}
 ~~~
 
 Método | Objetivo
 -------| --------
-`<movimentarTita>` | `<Muda a posição do titã dentro da matriz que representa o mapa. O parametro é um TitaModel que faz parte do componente Model>`
-`<retirarTitaDoMapa>` | `<Apaga o titã que esta dentro da matriz que representa o mapa. O parametro é um TitaModel que faz parte do componente Model>`
-`<atacarAlvos>` | `<Chama a função do componente Gameplay que ordena a torre, que está no parametro, atacar os alvos presentes na lista ligada(parametro)>`
+`movimentarTita` | `Muda a posição do titã dentro da matriz que representa o mapa. O parametro é um TitaModel que faz parte do componente Model`
+`retirarTitaDoMapa` | `Apaga o titã que esta dentro da matriz que representa o mapa. O parametro é um TitaModel que faz parte do componente Model`
+`atacarAlvos` | `Chama a função do componente Gameplay que ordena a torre, que está no parametro, atacar os alvos presentes na lista ligada(parametro)`
 ## Exemplo:
 
 ### Interface `ITableProducer`
