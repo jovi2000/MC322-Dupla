@@ -1,6 +1,6 @@
 package model;
 
-public class TorreModel extends Entidade {
+public class TorreModel extends Entidade implements ITorreModel {
     /* Atributos */
     private int nivel;
     private int dano;

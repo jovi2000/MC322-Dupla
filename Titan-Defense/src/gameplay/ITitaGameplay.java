@@ -3,10 +3,10 @@ package gameplay;
 import model.Entidade;
 import model.TitaModel;
 
-public interface ITita {
-    public void atacar(Entidade tita, Entidade cidade);
-    // Quem ta no parametro cede
-    // QUem requer solicita
+public interface ITitaGameplay {
+    public boolean verificarAtaque(TitaModel tita, int colunaCidade);
+
+    public void atacarCidade(TitaModel tita, Entidade cidade);
 
     public boolean verificarMovimento(TitaModel tita, Entidade[][] mapa);
 

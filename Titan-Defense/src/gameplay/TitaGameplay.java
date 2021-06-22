@@ -1,16 +1,26 @@
 package gameplay;
 
-import model.Entidade;
-import model.TitaModel;
+import model.*;
 
-public class TitaGameplay implements ITita {
+public class TitaGameplay implements ITitaGameplay, IRCidadeModel, IRTitaModel {
+    ICidadeModel cidadeModel;
+    ITitaModel titaModel;
+
+    public void connect(ICidadeModel cidadeModel) {
+        this.cidadeModel = cidadeModel;
+    }
+
+    public void connect(ITitaModel titaModel) {
+        this.titaModel = titaModel;
+    }
+
     /* Retorna true caso o titã tenha chegado na cidade */
     public boolean verificarAtaque(TitaModel tita, int colunaCidade) {
         return tita.getColuna() == colunaCidade;
     }
 
     /* Titã ataca a cidade */
-    public void atacar(Entidade tita, Entidade cidade) {
+    public void atacarCidade(TitaModel tita, Entidade cidade) {
         int vidaFinal = cidade.getVida() - tita.getDano();
         cidade.setVida(vidaFinal);
     }

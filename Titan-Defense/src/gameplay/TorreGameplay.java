@@ -1,15 +1,23 @@
 package gameplay;
 
-import model.Entidade;
-import model.TitaModel;
-import model.TorreModel;
+import model.*;
 
 import java.util.LinkedList;
 
-public class TorreGameplay implements ITorre {
+public class TorreGameplay implements ITorreGameplay, IRTorreModel, IRTitaModel {
+    ITorreModel torreModel;
+    ITitaModel titaModel;
+
+    public void connect(ITorreModel torreModel) {
+        this.torreModel = torreModel;
+    }
+
+    public void connect(ITitaModel titaModel) {
+        this.titaModel = titaModel;
+    }
 
     /* Torre ataca o titã */
-    public void atacar(TorreModel torre, Entidade tita) {
+    public void atacarTita(TorreModel torre, Entidade tita) {
         int vidaFinal = tita.getVida() - torre.getDano();
         tita.setVida(vidaFinal);
     }
@@ -26,7 +34,7 @@ public class TorreGameplay implements ITorre {
         }
         /* Torre Canhão */
         else {
-            listaDeAlvos = procurarAlvosCanhao(torre, mapa)
+            listaDeAlvos = procurarAlvosCanhao(torre, mapa);
         }
         return listaDeAlvos;
     }

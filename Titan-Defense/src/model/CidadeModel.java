@@ -1,6 +1,6 @@
 package model;
 
-public class CidadeModel extends Entidade {
+public class CidadeModel extends Entidade implements ICidadeModel {
     /* Atributos */
     private int dinheiro;
 

@@ -1,6 +1,6 @@
 package model;
 
-public class TitaModel extends Entidade {
+public class TitaModel extends Entidade implements ITitaModel {
     /* Atributos */
     private int movimento; // Quantos blocos o titã anda por tempo
     private int dano;

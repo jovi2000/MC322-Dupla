@@ -1,6 +1,6 @@
 package model;
 
-public class Entidade {
+public class Entidade implements IEntidade {
     /* Atributos */
     private int vida;
     private int linha;

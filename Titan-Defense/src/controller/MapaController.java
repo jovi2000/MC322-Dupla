@@ -1,27 +1,38 @@
 package controller;
 
-import gameplay.TitaGameplay;
-import gameplay.TorreGameplay;
+import gameplay.IGameplay;
+import gameplay.IRCidadeModel;
 import model.*;
 
 import java.util.LinkedList;
 
-public class MapaController implements IDadosView, IDadosModel , IController {
+public class MapaController implements IRGameplay, IRCidadeModel, IRMapaModel,IController{
     /* Atributos */
-    private TitaGameplay titaGameplay;
-    private TorreGameplay torreGameplay;
-    private Entidade[][] mapa;
-    private CidadeModel cidade;
+    private IGameplay gameplay;
+    private IMapaModel mapa;
+    private ICidadeModel cidade;
     private LinkedList<TitaModel> listaTitas;
     private LinkedList<TorreModel> listaTorres;
 
     /* Toda vez que o timer for acionado, os titãs nascem, os titãs andam e as torres atiram. Depois dessas ações o
     vetor de titas é percorrido para verificar se algum tita morreu ou chegou na cidade */
 
+    public void connect(IGameplay gameplay) {
+        this.gameplay = gameplay;
+    }
+
+    public void connect(ICidadeModel cidadeModel) {
+        this.cidade = cidadeModel;
+    }
+
+    public void connect(IMapaModel mapa) {
+        this.mapa = mapa;
+    }
+
     public void movimentoDosTitas() {
         for (int i = 0; i < listaTitas.size(); i++) {
-            if (titaGameplay.verificarMovimento(listaTitas.get(i), mapa)) {
-                titaGameplay.movimentar(listaTitas.get(i)); // Muda o atributo coluna do Titã
+            if (gameplay.verificarMovimento(listaTitas.get(i), mapa)) {
+                gameplay.movimentar(listaTitas.get(i)); // Muda o atributo coluna do Titã
                 movimentarTita(listaTitas.get(i)); // Muda a posição do titã no mapa
             }
         }
@@ -36,12 +47,12 @@ public class MapaController implements IDadosView, IDadosModel , IController {
     /* Funcao que percorre vetor de titas para verificar se algum morreu ou chegou na cidade */
     public void verificarTitas() {
         for (int i = 0; i < listaTitas.size(); i++) {
-            if (titaGameplay.verificarMorte(listaTitas.get(i))) {
+            if (gameplay.verificarMorte(listaTitas.get(i))) {
                 retirarTitaDoMapa(listaTitas.get(i)); // Se morreu, o Titã é retirado do mapa
             }
             else {
-                if (titaGameplay.verificarAtaque(listaTitas.get(i), cidade.getColuna())) {
-                    titaGameplay.atacar(listaTitas.get(i), cidade);
+                if (gameplay.verificarAtaque(listaTitas.get(i), cidade.getColuna())) {
+                    gameplay.atacarCidade(listaTitas.get(i), cidade);
                     retirarTitaDoMapa(listaTitas.get(i)); // Depois de atacar a cidade, o titã desaparece do mapa
                 }
             }
@@ -62,14 +73,14 @@ public class MapaController implements IDadosView, IDadosModel , IController {
     public void ataqueDasTorres() {
         LinkedList<Entidade> listaDeAlvos;
         for (int i = 0; i < listaTorres.size(); i++) {
-            listaDeAlvos = torreGameplay.procurarAlvos(listaTorres.get(i), mapa);
+            listaDeAlvos = gameplay.procurarAlvos(listaTorres.get(i), mapa);
             atacarAlvos(listaTorres.get(i), listaDeAlvos);
         }
     }
 
     public void atacarAlvos(TorreModel torre, LinkedList<Entidade> alvos) {
         for (int i = 0; i < alvos.size(); i++) {
-            torreGameplay.atacar(torre, alvos.get(i));
+            gameplay.atacarTita(torre, alvos.get(i));
         }
     }
 
@@ -84,6 +95,6 @@ public class MapaController implements IDadosView, IDadosModel , IController {
     }
 
     public void evoluirTorre(int linha, int coluna) {
-        torreGameplay.evoluir((TorreModel)mapa[linha][coluna]);
+        gameplay.evoluir((TorreModel)mapa[linha][coluna]);
     }
 }
