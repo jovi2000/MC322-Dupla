@@ -1,4 +1,4 @@
-package gameplay;
+package controller;
 
 import model.ITitaModel;
 import model.ITorreModel;

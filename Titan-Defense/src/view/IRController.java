@@ -1,7 +1,7 @@
 package view;
 
-import controller.IController;
+import controller.IMapaController;
 
 public interface IRController {
-    public void connect(IController controller);
+    public void connect(IMapaController controller);
 }

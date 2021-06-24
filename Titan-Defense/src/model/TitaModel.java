@@ -2,18 +2,10 @@ package model;
 
 public class TitaModel extends Entidade implements ITitaModel {
     /* Atributos */
-    private int movimento; // Quantos blocos o titã anda por tempo
     private int dano;
+    private int recompensa;
 
     /* Getters e Setters */
-
-    public int getMovimento() {
-        return movimento;
-    }
-
-    public void setMovimento(int movimento) {
-        this.movimento = movimento;
-    }
 
     public int getDano() {
         return dano;
@@ -21,5 +13,13 @@ public class TitaModel extends Entidade implements ITitaModel {
 
     public void setDano(int dano) {
         this.dano = dano;
+    }
+
+    public int getRecompensa() {
+        return recompensa;
+    }
+
+    public void setRecompensa(char tipo) {
+        this.recompensa = tipo;
     }
 }

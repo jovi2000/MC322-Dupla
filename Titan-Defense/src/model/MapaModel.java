@@ -1,13 +1,13 @@
 package model;
 
-public class MapaModel {
-    Entidade[][] mapa;
+public class MapaModel implements IMapaModel {
+    private Entidade[][] matrizMapa;
 
-    public Entidade[][] getMapa() {
-        return mapa;
+    public Entidade getCelula(int linha, int coluna) {
+        return matrizMapa[linha][coluna];
     }
 
-    public void setMapa(Entidade[][] mapa) {
-        this.mapa = mapa;
+    public void setCelula(Entidade novaEntidade, int linha, int coluna) {
+        matrizMapa[linha][coluna] = novaEntidade;
     }
 }
