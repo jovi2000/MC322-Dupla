@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class GameView implements IRMapaController, IRCidadeController, IRTitaController, IRTorreController {
-    IMapaController controle;
     /* Imagens */
     private JFrame janela = new JFrame("Ataque ao titã");
     private ImageIcon teto_vazio = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/teto.jpg");
@@ -40,32 +39,65 @@ public class GameView implements IRMapaController, IRCidadeController, IRTitaCon
     private JComboBox[][] celula;
 
     /* Interfaces */
-    MapaController mapaController;
-    CidadeController cidadeController;
-    TitaController titaController;
-    TorreController torreController;
+    private IMapaController mapaController;
+    private ICidadeController cidadeController;
+    private ITitaController titaController;
+    private ITorreController torreController;
 
-    /* Connects */
-    public void connect(MapaController mapaController) {
+    /* Getters e Setters */
+    public IMapaController getMapaController() {
+        return mapaController;
+    }
+
+    public void setMapaController(IMapaController mapaController) {
         this.mapaController = mapaController;
     }
 
-    public void connect(CidadeController cidadeController) {
+    public ICidadeController getCidadeController() {
+        return cidadeController;
+    }
+
+    public void setCidadeController(ICidadeController cidadeController) {
         this.cidadeController = cidadeController;
     }
 
-    public void connect(TitaController titaController) {
+    public ITitaController getTitaController() {
+        return titaController;
+    }
+
+    public void setTitaController(ITitaController titaController) {
         this.titaController = titaController;
     }
 
-    public void connect(TorreController torreController) {
+    public ITorreController getTorreController() {
+        return torreController;
+    }
+
+    public void setTorreController(ITorreController torreController) {
+        this.torreController = torreController;
+    }
+
+    /* Connects */
+    public void connect(IMapaController mapaController) {
+        this.mapaController = mapaController;
+    }
+
+    public void connect(ICidadeController cidadeController) {
+        this.cidadeController = cidadeController;
+    }
+
+    public void connect(ITitaController titaController) {
+        this.titaController = titaController;
+    }
+
+    public void connect(ITorreController torreController) {
         this.torreController = torreController;
     }
 
     String pp;
 
 
-    GameView()
+    public GameView()
     {
         janela.setSize(1300,1000);
         janela.setVisible(true);

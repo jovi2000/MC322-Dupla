@@ -4,61 +4,95 @@ import model.*;
 
 import java.util.LinkedList;
 
-public class MapaController implements IREntidadeController, IRMapaModel, IMapaController {
+public class MapaController implements IMapaController, IRMapaModel, IRTitaController, IRTorreController {
     /* Atributos */
     private int fase; // indica qual a fase atual do jogo
 
     /* Interfaces */
-    private IEntidadeController entidadeController;
-    private IMapaModel mapa;
+    private IMapaModel mapaModel;
+    private ITitaController titaController;
+    private ITorreController torreController;
 
-    /* Toda vez que o timer for acionado, os titãs nascem, os titãs andam e as torres atiram. Depois dessas ações o
-    vetor de titas é percorrido para verificar se algum tita morreu ou chegou na cidade */
-
-    public void connect(IEntidadeController entidadeController) {
-        this.entidadeController = entidadeController;
+    /* Getters e Setters */
+    public IMapaModel getMapaModel() {
+        return mapaModel;
     }
 
-    public void connect(IMapaModel mapa) {
-        this.mapa = mapa;
+    public void setMapaModel(IMapaModel mapaModel) {
+        this.mapaModel = mapaModel;
+    }
+
+    public ITitaController getTitaController() {
+        return titaController;
+    }
+
+    public void setTitaController(ITitaController titaController) {
+        this.titaController = titaController;
+    }
+
+    public ITorreController getTorreController() {
+        return torreController;
+    }
+
+    public void setTorreController(ITorreController torreController) {
+        this.torreController = torreController;
+    }
+
+    /* Construtor */
+    public MapaController() {
+        fase = 1;
+    }
+
+    /* Métodos */
+    public void connect(IMapaModel mapaModel) {
+        this.mapaModel = mapaModel;
+    }
+
+    public void connect(ITitaController titaController) {
+        this.titaController = titaController;
+    }
+
+    public void connect(ITorreController torreController) {
+        this.torreController = torreController;
     }
 
     /* Muda a posição do titã no mapa */
     public void movimentarTita(TitaModel tita) {
         retirarTitaDoMapa(tita);
-        mapa.setCelula(tita, entidadeController.getLinha(tita), entidadeController.getColuna(tita) + 1); // Muda para a outra posição
+        mapaModel.setCelula(tita, titaController.getLinha(tita), titaController.getColuna(tita) + 1); // Muda para a outra posição
     }
 
     public void retirarTitaDoMapa(TitaModel tita) {
         /* Tirando o titã do mapa */
-        mapa.setCelula(null, entidadeController.getLinha(tita), entidadeController.getColuna(tita));
+        mapaModel.setCelula(null, titaController.getLinha(tita), titaController.getColuna(tita));
     }
 
     public void gerarTitas() {
         //Dependendo da fase terá um vetor com um certo número de titãs que irão spawnar
-        // Colocar cada titã que nasce no vetor
+        // Colocar cada titã que nasce na lista
     }
 
     public void contruirTorre(int linha, int coluna, String tipo) {
         if (tipo == "flecha") {
-            mapa.setCelula(new TorreDeFlechas(), linha, coluna);
+            mapaModel.setCelula(new TorreDeFlechas(), linha, coluna);
         }
         else {
-            mapa.setCelula(new TorreCanhao(), linha, coluna);
+            mapaModel.setCelula(new TorreCanhao(), linha, coluna);
         }
-        entidadeController.adicionarNaLista((TorreModel)mapa.getCelula(linha, coluna));
+        torreController.adicionarNaLista((TorreModel)mapaModel.getCelula(linha, coluna));
     }
 
+    /* Método para o View */
     public void evoluirTorre(int linha, int coluna) {
-        entidadeController.evoluir((TorreModel)getCelula(linha, coluna));
+        torreController.evoluir((TorreModel)getCelula(linha, coluna));
     }
 
     public Entidade getCelula(int linha, int coluna) {
-        return mapa.getCelula(linha, coluna);
+        return mapaModel.getCelula(linha, coluna);
     }
 
     public void setCelula(Entidade novaEntidade, int linha, int coluna) {
-        mapa.setCelula(novaEntidade, linha, coluna);
+        mapaModel.setCelula(novaEntidade, linha, coluna);
     }
 
     public int getFase() {

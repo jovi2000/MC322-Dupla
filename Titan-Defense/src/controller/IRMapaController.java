@@ -1,5 +1,5 @@
 package controller;
 
 public interface IRMapaController {
-    public void connect(MapaController mapaController);
+    public void connect(IMapaController mapaController);
 }

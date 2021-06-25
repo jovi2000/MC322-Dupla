@@ -2,10 +2,11 @@ package model;
 
 public class Entidade implements IEntidade {
     /* Atributos */
-    private int vida;
-    private int linha;
-    private int coluna;
+    protected int vida;
+    protected int linha;
+    protected int coluna;
 
+    /* Métodos */
     public int getVida() {
         return vida;
     }

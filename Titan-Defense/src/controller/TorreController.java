@@ -5,10 +5,37 @@ import model.*;
 import java.util.LinkedList;
 
 public class TorreController implements ITorreController, IRTorreModel, IRTitaController, IRMapaController {
+    /* Atributos */
+    private LinkedList<TorreModel> listaTorres;
+
+    /* Interfaces */
     private ITorreModel torreModel;
     private IMapaController mapaController;
     private ITitaController titaController;
-    private LinkedList<TorreModel> listaTorres;
+
+    /* Constutor */
+    public TorreController() {
+        listaTorres = new LinkedList<TorreModel>();
+    }
+
+    /* Getters e Setters */
+
+    public IMapaController getMapaController() {
+        return mapaController;
+    }
+
+    public void setMapaController(IMapaController mapaController) {
+        this.mapaController = mapaController;
+    }
+
+    public ITitaController getTitaController() {
+        return titaController;
+    }
+
+    public void setTitaController(ITitaController titaController) {
+        this.titaController = titaController;
+    }
+    /* Métodos */
 
     public void connect(ITorreModel torreModel) {
         this.torreModel = torreModel;
@@ -18,7 +45,7 @@ public class TorreController implements ITorreController, IRTorreModel, IRTitaCo
         this.titaController = titaController;
     }
 
-    public void connect(MapaController mapaController) {
+    public void connect(IMapaController mapaController) {
         this.mapaController = mapaController;
     }
 

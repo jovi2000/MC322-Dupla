@@ -1,7 +1,8 @@
 package controller;
 
 import model.CidadeModel;
+import model.ICidadeModel;
 
 public interface IRCidadeModel {
-    public void connect(CidadeModel cidadeModel);
+    public void connect(ICidadeModel cidadeModel);
 }

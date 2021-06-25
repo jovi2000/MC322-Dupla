@@ -1,5 +1,5 @@
 package controller;
 
 public interface IRTorreController {
-    public void connect(TorreController torreController);
+    public void connect(ITorreController torreController);
 }

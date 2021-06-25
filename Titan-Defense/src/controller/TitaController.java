@@ -5,12 +5,48 @@ import model.*;
 import java.util.LinkedList;
 
 public class TitaController implements ITitaController, IRTitaModel, IRCidadeController, IRMapaController {
-    private MapaController mapaController;
-    private ICidadeController cidadeController;
-    private ITitaModel titaModel;
+    /* Atributos */
     private LinkedList<TitaModel> listaTitas;
 
-    public void connect(MapaController mapaController) {
+    /* Interfaces */
+    private IMapaController mapaController;
+    private ICidadeController cidadeController;
+    private ITitaModel titaModel;
+
+    /* Constutor */
+
+    public TitaController() {
+        listaTitas = new LinkedList<TitaModel>();
+    }
+
+    /* Getters e Setters */
+
+    public IMapaController getMapaController() {
+        return mapaController;
+    }
+
+    public void setMapaController(IMapaController mapaController) {
+        this.mapaController = mapaController;
+    }
+
+    public ICidadeController getCidadeController() {
+        return cidadeController;
+    }
+
+    public void setCidadeController(ICidadeController cidadeController) {
+        this.cidadeController = cidadeController;
+    }
+
+    public ITitaModel getTitaModel() {
+        return titaModel;
+    }
+
+    public void setTitaModel(ITitaModel titaModel) {
+        this.titaModel = titaModel;
+    }
+
+    /* Métodos */
+    public void connect(IMapaController mapaController) {
         this.mapaController = mapaController;
     }
 
@@ -72,11 +108,15 @@ public class TitaController implements ITitaController, IRTitaModel, IRCidadeCon
     }
 
     public int getLinha(TitaModel tita) {
-        return tita.getColuna();
+        return tita.getLinha();
     }
 
     public int getColuna(TitaModel tita) {
         return tita.getColuna();
+    }
+
+    public void adicionarNaLista(TitaModel tita) {
+        listaTitas.add(tita);
     }
 
     public boolean listaVazia() {

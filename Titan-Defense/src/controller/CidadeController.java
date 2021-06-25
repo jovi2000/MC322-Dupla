@@ -4,13 +4,24 @@ import model.CidadeModel;
 import model.ICidadeModel;
 
 public class CidadeController implements ICidadeController, IRCidadeModel {
+    /* Interface */
     private ICidadeModel cidadeModel;
 
+    /* Construtor */
     public CidadeController() {
-
     }
 
-    public void connect(CidadeModel cidadeModel) {
+    /* Getters e Setters */
+    public ICidadeModel getCidadeModel() {
+        return cidadeModel;
+    }
+
+    public void setCidadeModel(ICidadeModel cidadeModel) {
+        this.cidadeModel = cidadeModel;
+    }
+
+    /* Métodos */
+    public void connect(ICidadeModel cidadeModel) {
         this.cidadeModel = cidadeModel;
     }
 

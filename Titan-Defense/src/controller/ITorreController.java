@@ -11,8 +11,8 @@ public interface ITorreController {
 
     public void evoluir(TorreModel torre);
 
-    public LinkedList<Entidade> procurarAlvos(TorreModel torre);
-
     public void adicionarNaLista(TorreModel torre);
+
+    public void ataqueDasTorres();
 
 }

@@ -5,6 +5,13 @@ public class TitaModel extends Entidade implements ITitaModel {
     private int dano;
     private int recompensa;
 
+    /* Construtor */
+
+    public TitaModel() {
+        //dano = x;
+        //recompensa = y;
+    }
+
     /* Getters e Setters */
 
     public int getDano() {

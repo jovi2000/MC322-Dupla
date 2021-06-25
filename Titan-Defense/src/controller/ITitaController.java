@@ -23,6 +23,8 @@ public interface ITitaController {
 
     public int getColuna(TitaModel tita);
 
+    public void adicionarNaLista(TitaModel tita);
+
     public boolean listaVazia();
 
 }
