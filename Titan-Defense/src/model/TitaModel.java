@@ -6,7 +6,6 @@ public class TitaModel extends Entidade implements ITitaModel {
     private int recompensa;
 
     /* Construtor */
-
     public TitaModel() {
         dano = 10;
         recompensa = 15;

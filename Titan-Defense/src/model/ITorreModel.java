@@ -9,6 +9,10 @@ public interface ITorreModel extends IEntidade {
 
     public void setDano(int dano);
 
+    public int getCusto();
+
+    public void setCusto(int custo);
+
     public char getTipo();
 
     public void setTipo(char tipo);

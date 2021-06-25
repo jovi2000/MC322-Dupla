@@ -37,7 +37,7 @@ public class CidadeController implements ICidadeController, IRCidadeModel {
         cidadeModel.setDinheiro(cidadeModel.getDinheiro() - gasto);
     }
 
-    public int getColunaModel() {
+    public int getColuna() {
         return cidadeModel.getColuna();
     }
 

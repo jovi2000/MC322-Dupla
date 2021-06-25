@@ -84,38 +84,57 @@ public class TorreController implements ITorreController, IRTorreModel, IRTitaCo
         if (torre.getLinha() == 0) {
             /* Primeira posição alvo */
             if (torre.getColuna() + 1 <= 3 && mapaController.getCelula(torre.getLinha() + 1, torre.getColuna() + 1) != null) {
-                listaDeAlvos.add(mapaController.getCelula(torre.getLinha() + 1, torre.getColuna() + 1));
+                /* A vida precisa ser maior que zero para a torre atacar */
+                if (mapaController.getCelula(torre.getLinha() + 1, torre.getColuna() + 1).getVida() > 0) {
+                    listaDeAlvos.add(mapaController.getCelula(torre.getLinha() + 1, torre.getColuna() + 1));
+                }
             }
             /* Segunda posição alvo */
-            else if (mapaController.getCelula(torre.getLinha() + 1, torre.getColuna()) != null) {
-                listaDeAlvos.add(mapaController.getCelula(torre.getLinha() + 1, torre.getColuna()));
+            if (mapaController.getCelula(torre.getLinha() + 1, torre.getColuna()) != null && listaDeAlvos.size() == 0) {
+                if (mapaController.getCelula(torre.getLinha() + 1, torre.getColuna()).getVida() > 0) {
+                    listaDeAlvos.add(mapaController.getCelula(torre.getLinha() + 1, torre.getColuna()));
+                }
             }
             /* Terceira posição alvo */
-            else if (mapaController.getCelula(torre.getLinha() + 2, torre.getColuna()) != null) {
-                listaDeAlvos.add(mapaController.getCelula(torre.getLinha() + 2, torre.getColuna()));
+            if (mapaController.getCelula(torre.getLinha() + 2, torre.getColuna()) != null && listaDeAlvos.size() == 0) {
+                if (mapaController.getCelula(torre.getLinha() + 2, torre.getColuna()).getVida() > 0) {
+                    listaDeAlvos.add(mapaController.getCelula(torre.getLinha() + 2, torre.getColuna()));
+                }
             }
             /* Quarta posição alvo */
-            else if (torre.getColuna() - 1 >= 0 && mapaController.getCelula(torre.getLinha() + 1, torre.getColuna() - 1) != null) {
-                listaDeAlvos.add(mapaController.getCelula(torre.getLinha() + 1, torre.getColuna() - 1));
+            if (torre.getColuna() - 1 >= 0 && mapaController.getCelula(torre.getLinha() + 1, torre.getColuna() - 1) != null
+            && listaDeAlvos.size() == 0) {
+                if (mapaController.getCelula(torre.getLinha() + 1, torre.getColuna() - 1).getVida() > 0) {
+                    listaDeAlvos.add(mapaController.getCelula(torre.getLinha() + 1, torre.getColuna() - 1));
+                }
             }
         }
         /* Parte de baixo do mapa */
         else {
             /* Primeira posição alvo */
             if (torre.getColuna() + 1 <= 3 && mapaController.getCelula(torre.getLinha() - 1,torre.getColuna() + 1) != null) {
-                listaDeAlvos.add(mapaController.getCelula(torre.getLinha() - 1,torre.getColuna() + 1));
+                if (mapaController.getCelula(torre.getLinha() - 1,torre.getColuna() + 1).getVida() > 0) {
+                    listaDeAlvos.add(mapaController.getCelula(torre.getLinha() - 1, torre.getColuna() + 1));
+                }
             }
             /* Segunda posição alvo */
-            else if (mapaController.getCelula(torre.getLinha() - 1, torre.getColuna()) != null) {
-                listaDeAlvos.add(mapaController.getCelula(torre.getLinha() - 1, torre.getColuna()));
+            if (mapaController.getCelula(torre.getLinha() - 1, torre.getColuna()) != null && listaDeAlvos.size() == 0) {
+                if (mapaController.getCelula(torre.getLinha() - 1, torre.getColuna()).getVida() > 0) {
+                    listaDeAlvos.add(mapaController.getCelula(torre.getLinha() - 1, torre.getColuna()));
+                }
             }
             /* Terceira posição alvo */
-            else if (mapaController.getCelula(torre.getLinha() - 2, torre.getColuna()) != null) {
-                listaDeAlvos.add(mapaController.getCelula(torre.getLinha() - 2, torre.getColuna()));
+            if (mapaController.getCelula(torre.getLinha() - 2, torre.getColuna()) != null && listaDeAlvos.size() == 0) {
+                if (mapaController.getCelula(torre.getLinha() - 2, torre.getColuna()).getVida() > 0) {
+                    listaDeAlvos.add(mapaController.getCelula(torre.getLinha() - 2, torre.getColuna()));
+                }
             }
             /* Quarta posição alvo */
-            else if (torre.getColuna() - 1 >= 0 && mapaController.getCelula(torre.getLinha() - 1, torre.getColuna() - 1)  != null) {
-                listaDeAlvos.add(mapaController.getCelula(torre.getLinha() - 1, torre.getColuna() - 1));
+            if (torre.getColuna() - 1 >= 0 && mapaController.getCelula(torre.getLinha() - 1, torre.getColuna() - 1)  != null
+            && listaDeAlvos.size() == 0) {
+                if (mapaController.getCelula(torre.getLinha() - 1, torre.getColuna() - 1).getVida() > 0) {
+                    listaDeAlvos.add(mapaController.getCelula(torre.getLinha() - 1, torre.getColuna() - 1));
+                }
             }
         }
         return listaDeAlvos;
@@ -163,6 +182,10 @@ public class TorreController implements ITorreController, IRTorreModel, IRTitaCo
 
     public void adicionarNaLista(TorreModel torre) {
         listaTorres.add(torre);
+    }
+
+    public int getCusto(TorreModel torre) {
+        return torre.getCusto();
     }
 }
 

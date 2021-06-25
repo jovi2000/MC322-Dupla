@@ -2,12 +2,12 @@ package controller;
 
 import model.CidadeModel;
 import model.MapaModel;
+import view.CSVReader;
 import view.GameView;
 
 import java.rmi.server.UnicastRemoteObject;
 
 public class Montador {
-    GameView gameView = new GameView();
     public void montarJogo() {
         MapaController mapaController = new MapaController();
         CidadeController cidadeController = new CidadeController();
@@ -18,14 +18,9 @@ public class Montador {
 
         /* Referenciando */
 
-        // GameView
-        gameView.setCidadeController(cidadeController);
-        gameView.setMapaController(mapaController);
-        gameView.setTitaController(titaController);
-        gameView.setTorreController(torreController);
-
         // MapaController
         mapaController.setMapaModel(mapaModel);
+        mapaController.setCidadeController(cidadeController);
         mapaController.setTorreController(torreController);
         mapaController.setTitaController(titaController);
 
@@ -40,8 +35,15 @@ public class Montador {
         torreController.setMapaController(mapaController);
         torreController.setTitaController(titaController);
 
-    }
-    public GameView getGameView() {
-        return gameView;
+        // GameView
+        GameView gameView = new GameView();
+        gameView.setCidadeController(cidadeController);
+        gameView.setMapaController(mapaController);
+        gameView.setTitaController(titaController);
+        gameView.setTorreController(torreController);
+
+        CSVReader csv = new CSVReader();
+        csv.setDataSource("/img/historia2.csv");
+        gameView.start(csv.requestCommands());
     }
 }

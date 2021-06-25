@@ -80,7 +80,7 @@ public class TitaController implements ITitaController, IRTitaModel, IRCidadeCon
                 mapaController.retirarTitaDoMapa(listaTitas.get(i)); // Se morreu, o Titã é retirado do mapa
             }
             else {
-                if (verificarAtaque(listaTitas.get(i), cidadeController.getColunaModel())) {
+                if (verificarAtaque(listaTitas.get(i), cidadeController.getColuna())) {
                     atacarCidade(listaTitas.get(i));
                     mapaController.retirarTitaDoMapa(listaTitas.get(i)); // Depois de atacar a cidade, o titã desaparece do mapa
                 }

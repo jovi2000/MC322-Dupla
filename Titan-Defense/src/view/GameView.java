@@ -105,8 +105,8 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     {
         janela.setSize(1300,1000);
         janela.setVisible(true);
-        vida = cidadeController.getVida();
-        gold = cidadeController.getDinheiro();
+        vida = 200;
+        gold = 150;
         n_historia = 1;
         celula = new JComboBox[2][12];
         teto_campo = new JLabel[2][12];
@@ -117,7 +117,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         evolucao = p2;
     }
 
-    void start(String[] falas)
+    public void start(String[] falas)
     {
         this.falas = falas;
         menu();

@@ -4,8 +4,8 @@ public class TorreModel extends Entidade implements ITorreModel {
     /* Atributos */
     protected int nivel;
     protected int dano;
+    protected int custo;
     protected char tipo;
-    // custo
 
     public int getNivel() {
         return nivel;
@@ -21,6 +21,14 @@ public class TorreModel extends Entidade implements ITorreModel {
 
     public void setDano(int dano) {
         this.dano = dano;
+    }
+
+    public int getCusto() {
+        return custo;
+    }
+
+    public void setCusto(int custo) {
+        this.custo = custo;
     }
 
     public char getTipo() {

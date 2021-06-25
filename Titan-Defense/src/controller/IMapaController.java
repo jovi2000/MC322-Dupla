@@ -4,7 +4,6 @@ import model.Entidade;
 import model.TitaModel;
 
 public interface IMapaController {
-    // MUDAR ESSA FUNCAO
     public void movimentarTita(TitaModel tita);
 
     public void retirarTitaDoMapa(TitaModel tita);

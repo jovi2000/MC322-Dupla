@@ -9,7 +9,7 @@ public interface ICidadeController {
 
     public void diminuirDinheiro(int gasto);
 
-    public int getColunaModel();
+    public int getColuna();
 
     public int getVida();
 

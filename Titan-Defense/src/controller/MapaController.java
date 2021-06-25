@@ -4,12 +4,13 @@ import model.*;
 
 import java.util.LinkedList;
 
-public class MapaController implements IMapaController, IRMapaModel, IRTitaController, IRTorreController {
+public class MapaController implements IMapaController, IRMapaModel, IRTitaController, IRTorreController, IRCidadeController {
     /* Atributos */
     private int fase; // indica qual a fase atual do jogo
 
     /* Interfaces */
     private IMapaModel mapaModel;
+    private ICidadeController cidadeController;
     private ITitaController titaController;
     private ITorreController torreController;
 
@@ -20,6 +21,14 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
 
     public void setMapaModel(IMapaModel mapaModel) {
         this.mapaModel = mapaModel;
+    }
+
+    public ICidadeController getCidadeController() {
+        return cidadeController;
+    }
+
+    public void setCidadeController(ICidadeController cidadeController) {
+        this.cidadeController = cidadeController;
     }
 
     public ITitaController getTitaController() {
@@ -56,6 +65,10 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
         this.torreController = torreController;
     }
 
+    public void connect(ICidadeController cidadeController) {
+        this.cidadeController = cidadeController;
+    }
+
     /* Muda a posição do titã no mapa */
     public void movimentarTita(TitaModel tita) {
         retirarTitaDoMapa(tita);
@@ -73,13 +86,14 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
     }
 
     public void contruirTorre(int linha, int coluna, String tipo) {
-        if (tipo == "flecha") {
+        if (tipo.equals("flecha")) {
             mapaModel.setCelula(new TorreDeFlechas(), linha, coluna);
         }
         else {
             mapaModel.setCelula(new TorreCanhao(), linha, coluna);
         }
         torreController.adicionarNaLista((TorreModel)mapaModel.getCelula(linha, coluna));
+        cidadeController.diminuirDinheiro(torreController.getCusto((TorreModel)mapaModel.getCelula(linha, coluna)));
     }
 
     /* Método para o View */
