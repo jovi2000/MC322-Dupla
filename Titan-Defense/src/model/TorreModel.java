@@ -2,9 +2,10 @@ package model;
 
 public class TorreModel extends Entidade implements ITorreModel {
     /* Atributos */
-    private int nivel;
-    private int dano;
-    private char tipo;
+    protected int nivel;
+    protected int dano;
+    protected char tipo;
+    // custo
 
     public int getNivel() {
         return nivel;

@@ -8,8 +8,8 @@ public class TitaModel extends Entidade implements ITitaModel {
     /* Construtor */
 
     public TitaModel() {
-        //dano = x;
-        //recompensa = y;
+        dano = 10;
+        recompensa = 15;
     }
 
     /* Getters e Setters */

@@ -7,8 +7,8 @@ import view.GameView;
 import java.rmi.server.UnicastRemoteObject;
 
 public class Montador {
+    GameView gameView = new GameView();
     public void montarJogo() {
-        GameView gameView = new GameView();
         MapaController mapaController = new MapaController();
         CidadeController cidadeController = new CidadeController();
         TitaController titaController = new TitaController();
@@ -40,5 +40,8 @@ public class Montador {
         torreController.setMapaController(mapaController);
         torreController.setTitaController(titaController);
 
+    }
+    public GameView getGameView() {
+        return gameView;
     }
 }

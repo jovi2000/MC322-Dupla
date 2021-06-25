@@ -56,6 +56,7 @@ public class TorreController implements ITorreController, IRTorreModel, IRTitaCo
 
     public void evoluir(TorreModel torre) {
         // Dependendo do nível, algumas caracteristicas são melhoradas
+        // Gastar dinheiro
     }
 
     /* Função para o View */

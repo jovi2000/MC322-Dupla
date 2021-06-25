@@ -6,6 +6,8 @@ import model.Entidade;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,29 +15,31 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class GameView implements IRMapaController, IRCidadeController, IRTitaController, IRTorreController {
+public class GameView implements ActionListener, IRMapaController, IRCidadeController, IRTitaController, IRTorreController {
+    IMapaController controle;
     /* Imagens */
     private JFrame janela = new JFrame("Ataque ao titã");
-    private ImageIcon teto_vazio = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/teto.jpg");
-    private ImageIcon predio1 = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/predio1.jpg");
-    private ImageIcon predio2 = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/predio2.jpg");
-    private ImageIcon piso = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/piso.jpg");
-    private ImageIcon vida_img = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/vida.jpg");
-    private ImageIcon gold_img = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/gold.jpg");
-    private ImageIcon hannes = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/Hannes.jpg");
-    private ImageIcon muralha = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/muralha.jpg");
-    private ImageIcon colossau = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/colossau.jpg");
-    private ImageIcon erro = new ImageIcon("/home/arima/Área de Trabalho/mc322/view/data/erro.jpg");
+    private ImageIcon teto_vazio = new ImageIcon("/img/teto.jpg");
+    private ImageIcon predio1 = new ImageIcon("/img/predio1.jpg");
+    private ImageIcon predio2 = new ImageIcon("/img/predio2.jpg");
+    private ImageIcon piso = new ImageIcon("/img/piso.jpg");
+    private ImageIcon vida_img = new ImageIcon("/img/vida.jpg");
+    private ImageIcon gold_img = new ImageIcon("/img/gold.jpg");
+    private ImageIcon hannes = new ImageIcon("/img/Hannes.jpg");
+    private ImageIcon muralha = new ImageIcon("/img/muralha.jpg");
+    private ImageIcon colossau = new ImageIcon("/img/colossau.jpg");
+    private ImageIcon erro = new ImageIcon("/img/erro.jpg");
+    private ImageIcon titan = new ImageIcon("/img/titan.jpg");
 
     private JLabel[][] teto_campo, piso_campo;
     private String[] falas, tipo_torre, evolucao;
     private int vida, gold, n_historia;
-    // Entidade ponteiroMapa = mapaController.getCelula(x, y);
+
 
     //
     private JButton next = new JButton("NEXT");
     private JButton info = new JButton("???");
-    private JButton start = new JButton("start");
+    private JButton start = new JButton("play");
     private JComboBox[][] celula;
 
     /* Interfaces */
@@ -251,17 +255,53 @@ public class GameView implements IRMapaController, IRCidadeController, IRTitaCon
         janela.add(info);
         start.addActionListener(this);
         janela.add(start);
-        while(true)
+        int loop = 0;
+        while(loop == 0)
         {
-            System.out.print("");
-            if (n_historia >= 16)
+            janela.repaint();
+            //System.out.print("");
+            for (int x = 0; x < 2; x++)
+            {
+                for (int y = 0; y < 12; y++)
+                {
+                    int j;
+                    if (x==0) j=1;
+                    else j=2;
+                    Entidade ponteiroMapa = mapaController.getCelula(x, y);
+                    if (ponteiroMapa == null)
+                    {
+                        piso_campo[x][y].setIcon(piso);
+                    }
+                    else
+                    {
+                        piso_campo[x][y].setIcon(titan);
+                    }
+
+                }
+            }
+            /*if (n_historia >= 16)
             {
                 celula[0][3].removeAllItems();
                 //celula[0][3].insert(evolucao);
                 System.out.println("saiu");
                 n_historia = 0;
                 teto_campo[0][3].setIcon(colossau);
+            }*/
+            if (cidadeController.getVida() <= 0) {
+                loop = 1;
             }
+            else {
+                mapaController.passarDeFase();
+                JOptionPane.showMessageDialog(null, "Os titans evoluirão estão ficando maiores capitão!!!");
+            }
+        }
+        if (loop == 1)//derrota
+        {
+
+        }
+        else
+        {
+
         }
     }
 
@@ -271,21 +311,13 @@ public class GameView implements IRMapaController, IRCidadeController, IRTitaCon
         // TODO Auto-generated method stub
         if (e.getSource() == next ) n_historia+= 2;
         else if (e.getSource() == info ) JOptionPane.showMessageDialog(null, "teste!\n21354");
-        else if (e.getSource() == start ) {
-            // verificar se a lista de titãs está vazia e se todos os titãs ja nasceram ou se a vida da cidade é zero
-            while ((!titaController.listaVazia() && fases) || (cidadeController.getVida() <= 0)) {
-                titaController.moverTitas();
-                mapaController.gerarTitas();
-                torreController.ataqueDasTorres();
-                titaController.verificarTitas();
-            }
-            if (cidadeController.getVida() <= 0) {
-                // GAMEOVER
-            }
-            else {
-                mapaController.passarDeFase();
-                // MOSTRAR NA TELA QUE O PLAYER PASSOU DE FASE
-            }
+        else if (e.getSource() == start )
+        {
+            titaController.moverTitas();
+            mapaController.gerarTitas();
+            torreController.ataqueDasTorres();
+            titaController.verificarTitas();
+
         }
 
         for (int x = 0; x < 2; x++)
@@ -295,23 +327,21 @@ public class GameView implements IRMapaController, IRCidadeController, IRTitaCon
                 if  (e.getSource() == celula[x][y])
                 {
                     pp = (String) celula[x][y].getSelectedItem();
-
-                    // MUDAR A LINHA PARA 4
-
-                    mapaController.contruirTorre(x, y, pp); // Constroi a torre no mapa
+                    int j;
+                    if (x==0) j=0;
+                    else j=3;
+                    mapaController.contruirTorre(j, y, pp); // Constroi a torre no mapa
                     switch (pp)
                     {
-                        case "flecha":
+                        case "evoluir":
+                            mapaController.evoluirTorre(j, y);
                             System.out.println(" flecha ");
                             break;
-                        case "Canhão":
-                            System.out.println(" canhão ");
+
                     }
-                    System.out.println(x + " " + y);
                 }
             }
         }
         System.out.println("entro");
     }
-
 }
