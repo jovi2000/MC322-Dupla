@@ -8,7 +8,9 @@ public interface IMapaController {
 
     public void retirarTitaDoMapa(TitaModel tita);
 
-    public void contruirTorre(int linha, int coluna, String tipo);
+    public void contruirTorreDeFlechas(int linha, int coluna) throws CompraInvalida;
+
+    public void contruirTorreCanhao(int linha, int coluna) throws CompraInvalida;
 
     public void gerarTitas();
 

@@ -20,11 +20,11 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     /* Imagens */
     private JFrame janela = new JFrame("Ataque ao titã");
     private ImageIcon teto_vazio = new ImageIcon(getClass().getResource("/img/teto.jpg"));
-    private ImageIcon predio1 = new ImageIcon(getClass().getResource("/img/predio1.jpg"));
+    private ImageIcon predio1 = new ImageIcon(getClass().getResource("/img/ruinasMarrom.jpg"));
     private ImageIcon predio2 = new ImageIcon(getClass().getResource("/img/predio2.jpg"));
-    private ImageIcon piso = new ImageIcon(getClass().getResource("/img/piso.jpg"));
-    private ImageIcon vida_img = new ImageIcon(getClass().getResource("/img/vida.jpg"));
-    private ImageIcon gold_img = new ImageIcon(getClass().getResource("/img/gold.jpg"));
+    private ImageIcon piso = new ImageIcon(getClass().getResource("/img/chaoDePedra2.jpg"));
+    private ImageIcon vida_img = new ImageIcon(getClass().getResource("/img/gold.jpg"));
+    private ImageIcon gold_img = new ImageIcon(getClass().getResource("/img/vida.jpg"));
     private ImageIcon hannes = new ImageIcon(getClass().getResource("/img/predio2.jpg"));
     private ImageIcon muralha = new ImageIcon(getClass().getResource("/img/muralha.jpg"));
     private ImageIcon colossau = new ImageIcon(getClass().getResource("/img/colossau.jpg"));
@@ -150,7 +150,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         int fechadura = 1;
         while (n_historia < loop)
         {
-            Thread.sleep(1500);
+            Thread.sleep(250);
             fala_txt.setText(falas[n_historia]);
             janela.repaint();
             if (chave != fechadura)
@@ -265,7 +265,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             gold_print.setText(goldd);
             vidaa = "" + vida;
             vida_print.setText(vidaa);
-            Thread.sleep(1500);
+            Thread.sleep(250);
             //System.out.print("");
             for (int x = 0; x < 2; x++)
             {
@@ -277,11 +277,11 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                     Entidade ponteiroMapa = mapaController.getCelula(j, y);
                     if (ponteiroMapa == null)
                     {
-                        piso_campo[j][y].setIcon(piso);
+                        piso_campo[x][y].setIcon(piso);
                     }
                     else
                     {
-                        piso_campo[j][y].setIcon(titan);
+                        piso_campo[x][y].setIcon(titan);
                     }
 
                 }
@@ -291,7 +291,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             }
             /* else {
                 mapaController.passarDeFase();
-                JOptionPane.showMessageDialog(null, "Os titans evoluirão estão ficando maiores capitão!!!");
+                JOptionPane.showMessageDialog(null, "Os titans estão evoluindo ficando maiores, capitão!!!");
             } */
         }
         if (loop == 1)//derrota
@@ -328,19 +328,40 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                     int j;
                     if (x==0) j=0;
                     else j=3;
+                    boolean compraValida = true;
                     switch (pp)
                     {
                         case "Canhão":
-                            mapaController.contruirTorre(j, y, pp);
-                            celula[x][y].removeAllItems();
-                            teto_campo[x][y].setIcon(torreCanhao);
-                            System.out.println(" 1 ");
+                            try {
+                                mapaController.contruirTorreCanhao(j, y);
+                            }
+                            catch (CompraInvalida erro) {
+                                compraValida = false;
+                                celula[x][y].setSelectedItem("Vago");
+                                JOptionPane.showMessageDialog(null, erro.getMessage());
+                            }
+                            if (compraValida) {
+                                celula[x][y].removeAllItems();
+                                teto_campo[x][y].setIcon(torreCanhao);
+                                System.out.println(" 1 ");
+                            }
+                            compraValida = true;
                             break;
                         case "flecha":
-                            mapaController.contruirTorre(j, y, pp);
-                            celula[x][y].removeAllItems();
-                            teto_campo[x][y].setIcon(torreDeFlechas);
-                            System.out.println(" 2 ");
+                            try {
+                                mapaController.contruirTorreDeFlechas(j, y);
+                            }
+                            catch (CompraInvalida erro) {
+                                compraValida = false;
+                                celula[x][y].setSelectedItem("Vago");
+                                JOptionPane.showMessageDialog(null, erro.getMessage());
+                            }
+                            if (compraValida) {
+                                celula[x][y].removeAllItems();
+                                teto_campo[x][y].setIcon(torreDeFlechas);
+                                System.out.println(" 2 ");
+                            }
+                            compraValida = true;
                             break;
                         case "evoluir":
                             mapaController.evoluirTorre(j, y);

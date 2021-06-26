@@ -51,6 +51,7 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
     /* Construtor */
     public MapaController() {
         fase = 1;
+        numeroDeTitas = 10;
     }
 
     /* Métodos */
@@ -89,25 +90,50 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
             else {
                 /* Criando os titãs */
                 setCelula(new TitaModel(), 1, 0);
+                getCelula(1,0).setLinha(1); getCelula(1,0).setColuna(0);
                 setCelula(new TitaModel(), 2, 0);
+                getCelula(2,0).setLinha(2); getCelula(2,0).setColuna(0);
                 /* Colocando eles na lista de titãs */
                 titaController.adicionarNaLista((TitaModel)getCelula(1, 0));
                 titaController.adicionarNaLista((TitaModel)getCelula(2, 0));
+                /* Diminuir número de titãs */
+                numeroDeTitas -= 2;
             }
         }
-        // Colocar cada titã que nasce na lista
     }
 
-    public void contruirTorre(int linha, int coluna, String tipo) {
-        if (tipo.equals("flecha")) {
-            mapaModel.setCelula(new TorreDeFlechas(), linha, coluna);
+    public void contruirTorreDeFlechas(int linha, int coluna) throws CompraInvalida {
+        TorreModel torreDeFlechas = new TorreDeFlechas();
+        torreController.connect(torreDeFlechas);
+        /* Verificando se a compra é válida */
+        if (cidadeController.getDinheiro() - torreController.getCusto() < 0) {
+            throw new CompraInvalida("Você não possui o dinheiro necessário para realizar a compra");
         }
         else {
-            mapaModel.setCelula(new TorreCanhao(), linha, coluna);
+            mapaModel.setCelula(torreDeFlechas, linha, coluna);
+            getCelula(linha, coluna).setLinha(linha);
+            getCelula(linha, coluna).setColuna(coluna);
+            torreController.connect((TorreModel) mapaModel.getCelula(linha, coluna));
+            torreController.adicionarNaLista();
+            cidadeController.diminuirDinheiro(torreController.getCusto());
         }
-        torreController.connect((TorreModel)mapaModel.getCelula(linha, coluna));
-        torreController.adicionarNaLista();
-        cidadeController.diminuirDinheiro(torreController.getCusto());
+    }
+
+    public void contruirTorreCanhao(int linha, int coluna) throws CompraInvalida {
+        TorreModel torreCanhao = new TorreCanhao();
+        torreController.connect(torreCanhao);
+        /* Verificando se a compra é válida */
+        if (cidadeController.getDinheiro() - torreController.getCusto() < 0) {
+            throw new CompraInvalida("Você não possui o dinheiro necessário para realizar a compra");
+        }
+        else {
+            mapaModel.setCelula(torreCanhao, linha, coluna);
+            getCelula(linha, coluna).setLinha(linha);
+            getCelula(linha, coluna).setColuna(coluna);
+            torreController.connect((TorreModel) mapaModel.getCelula(linha, coluna));
+            torreController.adicionarNaLista();
+            cidadeController.diminuirDinheiro(torreController.getCusto());
+        }
     }
 
     /* Método para o View */
@@ -130,5 +156,6 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
 
     public void passarDeFase() {
         fase += 1;
+        numeroDeTitas = 10;
     }
 }
