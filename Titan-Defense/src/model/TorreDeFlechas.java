@@ -7,5 +7,6 @@ public class TorreDeFlechas extends TorreModel {
         dano = 20;
         nivel = 1;
         tipo = 'f';
+        custo = 90;
     }
 }

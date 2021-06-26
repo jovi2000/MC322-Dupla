@@ -7,6 +7,7 @@ import java.util.LinkedList;
 public class MapaController implements IMapaController, IRMapaModel, IRTitaController, IRTorreController, IRCidadeController {
     /* Atributos */
     private int fase; // indica qual a fase atual do jogo
+    private int numeroDeTitas; // indica quantos titãs ainda serão gerados
 
     /* Interfaces */
     private IMapaModel mapaModel;
@@ -81,7 +82,19 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
     }
 
     public void gerarTitas() {
-        //Dependendo da fase terá um vetor com um certo número de titãs que irão spawnar
+        if (numeroDeTitas > 0) {
+            if (numeroDeTitas == 1) {
+                // sortear um numero aleatorio
+            }
+            else {
+                /* Criando os titãs */
+                setCelula(new TitaModel(), 1, 0);
+                setCelula(new TitaModel(), 2, 0);
+                /* Colocando eles na lista de titãs */
+                titaController.adicionarNaLista((TitaModel)getCelula(1, 0));
+                titaController.adicionarNaLista((TitaModel)getCelula(2, 0));
+            }
+        }
         // Colocar cada titã que nasce na lista
     }
 

@@ -25,7 +25,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     private ImageIcon piso = new ImageIcon(getClass().getResource("/img/piso.jpg"));
     private ImageIcon vida_img = new ImageIcon(getClass().getResource("/img/vida.jpg"));
     private ImageIcon gold_img = new ImageIcon(getClass().getResource("/img/gold.jpg"));
-    private ImageIcon hannes = new ImageIcon(getClass().getResource("/img/muralha.jpg"));
+    private ImageIcon hannes = new ImageIcon(getClass().getResource("/img/predio2.jpg"));
     private ImageIcon muralha = new ImageIcon(getClass().getResource("/img/muralha.jpg"));
     private ImageIcon colossau = new ImageIcon(getClass().getResource("/img/colossau.jpg"));
     private ImageIcon erro = new ImageIcon(getClass().getResource("/img/erro.jpg"));
@@ -122,7 +122,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     public void start(String[] falas) throws InterruptedException {
         this.falas = falas;
         menu();
-        historia();
+        //historia();
         partida();
     }
 
@@ -259,6 +259,12 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         while(loop == 0)
         {
             janela.repaint();
+            vida = cidadeController.getDinheiro();
+            gold = cidadeController.getVida();
+            goldd = "" + gold;
+            gold_print.setText(goldd);
+            vidaa = "" + vida;
+            vida_print.setText(vidaa);
             Thread.sleep(1500);
             //System.out.print("");
             for (int x = 0; x < 2; x++)
@@ -268,26 +274,18 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                     int j;
                     if (x==0) j=1;
                     else j=2;
-                    Entidade ponteiroMapa = mapaController.getCelula(x, y);
+                    Entidade ponteiroMapa = mapaController.getCelula(j, y);
                     if (ponteiroMapa == null)
                     {
-                        piso_campo[x][y].setIcon(piso);
+                        piso_campo[j][y].setIcon(piso);
                     }
                     else
                     {
-                        piso_campo[x][y].setIcon(titan);
+                        piso_campo[j][y].setIcon(titan);
                     }
 
                 }
             }
-            /*if (n_historia >= 16)
-            {
-                celula[0][3].removeAllItems();
-                //celula[0][3].insert(evolucao);
-                System.out.println("saiu");
-                n_historia = 0;
-                teto_campo[0][3].setIcon(colossau);
-            }*/
             if (cidadeController.getVida() <= 0) {
                 loop = 1;
             }
@@ -318,7 +316,6 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             mapaController.gerarTitas();
             torreController.ataqueDasTorres();
             titaController.verificarTitas();
-
         }
 
         for (int x = 0; x < 2; x++)
