@@ -50,11 +50,12 @@ public class TorreController implements ITorreController, IRTorreModel, IRTitaCo
     }
 
     /* Torre ataca o titã */
-    public void atacarTita(TorreModel torre, TitaModel tita) {
-        titaController.diminuirVida(tita, torre.getDano());
+    public void atacarTita(TitaModel tita) {
+        titaController.connect(tita);
+        titaController.diminuirVida(torreModel.getDano());
     }
 
-    public void evoluir(TorreModel torre) {
+    public void evoluir() {
         // Dependendo do nível, algumas caracteristicas são melhoradas
         // Gastar dinheiro
     }
@@ -63,18 +64,19 @@ public class TorreController implements ITorreController, IRTorreModel, IRTitaCo
     /* Percorre o vetor de torres para ver qual as torres que podem atacar */
     public void ataqueDasTorres() {
         for (int i = 0; i < listaTorres.size(); i++) {
-            atacarAlvos(listaTorres.get(i), procurarAlvos(listaTorres.get(i)));
+            connect(listaTorres.get(i));
+            atacarAlvos(procurarAlvos());
         }
     }
 
-    public LinkedList<Entidade> procurarAlvos(TorreModel torre) {
+    public LinkedList<Entidade> procurarAlvos() {
         /* Torre de Flechas */
-        if (torre.getTipo() == 'f') {
-            return procurarAlvosFlecha(torre);
+        if (torreModel.getTipo() == 'f') {
+            return procurarAlvosFlecha((TorreModel)torreModel);
         }
         /* Torre Canhão */
         else {
-            return procurarAlvosCanhao(torre);
+            return procurarAlvosCanhao((TorreModel)torreModel);
         }
     }
 
@@ -174,18 +176,18 @@ public class TorreController implements ITorreController, IRTorreModel, IRTitaCo
         return listaDeAlvos;
     }
 
-    public void atacarAlvos(TorreModel torre, LinkedList<Entidade> alvos) {
+    public void atacarAlvos(LinkedList<Entidade> alvos) {
         for (int i = 0; i < alvos.size(); i++) {
-            atacarTita(torre, (TitaModel)alvos.get(i));
+            atacarTita((TitaModel)alvos.get(i));
         }
     }
 
-    public void adicionarNaLista(TorreModel torre) {
-        listaTorres.add(torre);
+    public void adicionarNaLista() {
+        listaTorres.add((TorreModel)torreModel);
     }
 
-    public int getCusto(TorreModel torre) {
-        return torre.getCusto();
+    public int getCusto() {
+        return torreModel.getCusto();
     }
 }
 

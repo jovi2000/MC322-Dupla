@@ -66,8 +66,9 @@ public class TitaController implements ITitaController, IRTitaModel, IRCidadeCon
     /* Método para o View usar */
     public void moverTitas() {
         for (int i = 0; i < listaTitas.size(); i++) {
-            mudarColuna(listaTitas.get(i)); // Muda o atributo coluna do Titã
-            mapaController.movimentarTita(listaTitas.get(i)); // Muda a posição do titã no mapa
+            connect(listaTitas.get(i));
+            mudarColuna(); // Muda o atributo coluna do Titã
+            mapaController.movimentarTita((TitaModel)titaModel); // Muda a posição do titã no mapa
         }
     }
 
@@ -75,48 +76,53 @@ public class TitaController implements ITitaController, IRTitaModel, IRCidadeCon
     /* Funcao que percorre lista de titas para verificar se algum morreu ou chegou na cidade */
     public void verificarTitas() {
         for (int i = 0; i < listaTitas.size(); i++) {
-            if (verificarMorte(listaTitas.get(i))) {
-                cidadeController.aumentarDinheiro(listaTitas.get(i).getRecompensa());
-                mapaController.retirarTitaDoMapa(listaTitas.get(i)); // Se morreu, o Titã é retirado do mapa
+            connect(listaTitas.get(i));
+            if (verificarMorte()) {
+                cidadeController.aumentarDinheiro(titaModel.getRecompensa());
+                mapaController.retirarTitaDoMapa((TitaModel)titaModel); // Se morreu, o Titã é retirado do mapa
             }
             else {
-                if (verificarAtaque(listaTitas.get(i), cidadeController.getColuna())) {
-                    atacarCidade(listaTitas.get(i));
-                    mapaController.retirarTitaDoMapa(listaTitas.get(i)); // Depois de atacar a cidade, o titã desaparece do mapa
+                if (verificarAtaque(cidadeController.getColuna())) {
+                    atacarCidade();
+                    mapaController.retirarTitaDoMapa((TitaModel)titaModel); // Depois de atacar a cidade, o titã desaparece do mapa
                 }
             }
         }
     }
 
     /* Titã ataca a cidade */
-    public void atacarCidade(TitaModel tita) {
-        cidadeController.diminuirVida(tita.getDano());
+    public void atacarCidade() {
+        cidadeController.diminuirVida(titaModel.getDano());
     }
 
-    public void mudarColuna(TitaModel tita) {
+    public void mudarColuna() {
         /* Mudando o atributo coluna do titã */
-        tita.setColuna(tita.getColuna() + 1);
+        titaModel.setColuna(titaModel.getColuna() + 1);
+    }
+
+    public boolean verificarAtaque(int colunaCidade) {
+        return titaModel.getColuna() == colunaCidade;
     }
 
     /* Se o titã morreu retorna true, se não retorna false */
-    public boolean verificarMorte(TitaModel tita) {
-        return tita.getVida() <= 0;
+    public boolean verificarMorte() {
+        return titaModel.getVida() <= 0;
     }
 
-    public void diminuirVida(Entidade torre, int dano) {
-        torre.setVida(torre.getVida() - dano);
+    public void diminuirVida(int dano) {
+        titaModel.setVida(titaModel.getVida() - dano);
     }
 
-    public int getLinha(TitaModel tita) {
-        return tita.getLinha();
+    public int getLinha() {
+        return titaModel.getLinha();
     }
 
-    public int getColuna(TitaModel tita) {
-        return tita.getColuna();
+    public int getColuna() {
+        return titaModel.getColuna();
     }
 
-    public void adicionarNaLista(TitaModel tita) {
-        listaTitas.add(tita);
+    public void adicionarNaLista() {
+        listaTitas.add((TitaModel)titaModel);
     }
 
     public boolean listaVazia() {

@@ -8,7 +8,7 @@ import view.GameView;
 import java.rmi.server.UnicastRemoteObject;
 
 public class Montador {
-    public void montarJogo() {
+    public void montarJogo() throws InterruptedException {
         MapaController mapaController = new MapaController();
         CidadeController cidadeController = new CidadeController();
         TitaController titaController = new TitaController();
@@ -42,8 +42,7 @@ public class Montador {
         gameView.setTitaController(titaController);
         gameView.setTorreController(torreController);
 
-        CSVReader csv = new CSVReader();
-        csv.setDataSource("/img/historia2.csv");
-        gameView.start(csv.requestCommands());
+        String[] falas = {"hannes", "oi", "hannes", "das"};
+        gameView.start(falas);
     }
 }

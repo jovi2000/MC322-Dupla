@@ -72,12 +72,12 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
     /* Muda a posição do titã no mapa */
     public void movimentarTita(TitaModel tita) {
         retirarTitaDoMapa(tita);
-        mapaModel.setCelula(tita, titaController.getLinha(tita), titaController.getColuna(tita) + 1); // Muda para a outra posição
+        mapaModel.setCelula(tita, titaController.getLinha(), titaController.getColuna() + 1); // Muda para a outra posição
     }
 
     public void retirarTitaDoMapa(TitaModel tita) {
         /* Tirando o titã do mapa */
-        mapaModel.setCelula(null, titaController.getLinha(tita), titaController.getColuna(tita));
+        mapaModel.setCelula(null, titaController.getLinha(), titaController.getColuna());
     }
 
     public void gerarTitas() {
@@ -92,13 +92,15 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
         else {
             mapaModel.setCelula(new TorreCanhao(), linha, coluna);
         }
-        torreController.adicionarNaLista((TorreModel)mapaModel.getCelula(linha, coluna));
-        cidadeController.diminuirDinheiro(torreController.getCusto((TorreModel)mapaModel.getCelula(linha, coluna)));
+        torreController.connect((TorreModel)mapaModel.getCelula(linha, coluna));
+        torreController.adicionarNaLista();
+        cidadeController.diminuirDinheiro(torreController.getCusto());
     }
 
     /* Método para o View */
     public void evoluirTorre(int linha, int coluna) {
-        torreController.evoluir((TorreModel)getCelula(linha, coluna));
+        torreController.connect((TorreModel)getCelula(linha, coluna));
+        torreController.evoluir();
     }
 
     public Entidade getCelula(int linha, int coluna) {

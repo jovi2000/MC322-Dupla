@@ -2,29 +2,31 @@ package controller;
 
 import model.CidadeModel;
 import model.Entidade;
+import model.ITitaModel;
 import model.TitaModel;
 
 public interface ITitaController {
-    public boolean verificarAtaque(TitaModel tita, int colunaCidade);
+    public void connect(ITitaModel titaModel);
 
-    public void atacarCidade(TitaModel tita);
+    public boolean verificarAtaque(int colunaCidade);
 
-    public void mudarColuna(TitaModel tita);
+    public void atacarCidade();
 
-    public boolean verificarMorte(TitaModel tita);
+    public void mudarColuna();
 
-    public void diminuirVida(Entidade tita, int dano);
+    public boolean verificarMorte();
+
+    public void diminuirVida(int dano);
 
     public void moverTitas();
 
     public void verificarTitas();
 
-    public int getLinha(TitaModel tita);
+    public int getLinha();
 
-    public int getColuna(TitaModel tita);
+    public int getColuna();
 
-    public void adicionarNaLista(TitaModel tita);
+    public void adicionarNaLista();
 
     public boolean listaVazia();
-
 }

@@ -1,19 +1,22 @@
 package controller;
 
 import model.Entidade;
+import model.ITorreModel;
 import model.TitaModel;
 import model.TorreModel;
 
 import java.util.LinkedList;
 
 public interface ITorreController {
-    public void atacarTita(TorreModel torre, TitaModel tita);
+    public void connect(ITorreModel torreModel);
 
-    public void evoluir(TorreModel torre);
+    public void atacarTita(TitaModel tita);
 
-    public void adicionarNaLista(TorreModel torre);
+    public void evoluir();
+
+    public void adicionarNaLista();
 
     public void ataqueDasTorres();
 
-    public int getCusto(TorreModel torre);
+    public int getCusto();
 }
