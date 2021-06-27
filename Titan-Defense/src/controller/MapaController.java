@@ -211,6 +211,7 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
         Random random = new Random();
         int gerar = random.nextInt(5) + 1;
         numeroDeTitas = 10 + gerar;
+        geradoAnteriomente = false;
     }
 
     private int gerarVida() {

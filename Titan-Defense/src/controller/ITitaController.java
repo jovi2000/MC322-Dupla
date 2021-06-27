@@ -22,6 +22,8 @@ public interface ITitaController {
 
     public void verificarTitas();
 
+    public int porcentagemDaVida();
+
     public int getLinha();
 
     public int getColuna();

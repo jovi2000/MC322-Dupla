@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class GameView implements ActionListener, IRMapaController, IRCidadeController, IRTitaController, IRTorreController {
-    IMapaController controle;
     /* Imagens */
     private JFrame janela = new JFrame("Ataque ao titã");
     private JFrame game_over = new JFrame("Ataque ao titã");
@@ -30,13 +29,19 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     private ImageIcon torreCanhao = new ImageIcon(getClass().getResource("/img/canhao2.jpg"));
     private ImageIcon cabecaTita = new ImageIcon(getClass().getResource("/img/cabecaDeTita.jpg"));
     private ImageIcon faseImg = new ImageIcon(getClass().getResource("/img/fase.jpg"));
+    private ImageIcon cidade = new ImageIcon(getClass().getResource("/img/pepo.jpg"));
+    private ImageIcon vitoria = new ImageIcon(getClass().getResource("/img/happy.jpg"));
+    private ImageIcon derrota = new ImageIcon(getClass().getResource("/img/sad.jpg"));
+    private ImageIcon dano0 = new ImageIcon(getClass().getResource("/img/dano0.jpg"));
+    private ImageIcon dano1 = new ImageIcon(getClass().getResource("/img/dano1.jpg"));
+    private ImageIcon dano2 = new ImageIcon(getClass().getResource("/img/dano2.jpg"));
+    private ImageIcon dano3 = new ImageIcon(getClass().getResource("/img/dano3.jpg"));
+    private ImageIcon dano4 = new ImageIcon(getClass().getResource("/img/dano4.jpg"));
 
     private JLabel[][] teto_campo, piso_campo;
     private String[] falas, tipo_torre, evolucao;
     private int vida, gold, n_historia, aleatorio, n_titan, fase;
-
-
-    //
+    
     private JButton next = new JButton("NEXT");
     private JButton info = new JButton("Help");
     private JButton start = new JButton("Play");
@@ -112,13 +117,14 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         teto_campo = new JLabel[2][12];
         piso_campo = new JLabel[2][12];
         String[] p1 = {"Vago","Canhão","Flecha"};
+        vida = 0;
         tipo_torre = p1;
     }
 
     public void start(String[] falas) throws InterruptedException {
         this.falas = falas;
         historia();
-        partida();
+        //partida();
         end();
     }
 
@@ -130,17 +136,24 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         if(cidadeController.getVida() <= 0)
         {
             JLabel img;
-            JLabel img_hannes = new JLabel(hannes);
+            JLabel img_hannes = new JLabel(derrota);
             img= img_hannes;
             game_over.add(img);
             game_over.repaint();
+            next.addActionListener(this);
+            game_over.add(BorderLayout.SOUTH, next);
+            JOptionPane.showMessageDialog(null, "Vocẽ Perdeu!!!\nCapitão, a cidade foi destruida e nenhum aldeão sobreviveu");
+            while (n_historia < 2)
+            {
+                Thread.sleep(250);
+            }
 
         }
         else
         {
             game_over.setLayout(new BorderLayout());
             JLabel img;
-            JLabel img_hannes = new JLabel(hannes);
+            JLabel img_hannes = new JLabel(vitoria);
             img= img_hannes;
             game_over.add(BorderLayout.CENTER, img);
             next.addActionListener(this);
@@ -149,7 +162,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             {
                 Thread.sleep(250);
             }
-            JOptionPane.showMessageDialog(null, "Capitão, o Senhor ajudou a salvar " + vida + " aldeões");
+            JOptionPane.showMessageDialog(null, "Vocẽ Venceu!!!!!\nCapitão, o Senhor ajudou a salvar " + cidadeController.getVida() + " aldeões");
             while (n_historia < 4)
             {
                 Thread.sleep(250);
@@ -256,9 +269,18 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                     int j;
                     if (x==3) j = 0;
                     else j = 1;
-                    JLabel piso_vazio = new JLabel(piso);
-                    piso_campo[j][y] = piso_vazio;
-                    janela.add(piso_campo[j][y]);
+                    if (y != 11)
+                    {
+                        JLabel piso_vazio = new JLabel(piso);
+                        piso_campo[j][y] = piso_vazio;
+                        janela.add(piso_campo[j][y]);
+                    }
+                    else
+                    {
+                        JLabel piso_vazio = new JLabel(cidade);
+                        piso_campo[j][y] = piso_vazio;
+                        janela.add(piso_campo[j][y]);
+                    }
                 }
             }
         }
@@ -320,7 +342,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             //System.out.print("");
             for (int x = 0; x < 2; x++)
             {
-                for (int y = 0; y < 12; y++)
+                for (int y = 0; y < 11; y++)
                 {
                     int j;
                     if (x==0) j=1;
@@ -332,11 +354,17 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                     }
                     else
                     {
-                        piso_campo[x][y].setIcon(titan);
+                        ///////////////////////////////////////////////leitura dano
+                        if(titaController.porcentagemDaVida() < 20) piso_campo[x][y].setIcon(dano0);
+                        else if(titaController.porcentagemDaVida() < 40) piso_campo[x][y].setIcon(dano1);
+                        else if(titaController.porcentagemDaVida() < 60) piso_campo[x][y].setIcon(dano2);
+                        else if(titaController.porcentagemDaVida() < 80) piso_campo[x][y].setIcon(dano3);
+                        else piso_campo[x][y].setIcon(dano4);
                     }
 
                 }
             }
+
             if (cidadeController.getVida() <= 0 || mapaController.getFase() == 10) {
                 loop = 1;
             }

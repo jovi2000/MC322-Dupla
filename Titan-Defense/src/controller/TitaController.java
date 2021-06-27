@@ -117,6 +117,10 @@ public class TitaController implements ITitaController, IRTitaModel, IRCidadeCon
         titaModel.setVida(titaModel.getVida() - dano);
     }
 
+    public int porcentagemDaVida() {
+        return titaModel.getVida();
+    }
+
     public int getLinha() {
         return titaModel.getLinha();
     }
