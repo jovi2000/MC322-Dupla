@@ -28,10 +28,12 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     private ImageIcon titan = new ImageIcon(getClass().getResource("/img/titan2.jpg"));
     private ImageIcon torreDeFlechas = new ImageIcon(getClass().getResource("/img/torreDeFlechas3.jpg"));
     private ImageIcon torreCanhao = new ImageIcon(getClass().getResource("/img/canhao2.jpg"));
+    private ImageIcon cabecaTita = new ImageIcon(getClass().getResource("/img/cabecaDeTita.jpg"));
+    private ImageIcon faseImg = new ImageIcon(getClass().getResource("/img/fase.jpg"));
 
     private JLabel[][] teto_campo, piso_campo;
     private String[] falas, tipo_torre, evolucao;
-    private int vida, gold, n_historia, aleatorio;
+    private int vida, gold, n_historia, aleatorio, n_titan, fase;
 
 
     //
@@ -103,9 +105,8 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     {
         janela.setSize(1300,1000);
         janela.setVisible(true);
-        aleatorio = 0;
-        vida = 200;
-        gold = 150;
+        n_titan = 0;
+        fase=1;
         n_historia = 1;
         celula = new JComboBox[2][12];
         teto_campo = new JLabel[2][12];
@@ -116,7 +117,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
 
     public void start(String[] falas) throws InterruptedException {
         this.falas = falas;
-        //historia();
+        historia();
         partida();
         end();
     }
@@ -126,7 +127,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         janela.setVisible(false);
         game_over.setSize(500,500);
         game_over.setVisible(true);
-        if(vida <= 0)
+        if(cidadeController.getVida() <= 0)
         {
             JLabel img;
             JLabel img_hannes = new JLabel(hannes);
@@ -153,16 +154,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             {
                 Thread.sleep(250);
             }
-            String nome;
-            nome = JOptionPane.showInputDialog("Digite seu nome:");
-            while (n_historia < 6)
-            {
-                Thread.sleep(250);
-            }
-            while (n_historia < 8)
-            {
-                Thread.sleep(250);
-            }
+
         }
         System.exit(0);
         System.out.println("saiu");
@@ -285,7 +277,21 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         gold_print.setText(goldd);
         janela.add(gold_print);
 
-        for (int i = 4; i < 10; i++)
+        JLabel titan_f = new JLabel(cabecaTita);
+        janela.add(titan_f);
+        JLabel titan_print = new JLabel();
+        String provi = "" + fase;
+        titan_print.setText(provi);
+        janela.add(titan_print);
+
+        JLabel fase_f = new JLabel(faseImg);
+        janela.add(fase_f);
+        JLabel fase_print = new JLabel();
+        provi = "" + n_titan;
+        fase_print.setText(provi);
+        janela.add(fase_print);
+
+        for (int i = 8; i < 10; i++)
         {
             JLabel campo = new JLabel(piso);
             janela.add(campo);
@@ -300,10 +306,16 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             janela.repaint();
             gold = cidadeController.getDinheiro();
             vida = cidadeController.getVida();
+            n_titan = mapaController.getNumeroDeTitas();
+            fase = mapaController.getFase();
             goldd = "" + gold;
-            gold_print.setText(goldd);
+            gold_print.setText("Gold: " + goldd);
             vidaa = "" + vida;
-            vida_print.setText(vidaa);
+            vida_print.setText("Vida: " + vidaa);
+            provi = "" + n_titan;
+            titan_print.setText("Titãs: " + provi);
+            provi = "" + fase;
+            fase_print.setText("Fase: " + provi);
             Thread.sleep(250);
             //System.out.print("");
             for (int x = 0; x < 2; x++)
@@ -325,7 +337,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
 
                 }
             }
-            if (cidadeController.getVida() <= 0 || mapaController.getFase() == 5) {
+            if (cidadeController.getVida() <= 0 || mapaController.getFase() == 10) {
                 loop = 1;
             }
             if (titaController.listaVazia() && mapaController.getNumeroDeTitas() == 0) {

@@ -99,7 +99,7 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
                     setCelula(new TitaModel(), linhaSorteada + 1, 0);
                     titaController.connect((TitaModel)getCelula(linhaSorteada + 1, 0));
                     titaController.setLinha(linhaSorteada + 1); titaController.setColuna(0);
-                    titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(70 + 4 * (fase - 1));
+                    titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(gerarVida());
                     titaController.setRecompensa(15 + 2*(fase-1));
                     /* Colocando ele na lista de titãs */
                     titaController.adicionarNaLista();
@@ -111,14 +111,14 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
                     setCelula(new TitaModel(), 1, 0);
                     titaController.connect((TitaModel)getCelula(1, 0));
                     titaController.setLinha(1); titaController.setColuna(0);
-                    titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(70 + 4 * (fase - 1));
+                    titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(gerarVida());
                     titaController.setRecompensa(15 + 2*(fase-1));
                     titaController.adicionarNaLista();
                     /* Criando o titã 2 */
                     setCelula(new TitaModel(), 2, 0);
                     titaController.connect((TitaModel)getCelula(2, 0));
                     titaController.setLinha(2); titaController.setColuna(0);
-                    titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(70 + 4 * (fase - 1));
+                    titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(gerarVida());
                     titaController.setRecompensa(15 + 2*(fase-1));
                     titaController.adicionarNaLista();
                     /* Diminuir número de titãs */
@@ -141,12 +141,17 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
             throw new CompraInvalida("Você não possui o dinheiro necessário para realizar a compra");
         }
         else {
+            /* Criando a torre e colocando no mapa */
             mapaModel.setCelula(torreDeFlechas, linha, coluna);
             getCelula(linha, coluna).setLinha(linha);
             getCelula(linha, coluna).setColuna(coluna);
+            /* Adicionando a torre na lista de torres */
             torreController.connect((TorreModel) mapaModel.getCelula(linha, coluna));
             torreController.adicionarNaLista();
+            /* Tirando o dinheiro da cidade */
             cidadeController.diminuirDinheiro(torreController.getCusto());
+            /* Mudando o custo da torre para o custo da evolução */
+            torreController.setCusto(10);
         }
     }
 
@@ -179,9 +184,9 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
             throw new CompraInvalida("Você não possui o dinheiro necessário para realizar a compra");
         }
         else {
-            torreController.evoluir();
             /* Tirando o dinheiro da cidade */
             cidadeController.diminuirDinheiro(torreController.getCusto());
+            torreController.evoluir();
         }
     }
 
@@ -206,5 +211,11 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
         Random random = new Random();
         int gerar = random.nextInt(5) + 1;
         numeroDeTitas = 10 + gerar;
+    }
+
+    private int gerarVida() {
+        Random random = new Random();
+        int vida = random.nextInt(100) + 1;
+        return 100 + 20 * (fase - 1) + vida;
     }
 }

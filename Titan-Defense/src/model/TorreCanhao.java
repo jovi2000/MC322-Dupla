@@ -7,6 +7,6 @@ public class TorreCanhao extends TorreModel {
         dano = 15;
         nivel = 1;
         tipo = 'c';
-        custo = 85;
+        custo = 90;
     }
 }

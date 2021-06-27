@@ -6,8 +6,8 @@ public class CidadeModel extends Entidade implements ICidadeModel {
 
     /* Construtor */
     public CidadeModel() {
-        dinheiro = 300;
-        vida = 300;
+        dinheiro = 400;
+        vida = 350;
         coluna = 11;
     }
 
