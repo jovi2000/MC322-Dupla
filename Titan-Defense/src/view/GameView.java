@@ -336,8 +336,8 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         start.addActionListener(this);
         janela.add(start);
         
-        JOptionPane.showMessageDialog(null, "Ajude a protejer a cidade e seus aldeões dos titans que estão invadindo\n"
-                + "construa torres de defeza em cima dos prédios e tente salvar o maximo de aldeões possivevis");
+        JOptionPane.showMessageDialog(null, "Ajude a proteger a cidade e seus aldeões dos titãs que estão invadindo\n"
+                + "construa torres de defesa em cima dos prédios e tente salvar o máximo de aldeões possíveis");
         int loop = 0;
         while(loop == 0)
         {
