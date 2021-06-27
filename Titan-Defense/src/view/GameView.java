@@ -409,7 +409,6 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             mapaController.gerarTitas();
             torreController.ataqueDasTorres();
             titaController.verificarTitas();
-            aleatorio = 1;
         }
 
         for (int x = 0; x < 2; x++)
