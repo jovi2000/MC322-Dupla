@@ -118,7 +118,7 @@ public class TitaController implements ITitaController, IRTitaModel, IRCidadeCon
     }
 
     public int porcentagemDaVida() {
-        return titaModel.getVida();
+        return (100 * titaModel.getVida()) / titaModel.getVidaTotal();
     }
 
     public int getLinha() {
@@ -145,8 +145,16 @@ public class TitaController implements ITitaController, IRTitaModel, IRCidadeCon
         titaModel.setRecompensa(recompensa);
     }
 
+    public int getVida() {
+        return titaModel.getVida();
+    }
+
     public void setVida(int vida) {
         titaModel.setVida(vida);
+    }
+
+    public void setVidaTotal(int vida) {
+        titaModel.setVidaTotal(vida);
     }
 
     public void adicionarNaLista() {

@@ -100,7 +100,7 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
                     titaController.connect((TitaModel)getCelula(linhaSorteada + 1, 0));
                     titaController.setLinha(linhaSorteada + 1); titaController.setColuna(0);
                     titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(gerarVida());
-                    titaController.setRecompensa(15 + 2*(fase-1));
+                    titaController.setRecompensa(15 + 2*(fase-1)); titaController.setVidaTotal(titaController.getVida());
                     /* Colocando ele na lista de titãs */
                     titaController.adicionarNaLista();
                     /* Diminuir número de titãs */
@@ -112,14 +112,14 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
                     titaController.connect((TitaModel)getCelula(1, 0));
                     titaController.setLinha(1); titaController.setColuna(0);
                     titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(gerarVida());
-                    titaController.setRecompensa(15 + 2*(fase-1));
+                    titaController.setRecompensa(15 + 2*(fase-1)); titaController.setVidaTotal(titaController.getVida());
                     titaController.adicionarNaLista();
                     /* Criando o titã 2 */
                     setCelula(new TitaModel(), 2, 0);
                     titaController.connect((TitaModel)getCelula(2, 0));
                     titaController.setLinha(2); titaController.setColuna(0);
                     titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(gerarVida());
-                    titaController.setRecompensa(15 + 2*(fase-1));
+                    titaController.setRecompensa(15 + 2*(fase-1)); titaController.setVidaTotal(titaController.getVida());
                     titaController.adicionarNaLista();
                     /* Diminuir número de titãs */
                     numeroDeTitas -= 2;
@@ -212,6 +212,7 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
         int gerar = random.nextInt(5) + 1;
         numeroDeTitas = 10 + gerar;
         geradoAnteriomente = false;
+        cidadeController.aumentarDinheiro(20);
     }
 
     private int gerarVida() {

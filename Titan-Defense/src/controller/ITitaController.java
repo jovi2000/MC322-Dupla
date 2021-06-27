@@ -34,7 +34,11 @@ public interface ITitaController {
 
     public void setRecompensa(int recompensa);
 
+    public int getVida();
+
     public void setVida(int vida);
+
+    public void setVidaTotal(int vida);
 
     public void adicionarNaLista();
 

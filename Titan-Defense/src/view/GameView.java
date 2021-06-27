@@ -2,6 +2,7 @@ package view;
 
 import controller.*;
 import model.Entidade;
+import model.TitaModel;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -126,7 +127,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
 
     public void start(String[] falas) throws InterruptedException {
         this.falas = falas;
-        historia();
+        //historia();
         partida();
         end();
     }
@@ -374,7 +375,8 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                     }
                     else
                     {
-                        ///////////////////////////////////////////////leitura dano
+                        titaController.connect((TitaModel)mapaController.getCelula(j,y));
+                        System.out.println(titaController.porcentagemDaVida());
                         if(titaController.porcentagemDaVida() < 20) piso_campo[x][y].setIcon(dano0);
                         else if(titaController.porcentagemDaVida() < 40) piso_campo[x][y].setIcon(dano1);
                         else if(titaController.porcentagemDaVida() < 60) piso_campo[x][y].setIcon(dano2);
