@@ -37,6 +37,9 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     private ImageIcon dano2 = new ImageIcon(getClass().getResource("/img/dano2.jpg"));
     private ImageIcon dano3 = new ImageIcon(getClass().getResource("/img/dano3.jpg"));
     private ImageIcon dano4 = new ImageIcon(getClass().getResource("/img/dano4.jpg"));
+    private ImageIcon brasao = new ImageIcon(getClass().getResource("/img/brasao.jpg"));
+    private ImageIcon eren = new ImageIcon(getClass().getResource("/img/eren.jpg"));
+    private ImageIcon errado = new ImageIcon(getClass().getResource("/img/errado.jpg"));
 
     private JLabel[][] teto_campo, piso_campo;
     private String[] falas, tipo_torre, evolucao;
@@ -124,7 +127,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     public void start(String[] falas) throws InterruptedException {
         this.falas = falas;
         historia();
-        //partida();
+        partida();
         end();
     }
 
@@ -201,7 +204,9 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             {
                 if (chave == 1) img.setIcon(hannes);
                 else if (chave == 2) img.setIcon(colossau);
-                else if (chave == 2) img.setIcon(muralha);
+                else if (chave == 3) img.setIcon(muralha);
+                else if (chave == 4) img.setIcon(eren);
+                else if (chave == 5) img.setIcon(brasao);
                 else img.setIcon(erro);
                 fechadura = chave;
             }
@@ -216,6 +221,12 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                 case "muralha":
                     chave = 3;
                     break;
+                case "eren":
+                    chave = 4;
+                    break;
+                case "brasao":
+                    chave = 5;
+                    break;
                 default:
                     chave = 4;
                     break;
@@ -228,6 +239,8 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
 
     private void partida() throws InterruptedException {
         janela.setLayout(new GridLayout(9, 12));
+        JOptionPane.showMessageDialog(null, "Ajude a protejer a cidade e seus aldeões dos titans que estão invadindo\n"
+                + "construa torres de defeza em cima dos prédios e tente salvar o maximo de aldeões possivevis");
         janela.repaint();
         for(int x = 0; x < 9; x++)
         {
@@ -313,6 +326,13 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         fase_print.setText(provi);
         janela.add(fase_print);
 
+        JLabel errado_img = new JLabel(errado);
+        janela.add(errado_img);
+        JLabel errado_print = new JLabel();
+        provi = "" + n_titan;
+        errado_print.setText(provi);
+        janela.add(errado_print);
+
         for (int i = 8; i < 10; i++)
         {
             JLabel campo = new JLabel(piso);
@@ -338,6 +358,10 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             titan_print.setText("Titãs: " + provi);
             provi = "" + fase;
             fase_print.setText("Fase: " + provi);
+            int mortes = 350 - vida;
+            provi = "" + mortes;
+            errado_print.setText("Death: " + provi);
+            Thread.sleep(250);
             Thread.sleep(250);
             //System.out.print("");
             for (int x = 0; x < 2; x++)
@@ -474,6 +498,5 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                 }
             }
         }
-        System.out.println("entro");
     }
 }
