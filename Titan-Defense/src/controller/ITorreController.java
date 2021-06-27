@@ -19,4 +19,6 @@ public interface ITorreController {
     public void ataqueDasTorres();
 
     public int getCusto();
+
+    public void setCusto(int custo);
 }

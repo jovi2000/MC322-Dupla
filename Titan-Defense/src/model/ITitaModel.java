@@ -7,5 +7,5 @@ public interface ITitaModel extends IEntidade {
 
     public int getRecompensa();
 
-    public void setRecompensa(char tipo);
+    public void setRecompensa(int recompensa);
 }

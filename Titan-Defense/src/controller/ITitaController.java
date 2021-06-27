@@ -26,7 +26,17 @@ public interface ITitaController {
 
     public int getColuna();
 
-    public void adicionarNaLista(TitaModel tita);
+    public void setLinha(int linha);
+
+    public void setColuna(int coluna);
+
+    public void setRecompensa(int recompensa);
+
+    public void setVida(int vida);
+
+    public void adicionarNaLista();
+
+    public void setDano(int dano);
 
     public boolean listaVazia();
 }

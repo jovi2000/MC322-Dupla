@@ -56,8 +56,11 @@ public class TorreController implements ITorreController, IRTorreModel, IRTitaCo
     }
 
     public void evoluir() {
-        // Dependendo do nível, algumas caracteristicas são melhoradas
-        // Gastar dinheiro
+        torreModel.setDano(torreModel.getDano() + 5);
+        torreModel.setNivel(torreModel.getNivel() + 1);
+        if (torreModel.getNivel() == 2) {
+            torreModel.setCusto(torreModel.getCusto() + 5);
+        }
     }
 
     /* Função para o View */
@@ -188,6 +191,10 @@ public class TorreController implements ITorreController, IRTorreModel, IRTitaCo
 
     public int getCusto() {
         return torreModel.getCusto();
+    }
+
+    public void setCusto(int custo) {
+        torreModel.setCusto(custo);
     }
 }
 

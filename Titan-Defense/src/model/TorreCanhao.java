@@ -4,9 +4,9 @@ import model.TorreModel;
 
 public class TorreCanhao extends TorreModel {
     public TorreCanhao() {
-        dano = 10;
+        dano = 15;
         nivel = 1;
         tipo = 'c';
-        custo = 90;
+        custo = 85;
     }
 }

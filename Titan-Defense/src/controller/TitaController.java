@@ -125,8 +125,28 @@ public class TitaController implements ITitaController, IRTitaModel, IRCidadeCon
         return titaModel.getColuna();
     }
 
-    public void adicionarNaLista(TitaModel tita) {
-        listaTitas.add(tita);
+    public void setLinha(int linha) {
+        titaModel.setLinha(linha);
+    }
+
+    public void setColuna(int coluna) {
+        titaModel.setColuna(coluna);
+    }
+
+    public void setDano(int dano) {
+        titaModel.setDano(dano);
+    }
+
+    public void setRecompensa(int recompensa) {
+        titaModel.setRecompensa(recompensa);
+    }
+
+    public void setVida(int vida) {
+        titaModel.setVida(vida);
+    }
+
+    public void adicionarNaLista() {
+        listaTitas.add((TitaModel)titaModel);
     }
 
     public boolean listaVazia() {

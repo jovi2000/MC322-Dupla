@@ -8,17 +8,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class GameView implements ActionListener, IRMapaController, IRCidadeController, IRTitaController, IRTorreController {
     IMapaController controle;
     /* Imagens */
     private JFrame janela = new JFrame("Ataque ao titã");
+    private JFrame game_over = new JFrame("Ataque ao titã");
     private ImageIcon teto_vazio = new ImageIcon(getClass().getResource("/img/teto.jpg"));
     private ImageIcon predio1 = new ImageIcon(getClass().getResource("/img/ruinasMarrom.jpg"));
     private ImageIcon predio2 = new ImageIcon(getClass().getResource("/img/predio2.jpg"));
@@ -35,13 +31,13 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
 
     private JLabel[][] teto_campo, piso_campo;
     private String[] falas, tipo_torre, evolucao;
-    private int vida, gold, n_historia;
+    private int vida, gold, n_historia, aleatorio;
 
 
     //
     private JButton next = new JButton("NEXT");
-    private JButton info = new JButton("???");
-    private JButton start = new JButton("play");
+    private JButton info = new JButton("Help");
+    private JButton start = new JButton("Play");
     private JComboBox[][] celula;
 
     /* Interfaces */
@@ -107,29 +103,67 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     {
         janela.setSize(1300,1000);
         janela.setVisible(true);
+        aleatorio = 0;
         vida = 200;
         gold = 150;
         n_historia = 1;
         celula = new JComboBox[2][12];
         teto_campo = new JLabel[2][12];
         piso_campo = new JLabel[2][12];
-        String[] p1 = {"Vago","Canhão","flecha"};
+        String[] p1 = {"Vago","Canhão","Flecha"};
         tipo_torre = p1;
-        String[] p2 = {"  ", "evoluir"};
-        evolucao = p2;
     }
 
     public void start(String[] falas) throws InterruptedException {
         this.falas = falas;
-        menu();
         //historia();
         partida();
+        end();
     }
 
-    private void menu()
-    {
+    public void end() throws InterruptedException {
+        n_historia = 0;
+        janela.setVisible(false);
+        game_over.setSize(1300,100);
+        game_over.setVisible(true);
+        game_over.setLayout(new BorderLayout());
+        if(vida <= 0)
+        {
+            JLabel img;
+            JLabel img_hannes = new JLabel(hannes);
+            img= img_hannes;
+            game_over.add(BorderLayout.CENTER, img);
+            game_over.repaint();
 
+        }
+        else
+        {
+            game_over.setLayout(new BorderLayout());
+            JLabel img;
+            JLabel img_hannes = new JLabel(hannes);
+            img= img_hannes;
+            game_over.add(BorderLayout.CENTER, img);
+            next.addActionListener(this);
+            game_over.add(BorderLayout.SOUTH, next);
+            while (n_historia > 2)
+            {
+                Thread.sleep(250);
+            }
+            game_over.remove(img);
+            JLabel fala_txt = new JLabel();
+            fala_txt.setText("voce salvol" + vida + "Digite seu nome");
+            game_over.add(BorderLayout.CENTER, fala_txt);
+            JTextField caixa = new JTextField(10);
+            game_over.add(BorderLayout.CENTER, caixa);
+            while (n_historia > 4)
+            {
+                Thread.sleep(250);
+            }
+        }
     }
+
+
+
     private void historia() throws InterruptedException {
         janela.setLayout(new BorderLayout());
 
@@ -286,22 +320,16 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
 
                 }
             }
-            if (cidadeController.getVida() <= 0) {
+            if (cidadeController.getVida() <= 0 || mapaController.getFase() == 5) {
                 loop = 1;
             }
-            /* else {
+            if (aleatorio == 1 && titaController.listaVazia()) {
                 mapaController.passarDeFase();
-                JOptionPane.showMessageDialog(null, "Os titans estão evoluindo ficando maiores, capitão!!!");
-            } */
+                JOptionPane.showMessageDialog(null, "Você passou de fase!!\nOs titans estão evoluindo e ficando maiores, capitão!!!");
+                aleatorio = 0;
+            }
         }
-        if (loop == 1)//derrota
-        {
 
-        }
-        else
-        {
-
-        }
     }
 
     @Override
@@ -309,13 +337,14 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     {
         // TODO Auto-generated method stub
         if (e.getSource() == next ) n_historia+= 2;
-        else if (e.getSource() == info ) JOptionPane.showMessageDialog(null, "teste!\n21354");
+        else if (e.getSource() == info ) JOptionPane.showMessageDialog(null, "Vida dos titans: 70, 74, 78, 82, 86 (conforme a fase)\n\nDano das Torres:\nFlecha: 25, 30, 35 (conforme o nivel)\nCanhão: 15, 20 ,25 (conforme o nivel)\n\nCusto:\nFlecha: 70; Canhão: 90 \nEvoluir para o Nivel 2: 10\nEvoluir para o Nivel 3: 15 \n\nComo as torres dão dano: \nO canhão da dano simultâneo nas 3 celulas da linha mais proxima a ele\n+ + + C + + +\n# # *  *  *  # #\n# # # # # # #\n+ + + + + + +\n \nA torre de flecha da dano em T no titan mais proximo da cidade conforme o alcance\n+ + + F + + +\n# # 4 2 1 # #\n# # # 3 # # #\n+ + + + + + +");
         else if (e.getSource() == start )
         {
             titaController.moverTitas();
             mapaController.gerarTitas();
             torreController.ataqueDasTorres();
             titaController.verificarTitas();
+            aleatorio = 1;
         }
 
         for (int x = 0; x < 2; x++)
@@ -343,11 +372,12 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                             if (compraValida) {
                                 celula[x][y].removeAllItems();
                                 teto_campo[x][y].setIcon(torreCanhao);
-                                System.out.println(" 1 ");
+                                celula[x][y].addItem("Nível 1");
+                                celula[x][y].addItem("Evoluir 2");
                             }
                             compraValida = true;
                             break;
-                        case "flecha":
+                        case "Flecha":
                             try {
                                 mapaController.contruirTorreDeFlechas(j, y);
                             }
@@ -359,14 +389,41 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                             if (compraValida) {
                                 celula[x][y].removeAllItems();
                                 teto_campo[x][y].setIcon(torreDeFlechas);
-                                System.out.println(" 2 ");
+                                celula[x][y].addItem("Nível 1");
+                                celula[x][y].addItem("Evoluir 2");
                             }
                             compraValida = true;
                             break;
-                        case "evoluir":
-                            mapaController.evoluirTorre(j, y);
-                            //teto_campo[x][y].setIcon(trocarrrr);
-                            System.out.println(" 3 ");
+                        case "Evoluir 2":
+                            try {
+                                mapaController.evoluirTorre(j, y);
+                            }
+                            catch (CompraInvalida erro) {
+                                compraValida = false;
+                                celula[x][y].setSelectedItem("Nível 1");
+                                JOptionPane.showMessageDialog(null, erro.getMessage());
+                            }
+                            if (compraValida) {
+                                celula[x][y].removeAllItems();
+                                celula[x][y].addItem("Nível 2");
+                                celula[x][y].addItem("Evoluir 3");
+                            }
+                            compraValida = true;
+                            break;
+                        case "Evoluir 3":
+                            try {
+                                mapaController.evoluirTorre(j, y);
+                            }
+                            catch (CompraInvalida erro) {
+                                compraValida = false;
+                                celula[x][y].setSelectedItem("Nível 2");
+                                JOptionPane.showMessageDialog(null, erro.getMessage());
+                            }
+                            if (compraValida) {
+                                celula[x][y].removeAllItems();
+                                celula[x][y].addItem("Nível 3");
+                            }
+                            compraValida = true;
                             break;
                     }
                 }

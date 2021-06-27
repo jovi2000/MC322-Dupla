@@ -3,11 +3,13 @@ package controller;
 import model.*;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 public class MapaController implements IMapaController, IRMapaModel, IRTitaController, IRTorreController, IRCidadeController {
     /* Atributos */
     private int fase; // indica qual a fase atual do jogo
     private int numeroDeTitas; // indica quantos titãs ainda serão gerados
+    private boolean geradoAnteriomente; // indica se titãs foram gerados na rodada anterior
 
     /* Interfaces */
     private IMapaModel mapaModel;
@@ -51,7 +53,8 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
     /* Construtor */
     public MapaController() {
         fase = 1;
-        numeroDeTitas = 10;
+        numeroDeTitas = 11;
+        geradoAnteriomente = false;
     }
 
     /* Métodos */
@@ -84,24 +87,52 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
 
     public void gerarTitas() {
         if (numeroDeTitas > 0) {
-            if (numeroDeTitas == 1) {
-                // sortear um numero aleatorio
+            Random random = new Random();
+            /* Caso o número sorteado seja 1 o(s) titã(s) é(são) gerado(s), e caso seja 0 nenhum titã é gerado */
+            int gerar = random.nextInt(2);
+            /* Caso na rodada passada nenhum titã tenha sido gerado, na rodada atual é certeza de que será gerado */
+            if (gerar == 1 || !geradoAnteriomente) {
+                if (numeroDeTitas == 1) {
+                    Random random2 = new Random();
+                    int linhaSorteada = random2.nextInt(2);
+                    /* Criando o titã */
+                    setCelula(new TitaModel(), linhaSorteada + 1, 0);
+                    titaController.connect((TitaModel)getCelula(linhaSorteada + 1, 0));
+                    titaController.setLinha(linhaSorteada + 1); titaController.setColuna(0);
+                    titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(70 + 4 * (fase - 1));
+                    titaController.setRecompensa(2*(fase-1));
+                    /* Colocando ele na lista de titãs */
+                    titaController.adicionarNaLista();
+                    /* Diminuir número de titãs */
+                    numeroDeTitas -= 1;
+                    geradoAnteriomente = true;
+                } else {
+                    /* Criando o titã 1 */
+                    setCelula(new TitaModel(), 1, 0);
+                    titaController.connect((TitaModel)getCelula(1, 0));
+                    titaController.setLinha(1); titaController.setColuna(0);
+                    titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(70 + 4 * (fase - 1));
+                    titaController.setRecompensa(2*(fase-1));
+                    titaController.adicionarNaLista();
+                    /* Criando o titã 2 */
+                    setCelula(new TitaModel(), 2, 0);
+                    titaController.connect((TitaModel)getCelula(2, 0));
+                    titaController.setLinha(2); titaController.setColuna(0);
+                    titaController.setDano(10 + (2 * (fase-1))); titaController.setVida(70 + 4 * (fase - 1));
+                    titaController.setRecompensa(2*(fase-1));
+                    titaController.adicionarNaLista();
+                    /* Diminuir número de titãs */
+                    numeroDeTitas -= 2;
+                    geradoAnteriomente = true;
+                }
             }
             else {
-                /* Criando os titãs */
-                setCelula(new TitaModel(), 1, 0);
-                getCelula(1,0).setLinha(1); getCelula(1,0).setColuna(0);
-                setCelula(new TitaModel(), 2, 0);
-                getCelula(2,0).setLinha(2); getCelula(2,0).setColuna(0);
-                /* Colocando eles na lista de titãs */
-                titaController.adicionarNaLista((TitaModel)getCelula(1, 0));
-                titaController.adicionarNaLista((TitaModel)getCelula(2, 0));
-                /* Diminuir número de titãs */
-                numeroDeTitas -= 2;
+                geradoAnteriomente = false;
             }
         }
     }
 
+    //MUDAR DPS
     public void contruirTorreDeFlechas(int linha, int coluna) throws CompraInvalida {
         TorreModel torreDeFlechas = new TorreDeFlechas();
         torreController.connect(torreDeFlechas);
@@ -127,19 +158,31 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
             throw new CompraInvalida("Você não possui o dinheiro necessário para realizar a compra");
         }
         else {
+            /* Criando a torre e colocando no mapa */
             mapaModel.setCelula(torreCanhao, linha, coluna);
             getCelula(linha, coluna).setLinha(linha);
             getCelula(linha, coluna).setColuna(coluna);
-            torreController.connect((TorreModel) mapaModel.getCelula(linha, coluna));
+            /* Adicionando a torre na lista de torres */
+            torreController.connect((TorreModel)mapaModel.getCelula(linha, coluna));
             torreController.adicionarNaLista();
+            /* Tirando o dinheiro da cidade */
             cidadeController.diminuirDinheiro(torreController.getCusto());
+            /* Mudando o custo da torre para o custo da evolução */
+            torreController.setCusto(10);
         }
     }
 
     /* Método para o View */
-    public void evoluirTorre(int linha, int coluna) {
+    public void evoluirTorre(int linha, int coluna) throws CompraInvalida {
         torreController.connect((TorreModel)getCelula(linha, coluna));
-        torreController.evoluir();
+        if (cidadeController.getDinheiro() - torreController.getCusto() < 0) {
+            throw new CompraInvalida("Você não possui o dinheiro necessário para realizar a compra");
+        }
+        else {
+            torreController.evoluir();
+            /* Tirando o dinheiro da cidade */
+            cidadeController.diminuirDinheiro(torreController.getCusto());
+        }
     }
 
     public Entidade getCelula(int linha, int coluna) {
@@ -156,6 +199,8 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
 
     public void passarDeFase() {
         fase += 1;
-        numeroDeTitas = 10;
+        Random random = new Random();
+        int gerar = random.nextInt(5) + 1;
+        numeroDeTitas = 10 + gerar;
     }
 }

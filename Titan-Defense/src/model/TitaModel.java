@@ -26,7 +26,7 @@ public class TitaModel extends Entidade implements ITitaModel {
         return recompensa;
     }
 
-    public void setRecompensa(char tipo) {
-        this.recompensa = tipo;
+    public void setRecompensa(int recompensa) {
+        this.recompensa = recompensa;
     }
 }

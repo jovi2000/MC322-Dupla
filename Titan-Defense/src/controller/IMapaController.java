@@ -14,7 +14,7 @@ public interface IMapaController {
 
     public void gerarTitas();
 
-    public void evoluirTorre(int linha, int coluna);
+    public void evoluirTorre(int linha, int coluna) throws CompraInvalida;
 
     public Entidade getCelula(int linha, int coluna);
 
