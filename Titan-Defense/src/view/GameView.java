@@ -20,7 +20,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     private ImageIcon piso = new ImageIcon(getClass().getResource("/img/pisoDePedra3.jpg"));
     private ImageIcon gold_img = new ImageIcon(getClass().getResource("/img/gold.jpg"));
     private ImageIcon vida_img = new ImageIcon(getClass().getResource("/img/vida.jpg"));
-    private ImageIcon hannes = new ImageIcon(getClass().getResource("/img/predio2.jpg"));
+    private ImageIcon hannes = new ImageIcon(getClass().getResource("/img/Hannes.jpg"));
     private ImageIcon muralha = new ImageIcon(getClass().getResource("/img/muralha.jpg"));
     private ImageIcon colossau = new ImageIcon(getClass().getResource("/img/colossau.jpg"));
     private ImageIcon erro = new ImageIcon(getClass().getResource("/img/erro.jpg"));
@@ -239,8 +239,6 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
 
     private void partida() throws InterruptedException {
         janela.setLayout(new GridLayout(9, 12));
-        JOptionPane.showMessageDialog(null, "Ajude a protejer a cidade e seus aldeões dos titans que estão invadindo\n"
-                + "construa torres de defeza em cima dos prédios e tente salvar o maximo de aldeões possivevis");
         janela.repaint();
         for(int x = 0; x < 9; x++)
         {
@@ -333,15 +331,13 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         errado_print.setText(provi);
         janela.add(errado_print);
 
-        for (int i = 8; i < 10; i++)
-        {
-            JLabel campo = new JLabel(piso);
-            janela.add(campo);
-        }
         info.addActionListener(this);
         janela.add(info);
         start.addActionListener(this);
         janela.add(start);
+        
+        JOptionPane.showMessageDialog(null, "Ajude a protejer a cidade e seus aldeões dos titans que estão invadindo\n"
+                + "construa torres de defeza em cima dos prédios e tente salvar o maximo de aldeões possivevis");
         int loop = 0;
         while(loop == 0)
         {
@@ -360,7 +356,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             fase_print.setText("Fase: " + provi);
             int mortes = 350 - vida;
             provi = "" + mortes;
-            errado_print.setText("Death: " + provi);
+            errado_print.setText("Mortes: " + provi);
             Thread.sleep(250);
             Thread.sleep(250);
             //System.out.print("");
