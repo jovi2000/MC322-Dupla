@@ -15,19 +15,19 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     /* Imagens */
     private JFrame janela = new JFrame("Ataque ao titã");
     private JFrame game_over = new JFrame("Ataque ao titã");
-    private ImageIcon teto_vazio = new ImageIcon(getClass().getResource("/img/teto.jpg"));
-    private ImageIcon predio1 = new ImageIcon(getClass().getResource("/img/ruinasMarrom.jpg"));
-    private ImageIcon predio2 = new ImageIcon(getClass().getResource("/img/predio2.jpg"));
-    private ImageIcon piso = new ImageIcon(getClass().getResource("/img/chaoDePedra2.jpg"));
-    private ImageIcon vida_img = new ImageIcon(getClass().getResource("/img/gold.jpg"));
-    private ImageIcon gold_img = new ImageIcon(getClass().getResource("/img/vida.jpg"));
+    private ImageIcon teto_vazio = new ImageIcon(getClass().getResource("/img/ceu.jpg"));
+    private ImageIcon predio1 = new ImageIcon(getClass().getResource("/img/ruinaa2.jpg"));
+    private ImageIcon predio2 = new ImageIcon(getClass().getResource("/img/ruinaInvertida.jpg"));
+    private ImageIcon piso = new ImageIcon(getClass().getResource("/img/pisoDePedra3.jpg"));
+    private ImageIcon gold_img = new ImageIcon(getClass().getResource("/img/gold.jpg"));
+    private ImageIcon vida_img = new ImageIcon(getClass().getResource("/img/vida.jpg"));
     private ImageIcon hannes = new ImageIcon(getClass().getResource("/img/predio2.jpg"));
     private ImageIcon muralha = new ImageIcon(getClass().getResource("/img/muralha.jpg"));
     private ImageIcon colossau = new ImageIcon(getClass().getResource("/img/colossau.jpg"));
     private ImageIcon erro = new ImageIcon(getClass().getResource("/img/erro.jpg"));
-    private ImageIcon titan = new ImageIcon(getClass().getResource("/img/titan.jpg"));
-    private ImageIcon torreDeFlechas = new ImageIcon(getClass().getResource("/img/TorreDeFlechas.png"));
-    private ImageIcon torreCanhao = new ImageIcon(getClass().getResource("/img/torreCanhao.png"));
+    private ImageIcon titan = new ImageIcon(getClass().getResource("/img/titan2.jpg"));
+    private ImageIcon torreDeFlechas = new ImageIcon(getClass().getResource("/img/torreDeFlechas3.jpg"));
+    private ImageIcon torreCanhao = new ImageIcon(getClass().getResource("/img/canhao2.jpg"));
 
     private JLabel[][] teto_campo, piso_campo;
     private String[] falas, tipo_torre, evolucao;
@@ -124,15 +124,14 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     public void end() throws InterruptedException {
         n_historia = 0;
         janela.setVisible(false);
-        game_over.setSize(1300,100);
+        game_over.setSize(500,500);
         game_over.setVisible(true);
-        game_over.setLayout(new BorderLayout());
         if(vida <= 0)
         {
             JLabel img;
             JLabel img_hannes = new JLabel(hannes);
             img= img_hannes;
-            game_over.add(BorderLayout.CENTER, img);
+            game_over.add(img);
             game_over.repaint();
 
         }
@@ -145,23 +144,29 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             game_over.add(BorderLayout.CENTER, img);
             next.addActionListener(this);
             game_over.add(BorderLayout.SOUTH, next);
-            while (n_historia > 2)
+            while (n_historia < 2)
             {
                 Thread.sleep(250);
             }
-            game_over.remove(img);
-            JLabel fala_txt = new JLabel();
-            fala_txt.setText("voce salvol" + vida + "Digite seu nome");
-            game_over.add(BorderLayout.CENTER, fala_txt);
-            JTextField caixa = new JTextField(10);
-            game_over.add(BorderLayout.CENTER, caixa);
-            while (n_historia > 4)
+            JOptionPane.showMessageDialog(null, "Capitão, o Senhor ajudou a salvar " + vida + " aldeões");
+            while (n_historia < 4)
+            {
+                Thread.sleep(250);
+            }
+            String nome;
+            nome = JOptionPane.showInputDialog("Digite seu nome:");
+            while (n_historia < 6)
+            {
+                Thread.sleep(250);
+            }
+            while (n_historia < 8)
             {
                 Thread.sleep(250);
             }
         }
+        System.exit(0);
+        System.out.println("saiu");
     }
-
 
 
     private void historia() throws InterruptedException {
@@ -293,8 +298,8 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         while(loop == 0)
         {
             janela.repaint();
-            vida = cidadeController.getDinheiro();
-            gold = cidadeController.getVida();
+            gold = cidadeController.getDinheiro();
+            vida = cidadeController.getVida();
             goldd = "" + gold;
             gold_print.setText(goldd);
             vidaa = "" + vida;
@@ -323,7 +328,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             if (cidadeController.getVida() <= 0 || mapaController.getFase() == 5) {
                 loop = 1;
             }
-            if (aleatorio == 1 && titaController.listaVazia()) {
+            if (titaController.listaVazia() && mapaController.getNumeroDeTitas() == 0) {
                 mapaController.passarDeFase();
                 JOptionPane.showMessageDialog(null, "Você passou de fase!!\nOs titans estão evoluindo e ficando maiores, capitão!!!");
                 aleatorio = 0;

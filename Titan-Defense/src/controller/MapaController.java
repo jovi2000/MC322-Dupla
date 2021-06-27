@@ -197,6 +197,10 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
         return fase;
     }
 
+    public int getNumeroDeTitas() {
+        return numeroDeTitas;
+    }
+
     public void passarDeFase() {
         fase += 1;
         Random random = new Random();

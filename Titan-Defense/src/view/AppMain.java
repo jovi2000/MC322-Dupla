@@ -6,5 +6,7 @@ public class AppMain {
     public static void main(String[] args) throws InterruptedException {
         Montador montador = new Montador();
         montador.montarJogo();
+        String[] falas = {"hannes", "oi", "hannes", "das"};
+        montador.getGameView().start(falas);
     }
 }

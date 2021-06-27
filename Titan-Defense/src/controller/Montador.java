@@ -8,6 +8,16 @@ import view.GameView;
 import java.rmi.server.UnicastRemoteObject;
 
 public class Montador {
+    private GameView gameView;
+
+    public Montador() {
+        gameView = new GameView();
+    }
+
+    public GameView getGameView() {
+        return gameView;
+    }
+
     public void montarJogo() throws InterruptedException {
         MapaController mapaController = new MapaController();
         CidadeController cidadeController = new CidadeController();
@@ -36,13 +46,10 @@ public class Montador {
         torreController.setTitaController(titaController);
 
         // GameView
-        GameView gameView = new GameView();
         gameView.setCidadeController(cidadeController);
         gameView.setMapaController(mapaController);
         gameView.setTitaController(titaController);
         gameView.setTorreController(torreController);
 
-        String[] falas = {"hannes", "oi", "hannes", "das"};
-        gameView.start(falas);
     }
 }

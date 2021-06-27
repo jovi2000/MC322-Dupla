@@ -22,5 +22,7 @@ public interface IMapaController {
 
     public int getFase();
 
+    public int getNumeroDeTitas();
+
     public void passarDeFase();
 }
