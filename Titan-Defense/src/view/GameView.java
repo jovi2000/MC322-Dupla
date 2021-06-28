@@ -430,7 +430,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                     {
                         case "Canhão":
                             try {
-                                mapaController.contruirTorreCanhao(j, y);
+                                mapaController.construir_torre(j, y, pp);
                             }
                             catch (CompraInvalida erro) {
                                 compraValida = false;
@@ -447,7 +447,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                             break;
                         case "Flecha":
                             try {
-                                mapaController.contruirTorreDeFlechas(j, y);
+                                mapaController.construir_torre(j, y, pp);
                             }
                             catch (CompraInvalida erro) {
                                 compraValida = false;
