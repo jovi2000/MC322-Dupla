@@ -10,10 +10,10 @@ public class AppMain {
         		"brasao","A humanidade se lembrou…",
         		"brasao","Do terror de estar nas mãos deles…",
         		"brasao","Da humilhação de estar nas mãos deles",
-        		"eren","Senhor Hannes, por acaso vc estava bebendo?!(soldados bebendo ao fundo)"
+        		"eren","Senhor Hannes, por acaso você está bebendo?!(soldados bebendo ao fundo)"
         		+ "\n O senhor não deveria estar vigiando o portão?",
-        		"hannes","A gente tava aqui o dia todo sem fazer nada, então ficamos com sede",
-        		"erern","Se acontecer alguma coisa?? vocês vão conseguir lutar??",
+        		"hannes","A gente estava aqui o dia todo sem fazer nada, então ficamos com sede",
+        		"eren","E se acontecer alguma coisa?? Vocês vão conseguir lutar??",
         		"hannes","Como assim??? Se acontecer alguma coisa?",
         		"eren","E se eles invadirem a cidade?",
         		"hannes","Não se preocupe. hahahahahah  Isso não ocorre ha mais de 100 anos",

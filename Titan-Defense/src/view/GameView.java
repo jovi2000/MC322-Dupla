@@ -46,8 +46,8 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     private String[] falas, tipo_torre, evolucao;
     private int vida, gold, n_historia, aleatorio, n_titan, fase;
     
-    private JButton next = new JButton("NEXT");
-    private JButton pular = new JButton("Pular");
+    private JButton next = new JButton("Next");
+    private JButton pular = new JButton("Pular História");
     private JButton info = new JButton("Help");
     private JButton start = new JButton("Play");
     private JComboBox[][] celula;
@@ -363,7 +363,6 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             provi = "" + mortes;
             errado_print.setText("Mortes: " + provi);
             Thread.sleep(250);
-            Thread.sleep(250);
             //System.out.print("");
             for (int x = 0; x < 2; x++)
             {
@@ -380,7 +379,6 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                     else
                     {
                         titaController.connect((TitaModel)mapaController.getCelula(j,y));
-                        System.out.println(titaController.porcentagemDaVida());
                         if(titaController.porcentagemDaVida() > 80) piso_campo[x][y].setIcon(dano0);
                         else if(titaController.porcentagemDaVida() > 60) piso_campo[x][y].setIcon(dano1);
                         else if(titaController.porcentagemDaVida() > 40) piso_campo[x][y].setIcon(dano2);

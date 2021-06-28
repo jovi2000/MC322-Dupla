@@ -75,14 +75,14 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
     }
 
     /* Muda a posição do titã no mapa */
-    public void movimentarTita(TitaModel tita) {
-        retirarTitaDoMapa(tita);
-        mapaModel.setCelula(tita, titaController.getLinha(), titaController.getColuna() + 1); // Muda para a outra posição
+    public void movimentarTita(TitaModel tita ,int linha, int coluna) {
+        retirarTitaDoMapa(linha, coluna);
+        mapaModel.setCelula(tita, linha, coluna + 1); // Muda para a outra posição
     }
 
-    public void retirarTitaDoMapa(TitaModel tita) {
+    public void retirarTitaDoMapa(int linha, int coluna) {
         /* Tirando o titã do mapa */
-        mapaModel.setCelula(null, titaController.getLinha(), titaController.getColuna());
+        mapaModel.setCelula(null, linha, coluna);
     }
 
     public void gerarTitas() {
