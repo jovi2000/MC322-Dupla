@@ -132,8 +132,7 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
         }
     }
 
-    public void construir_torre(int linha, int coluna, String tipo) throws CompraInvalida 
-    {
+    public void construirTorre(int linha, int coluna, String tipo) throws CompraInvalida {
     	TorreModel torre = null;
     	if (tipo.equalsIgnoreCase("Flecha"))
     	{

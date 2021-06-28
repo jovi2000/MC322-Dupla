@@ -8,9 +8,7 @@ public interface IMapaController {
 
     public void retirarTitaDoMapa(TitaModel tita);
 
-    public void contruirTorreDeFlechas(int linha, int coluna) throws CompraInvalida;
-
-    public void contruirTorreCanhao(int linha, int coluna) throws CompraInvalida;
+    public void construirTorre(int linha, int coluna, String tipo) throws CompraInvalida;
 
     public void gerarTitas();
 
@@ -25,6 +23,4 @@ public interface IMapaController {
     public int getNumeroDeTitas();
 
     public void passarDeFase();
-
-	public void construir_torre(int j, int y, String pp) throws CompraInvalida;
 }
