@@ -47,6 +47,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     private int vida, gold, n_historia, aleatorio, n_titan, fase;
     
     private JButton next = new JButton("NEXT");
+    private JButton pular = new JButton("Pular");
     private JButton info = new JButton("Help");
     private JButton start = new JButton("Play");
     private JComboBox[][] celula;
@@ -127,7 +128,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
 
     public void start(String[] falas) throws InterruptedException {
         this.falas = falas;
-        //historia();
+        historia();
         partida();
         end();
     }
@@ -190,7 +191,9 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         fala_txt.setText(falas[n_historia]);
         janela.add(BorderLayout.CENTER, fala_txt);
         next.addActionListener(this);
-        janela.add(BorderLayout.SOUTH, next);
+        janela.add(BorderLayout.EAST, next);
+        pular.addActionListener(this);
+        janela.add(BorderLayout.SOUTH, pular);
 
         int loop = falas.length;
         loop--;
@@ -198,7 +201,6 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
         int fechadura = 1;
         while (n_historia < loop)
         {
-            Thread.sleep(250);
             fala_txt.setText(falas[n_historia]);
             janela.repaint();
             if (chave != fechadura)
@@ -232,7 +234,9 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                     chave = 4;
                     break;
             }
+            Thread.sleep(200);
         }
+        janela.remove(pular);
         janela.remove(next);
         janela.remove(fala_txt);
         janela.remove(img);
@@ -355,7 +359,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             titan_print.setText("Titãs: " + provi);
             provi = "" + fase;
             fase_print.setText("Fase: " + provi);
-            int mortes = 350 - vida;
+            int mortes = 400 - vida;
             provi = "" + mortes;
             errado_print.setText("Mortes: " + provi);
             Thread.sleep(250);
@@ -377,10 +381,10 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
                     {
                         titaController.connect((TitaModel)mapaController.getCelula(j,y));
                         System.out.println(titaController.porcentagemDaVida());
-                        if(titaController.porcentagemDaVida() < 20) piso_campo[x][y].setIcon(dano0);
-                        else if(titaController.porcentagemDaVida() < 40) piso_campo[x][y].setIcon(dano1);
-                        else if(titaController.porcentagemDaVida() < 60) piso_campo[x][y].setIcon(dano2);
-                        else if(titaController.porcentagemDaVida() < 80) piso_campo[x][y].setIcon(dano3);
+                        if(titaController.porcentagemDaVida() > 80) piso_campo[x][y].setIcon(dano0);
+                        else if(titaController.porcentagemDaVida() > 60) piso_campo[x][y].setIcon(dano1);
+                        else if(titaController.porcentagemDaVida() > 40) piso_campo[x][y].setIcon(dano2);
+                        else if(titaController.porcentagemDaVida() > 20) piso_campo[x][y].setIcon(dano3);
                         else piso_campo[x][y].setIcon(dano4);
                     }
 
@@ -404,7 +408,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
     {
         // TODO Auto-generated method stub
         if (e.getSource() == next ) n_historia+= 2;
-        else if (e.getSource() == info ) JOptionPane.showMessageDialog(null, "Vida dos titans: 70, 74, 78, 82, 86 (conforme a fase)\n\nDano das Torres:\nFlecha: 25, 30, 35 (conforme o nivel)\nCanhão: 15, 20 ,25 (conforme o nivel)\n\nCusto:\nFlecha: 70; Canhão: 90 \nEvoluir para o Nivel 2: 10\nEvoluir para o Nivel 3: 15 \n\nComo as torres dão dano: \nO canhão da dano simultâneo nas 3 celulas da linha mais proxima a ele\n+ + + C + + +\n# # *  *  *  # #\n# # # # # # #\n+ + + + + + +\n \nA torre de flecha da dano em T no titan mais proximo da cidade conforme o alcance\n+ + + F + + +\n# # 4 2 1 # #\n# # # 3 # # #\n+ + + + + + +");
+        else if (e.getSource() == info ) JOptionPane.showMessageDialog(null, "A Vida dos titans vai ficando vermelha conforme a vida\n\nDano das Torres:\nFlecha: 25, 30, 35 (conforme o nivel)\nCanhão: 15, 20 ,25 (conforme o nivel)\n\nCusto:\nFlecha: 70; Canhão: 90 \nEvoluir para o Nivel 2: 10\nEvoluir para o Nivel 3: 15 \n\nComo as torres dão dano: \nO canhão da dano simultâneo nas 3 celulas da linha mais proxima a ele\n+ + + C + + +\n# # *  *  *  # #\n# # # # # # #\n+ + + + + + +\n \nA torre de flecha da dano em T no titan mais proximo da cidade conforme o alcance\n+ + + F + + +\n# # 4 2 1 # #\n# # # 3 # # #\n+ + + + + + +");
         else if (e.getSource() == start )
         {
             titaController.moverTitas();
@@ -412,7 +416,7 @@ public class GameView implements ActionListener, IRMapaController, IRCidadeContr
             torreController.ataqueDasTorres();
             titaController.verificarTitas();
         }
-
+        else if (e.getSource() == pular ) n_historia+= 50;
         for (int x = 0; x < 2; x++)
         {
             for (int y = 0; y < 12; y++)

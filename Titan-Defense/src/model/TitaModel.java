@@ -10,7 +10,7 @@ public class TitaModel extends Entidade implements ITitaModel {
     public TitaModel() {
         vida = 100;
         dano = 10;
-        recompensa = 15;
+        recompensa = 25;
     }
 
     /* Getters e Setters */
