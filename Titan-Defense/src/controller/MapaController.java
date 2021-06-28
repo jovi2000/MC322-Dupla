@@ -75,14 +75,14 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
     }
 
     /* Muda a posição do titã no mapa */
-    public void movimentarTita(TitaModel tita ,int linha, int coluna) {
-        retirarTitaDoMapa(linha, coluna);
-        mapaModel.setCelula(tita, linha, coluna + 1); // Muda para a outra posição
+    public void movimentarTita(TitaModel tita) {
+        retirarTitaDoMapa(tita);
+        mapaModel.setCelula(tita, titaController.getLinha(), titaController.getColuna() + 1); // Muda para a outra posição
     }
 
-    public void retirarTitaDoMapa(int linha, int coluna) {
+    public void retirarTitaDoMapa(TitaModel tita) {
         /* Tirando o titã do mapa */
-        mapaModel.setCelula(null, linha, coluna);
+        mapaModel.setCelula(null, titaController.getLinha(), titaController.getColuna());
     }
 
     public void gerarTitas() {
@@ -132,17 +132,24 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
         }
     }
 
-    //MUDAR DPS
-    public void contruirTorreDeFlechas(int linha, int coluna) throws CompraInvalida {
-        TorreModel torreDeFlechas = new TorreDeFlechas();
-        torreController.connect(torreDeFlechas);
-        /* Verificando se a compra é válida */
-        if (cidadeController.getDinheiro() - torreController.getCusto() < 0) {
+    public void construir_torre(int linha, int coluna, String tipo) throws CompraInvalida 
+    {
+    	TorreModel torre = null;
+    	if (tipo.equalsIgnoreCase("Flecha"))
+    	{
+    		torre = new TorreDeFlechas();
+    	}
+    	else if (tipo.equalsIgnoreCase("Canhão"))
+    	{
+    		torre = new TorreCanhao();
+    	}
+    	torreController.connect(torre);
+    	if (cidadeController.getDinheiro() - torreController.getCusto() < 0) {
             throw new CompraInvalida("Você não possui o dinheiro necessário para realizar a compra");
         }
-        else {
+    	else {
             /* Criando a torre e colocando no mapa */
-            mapaModel.setCelula(torreDeFlechas, linha, coluna);
+            mapaModel.setCelula(torre, linha, coluna);
             getCelula(linha, coluna).setLinha(linha);
             getCelula(linha, coluna).setColuna(coluna);
             /* Adicionando a torre na lista de torres */
@@ -153,28 +160,7 @@ public class MapaController implements IMapaController, IRMapaModel, IRTitaContr
             /* Mudando o custo da torre para o custo da evolução */
             torreController.setCusto(10);
         }
-    }
-
-    public void contruirTorreCanhao(int linha, int coluna) throws CompraInvalida {
-        TorreModel torreCanhao = new TorreCanhao();
-        torreController.connect(torreCanhao);
-        /* Verificando se a compra é válida */
-        if (cidadeController.getDinheiro() - torreController.getCusto() < 0) {
-            throw new CompraInvalida("Você não possui o dinheiro necessário para realizar a compra");
-        }
-        else {
-            /* Criando a torre e colocando no mapa */
-            mapaModel.setCelula(torreCanhao, linha, coluna);
-            getCelula(linha, coluna).setLinha(linha);
-            getCelula(linha, coluna).setColuna(coluna);
-            /* Adicionando a torre na lista de torres */
-            torreController.connect((TorreModel)mapaModel.getCelula(linha, coluna));
-            torreController.adicionarNaLista();
-            /* Tirando o dinheiro da cidade */
-            cidadeController.diminuirDinheiro(torreController.getCusto());
-            /* Mudando o custo da torre para o custo da evolução */
-            torreController.setCusto(10);
-        }
+    	
     }
 
     /* Método para o View */

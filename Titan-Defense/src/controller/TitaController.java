@@ -67,7 +67,7 @@ public class TitaController implements ITitaController, IRTitaModel, IRCidadeCon
     public void moverTitas() {
         for (int i = 0; i < listaTitas.size(); i++) {
             connect(listaTitas.get(i));
-            mapaController.movimentarTita((TitaModel)titaModel ,titaModel.getLinha(), titaModel.getColuna()); // Muda a posição do titã no mapa
+            mapaController.movimentarTita((TitaModel)titaModel); // Muda a posição do titã no mapa
             mudarColuna(); // Muda o atributo coluna do Titã
         }
     }
@@ -79,14 +79,14 @@ public class TitaController implements ITitaController, IRTitaModel, IRCidadeCon
             connect(listaTitas.get(i));
             if (verificarMorte()) {
                 cidadeController.aumentarDinheiro(titaModel.getRecompensa());
-                mapaController.retirarTitaDoMapa(titaModel.getLinha(), titaModel.getColuna()); // Se morreu, o Titã é retirado do mapa
+                mapaController.retirarTitaDoMapa((TitaModel)titaModel); // Se morreu, o Titã é retirado do mapa
                 listaTitas.remove(i);
                 i--;
             }
             else {
                 if (verificarAtaque(cidadeController.getColuna())) {
                     atacarCidade();
-                    mapaController.retirarTitaDoMapa(titaModel.getLinha(), titaModel.getColuna()); // Depois de atacar a cidade, o titã desaparece do mapa
+                    mapaController.retirarTitaDoMapa((TitaModel)titaModel); // Depois de atacar a cidade, o titã desaparece do mapa
                     listaTitas.remove(i);
                     i--;
                 }

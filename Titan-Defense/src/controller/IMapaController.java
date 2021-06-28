@@ -4,9 +4,9 @@ import model.Entidade;
 import model.TitaModel;
 
 public interface IMapaController {
-    public void movimentarTita(TitaModel tita, int linha, int coluna);
+    public void movimentarTita(TitaModel tita);
 
-    public void retirarTitaDoMapa(int linha, int coluna);
+    public void retirarTitaDoMapa(TitaModel tita);
 
     public void contruirTorreDeFlechas(int linha, int coluna) throws CompraInvalida;
 
@@ -18,11 +18,13 @@ public interface IMapaController {
 
     public Entidade getCelula(int linha, int coluna);
 
-    public void setCelula(Entidade novaEntidade, int linha, int coluna);
+    public void setCelula(Entidade novaEntidade ,int linha, int coluna);
 
     public int getFase();
 
     public int getNumeroDeTitas();
 
     public void passarDeFase();
+
+	public void construir_torre(int j, int y, String pp) throws CompraInvalida;
 }
